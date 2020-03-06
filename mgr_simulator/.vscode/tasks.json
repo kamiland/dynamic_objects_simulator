@@ -1,0 +1,26 @@
+{
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "g++.exe build active file",
+            "command": "C:\\MinGW\\bin\\g++.exe",
+            "args": [
+                "-g",
+                "-std=c++17",
+                // "${file}", <-- reference to active file I want to compile
+                "${fileDirname}\\*.cpp",
+                "${fileDirname}\\models\\*.cpp",
+                "-o",
+                "${fileDirname}\\NSimulator.exe"
+            ],
+            "options": {
+                "cwd": "C:\\MinGW\\bin"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ],
+    "version": "2.0.0"
+}
