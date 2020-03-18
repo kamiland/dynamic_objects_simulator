@@ -2,6 +2,18 @@
 
 Controller::Controller(double initialKp, double initialKi, double initialKd)
 {
+    P = 0;
+    I = 0;
+    D = 0;
+    integral = 0;
+    derivative = 0;
+    error = 0;
+    pre_error = 0;
+    controllerOutput = 0;
+    saturationMin = 0;
+    saturationMax = 0;
+    saturationEnable = false;
+
     Kp = initialKp;
     Ki = initialKi;
     Kd = initialKd;
