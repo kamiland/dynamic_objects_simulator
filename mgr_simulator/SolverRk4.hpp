@@ -1,13 +1,15 @@
 #include <iostream>
+#include "ISolver.hpp"
 using namespace std;
 
 class SolverRk4
 {
 private:
-    /* data */
+    // IStateObject StateObject;
+
 public:
-    SolverRk4(int stateEquationsCount);
+    SolverRk4(int stateEquationsCount/*, IStateObject _StateObject*/);
     ~SolverRk4();
 
-    double Solve(double step);
+    virtual void Solve(double step);
 };

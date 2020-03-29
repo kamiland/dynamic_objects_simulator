@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include "../IStateObject.hpp"
 using namespace std;
 
 const int DC_MOTOR_STATE_COUNT = 2;
@@ -14,7 +15,6 @@ struct GenDcMotorState
 class GenDcMotor
 {   
 private:
-    /* data */
     /** E - siła elektromotoryczna */
     double E;
     /** La - indukcyjność własna wirnika, Ra - rezystancja uzwojenia wirnika, Ua - napięcie twornika    */
@@ -35,18 +35,19 @@ private:
 public:
     /** External forces needs to be public in order to freely apply them into the object */
 
-    /** U - napięcie zasilania */
-    double U;
-    /** Tl - moment obciążenia */
-    double Tl;
+    /** U - napięcie zasilania, Tl - moment obciążenia */
+    double U, Tl;
 
     vector <double(GenDcMotor::*)(vector <double>)> ODEs;
     vector <double> State;
 
     GenDcMotor(double angularVelocity, double rotorCurrent);
     ~GenDcMotor();
+
+    void ComputeNextState(double step);
+    void OperationAfterSolve();
+
     void SetupODEs();
-    
     double f1(vector <double> state);
     double f2(vector <double> state);
 };

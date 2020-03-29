@@ -16,13 +16,7 @@ GenDcMotor::GenDcMotor(double initialRotorCurrent, double initialAngularVelocity
     U = 230;
     Tl = 0;
 
-    /** Setup Ordinary Differential Equations (ODEs) */
-    ODEs.push_back(&GenDcMotor::f1);
-    ODEs.push_back(&GenDcMotor::f2);
-
-    /** Wartości początkowe dla obiektu silnika   */
-    // X[0] = initialRotorCurrent;
-    // X[1] = initialAngularVelocity;
+    SetupODEs();
 
     ifn = Ufn / Rf;
     Gaf = p * Laf * ifn;
@@ -34,11 +28,28 @@ GenDcMotor::~GenDcMotor()
 {
 }
 
+void GenDcMotor::ComputeNextState(double step)
+{
+    cout << "GenDcMotor::ComputeNextState pass" << endl;
+}
+
+void GenDcMotor::OperationAfterSolve()
+{
+    cout << "GenDcMotor::OperationAfterSolve pass" << endl;
+}
+
+/** Setup Ordinary Differential Equations (ODEs) */
+void GenDcMotor::SetupODEs()
+{
+    ODEs.push_back(&GenDcMotor::f1);
+    ODEs.push_back(&GenDcMotor::f2);
+}
+
 double GenDcMotor::f1(vector<double> state)
 {
     double X1 = state[0];
     double X2 = state[1];
-    double output = -(Ra / La) * X1 - (Gaf / La) * X2 + (1 / La) * U;
+    double output = -(Ra / La) * X1 - (Gaf / La) * X2 + (1 / La) * U; // for dbg
     return output;
 }
 
@@ -47,6 +58,6 @@ double GenDcMotor::f2(vector<double> state)
 {
     double X1 = state[0];
     double X2 = state[1];
-    double output2 = (Gaf / J) * X1 - (B / J) * X2 + (1 / J) * Tl;
-    return output2;
+    double output = (Gaf / J) * X1 - (B / J) * X2 + (1 / J) * Tl; // for dbg
+    return output;
 }

@@ -1,13 +1,19 @@
 #include "SolverRk4.hpp"
 #define RK4_FIXED_K_NUMBER 4
 
-SolverRk4::SolverRk4(int stateEquationsCount)
+SolverRk4::SolverRk4(int stateEquationsCount /*, IStateObject _StateObject*/)
 {
     auto k = new double[stateEquationsCount][RK4_FIXED_K_NUMBER];
+    // this->StateObject = _StateObject;
 }
 
 SolverRk4::~SolverRk4()
 {
+}
+
+void SolverRk4::Solve(double step)
+{
+    cout << "SolverRk4::Solve pass" << endl;
 }
 
 /**

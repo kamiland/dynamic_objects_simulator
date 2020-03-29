@@ -11,7 +11,7 @@ using namespace std;
 int main() 
 {
     /**
-     * Declaration of elementary objescts and variables
+     * Declaration of elementary objects and variables
     */
     GlobalContext context;
     Controller pid(1, 1, 0);
@@ -26,14 +26,12 @@ int main()
 
     dcHistory = motor.Simulate(context.GetProbesCountTotal(), 0.001);
 
-    // for(DcMotorState n : dcHistory) 
-    // {
-    //     std::cout << n.rotorCurrent << ", " << n.angularVelocity << '\n';
-    // }
     std::cout << dcHistory[0].rotorCurrent << ", " << dcHistory[0].angularVelocity << '\n';
+
     vector <double> state;
     state.push_back(0.0);
     state.push_back(0.0);
+
     GenDcMotor dcmotor(0,0);
     vector<double (GenDcMotor::*)(vector <double>)> temp = dcmotor.ODEs;
     cout << (dcmotor.*temp[0])(state) << endl;
