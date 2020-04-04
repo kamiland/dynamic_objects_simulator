@@ -1,64 +1,19 @@
 #include "SolverRk4.hpp"
-#define RK4_FIXED_K_NUMBER 4
 
-SolverRk4::SolverRk4(int stateEquationsCount /*, IStateObject _StateObject*/)
+SolverRk4::SolverRk4(int _stateEquationsCount)
 {
-    auto k = new double[stateEquationsCount][RK4_FIXED_K_NUMBER];
-    // this->StateObject = _StateObject;
+    stateEquationsCount = _stateEquationsCount;
+    auto k = new double[_stateEquationsCount][RK4_FIXED_K_NUMBER];
+    memset(k, 0, sizeof(k));
 }
 
 SolverRk4::~SolverRk4()
 {
 }
 
-void SolverRk4::Solve(double step)
-{
-    cout << "SolverRk4::Solve pass" << endl;
-}
 
 /**
- * Prototype of generic RK4 solver
+ * Prototype of generic RK4 solver in header bcs of template
  * 
 */
 
-// double SolverRk4::Solve(double step)
-// {
-//     int denom = 2;
-//     bool zCheck = false; 
-
-//     for(int j = 0; j < 4; j++)     //four steps of RK4 solver
-//     {
-//         int i = 0;
-//         for(GenericStateObject.ODE ode : StateObject.ODEs)  //iterating through system of ODE's
-//         {
-//             //second step of RK4
-//             if (j > 0)
-//             {
-//                 zCheck = true;
-//             }      
-//             //fourth step of RK4
-//             if (j > 2)
-//             {
-//                 denom = 1;
-//             }
-
-//             double[] RK4State = new double[stateEquationsCount];
-
-//             for(int a = 0; a < stateEquationsCount; a++)
-//             {
-//                 RK4State[a] = StateObject.State[a] + (zCheck ? (k[a][j - 1] / denom) : 0);
-//             }
-
-//             k[i][j] = step * ode(new List<double>(RK4State)); //RK4 main equation, modified to system of ODE's
-//             i++;
-//         }
-//     }
-
-//         /* updating next position of object */
-//     for (int i = 0; i < StateObject.State.Count; i++)
-//     {
-//         StateObject.State[i] = StateObject.State[i] + (k[i][0] + 2 * k[i][1] + 2 * k[i][2] + k[i][3]) / 6;
-//     }
-
-//     StateObject.OperationAfterSolve();
-// }

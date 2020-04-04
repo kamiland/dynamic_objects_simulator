@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include "../IStateObject.hpp"
+#include "../SolverRk4.hpp"
 using namespace std;
 
 const int DC_MOTOR_STATE_COUNT = 2;
@@ -11,8 +12,7 @@ struct GenDcMotorState
     double angularVelocity;
 };
 
-
-class GenDcMotor
+class GenDcMotor : IStateObject
 {   
 private:
     /** E - siła elektromotoryczna */
@@ -32,13 +32,14 @@ private:
 
     double Gaf;
 
+    typedef vector < double (GenDcMotor::*) (vector <double>) > ODE;
+
 public:
     /** External forces needs to be public in order to freely apply them into the object */
-
     /** U - napięcie zasilania, Tl - moment obciążenia */
     double U, Tl;
 
-    vector <double(GenDcMotor::*)(vector <double>)> ODEs;
+    ODE Odes;
     vector <double> State;
 
     GenDcMotor(double angularVelocity, double rotorCurrent);
@@ -46,7 +47,7 @@ public:
 
     void ComputeNextState(double step);
     void OperationAfterSolve();
-
+    
     void SetupODEs();
     double f1(vector <double> state);
     double f2(vector <double> state);

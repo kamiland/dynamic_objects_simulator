@@ -25,7 +25,6 @@ int main()
     context.SetProbesCountPerSec(1000);
 
     dcHistory = motor.Simulate(context.GetProbesCountTotal(), 0.001);
-
     std::cout << dcHistory[0].rotorCurrent << ", " << dcHistory[0].angularVelocity << '\n';
 
     vector <double> state;
@@ -33,11 +32,14 @@ int main()
     state.push_back(0.0);
 
     GenDcMotor dcmotor(0,0);
-    vector<double (GenDcMotor::*)(vector <double>)> temp = dcmotor.ODEs;
+    DC_ODE temp = dcmotor.Odes;
     cout << (dcmotor.*temp[0])(state) << endl;
     cout << (dcmotor.*temp[1])(state) << endl;
     
+    dcmotor.ComputeNextState(0.01);
+    dcmotor.OperationAfterSolve();
+
     cout << "Thank you for using N-Simulator. KamilAnd." << endl;
-    system("PAUSE");
+    // system("PAUSE");
     return 0;
 }

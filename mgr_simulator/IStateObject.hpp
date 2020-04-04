@@ -1,22 +1,18 @@
 #include <iostream>
 #include <vector>
-// #include "ISolver.hpp"
 using namespace std;
 
 class IStateObject
 {
     public:
-        IStateObject(/* args */);
-        ~IStateObject();
-        typedef vector <double (*) (vector <double>)> ODE;
-        // ISolver Solver; // po co to tu jest ??
+        typedef vector <void (*) (vector <double>)> IODE;
 
-        virtual void ComputeNextState(double step);
-        virtual void OperationAfterSolve();
+        virtual void ComputeNextState(double step) = 0;
+        virtual void OperationAfterSolve() = 0;
     
     private:
         vector <double> State;
-        vector <ODE> ODEs;
+        vector <IODE> Iodes;
 };
 
 
