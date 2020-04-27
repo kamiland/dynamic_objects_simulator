@@ -1,6 +1,6 @@
 #include "GenDcMotor.hpp"
 
-GenDcMotor::GenDcMotor(double initialRotorCurrent, double initialAngularVelocity)
+GenDcMotor::GenDcMotor()
 {
     /** Parametry domyślne  */
     Ra = 0.4;   
@@ -28,7 +28,7 @@ GenDcMotor::~GenDcMotor()
 {
 }
 
-double GenDcMotor::f1(vector<double> state)
+double GenDcMotor::f1(double state[])
 {
     double X1 = state[0];
     double X2 = state[1];
@@ -37,7 +37,7 @@ double GenDcMotor::f1(vector<double> state)
 }
 
 
-double GenDcMotor::f2(vector<double> state)
+double GenDcMotor::f2(double state[])
 {
     double X1 = state[0];
     double X2 = state[1];
@@ -48,19 +48,18 @@ double GenDcMotor::f2(vector<double> state)
 /** Setup Ordinary Differential Equations (ODEs) */
 void GenDcMotor::SetupODEs()
 {
-    Odes.push_back(&GenDcMotor::f1);
-    Odes.push_back(&GenDcMotor::f2);
+    OdeList[0] = &GenDcMotor::f1;
+    OdeList[1] = &GenDcMotor::f2;
 }
 
-void GenDcMotor::ComputeNextState(double step)
+double * GenDcMotor::ComputeNextState(double step)
 {
-    SolverRk4 Solver(2);
-    Solver.Solve<GenDcMotor>(step, Odes);
-
-    cout << "[GenDcMotor::ComputeNextState] pass." << endl;
+    SolverRk4 Solver(DC_MOTOR_STATE_COUNT);
+    return Solver.Solve<OdeMethod, GenDcMotor>(step, State, OdeList);
 }
 
 void GenDcMotor::OperationAfterSolve()
 {
-    cout << "[GenDcMotor::OperationAfterSolve] pass." << endl;
+
 }
+

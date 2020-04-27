@@ -25,21 +25,35 @@ int main()
     context.SetProbesCountPerSec(1000);
 
     dcHistory = motor.Simulate(context.GetProbesCountTotal(), 0.001);
-    std::cout << dcHistory[0].rotorCurrent << ", " << dcHistory[0].angularVelocity << '\n';
+    // cout << "Rotor current: " << dcHistory[0].rotorCurrent << ", angular velocity: " << dcHistory[0].angularVelocity << '\n';
 
-    vector <double> state;
-    state.push_back(0.0);
-    state.push_back(0.0);
-
-    GenDcMotor dcmotor(0,0);
-    DC_ODE temp = dcmotor.Odes;
-    cout << (dcmotor.*temp[0])(state) << endl;
-    cout << (dcmotor.*temp[1])(state) << endl;
+    GenDcMotor dcmotor;
+    dcmotor.State[0] = 0.0;
+    dcmotor.State[1] = 0.0;
+    dcmotor.U = 230;
     
-    dcmotor.ComputeNextState(0.01);
-    dcmotor.OperationAfterSolve();
+    vector<DcMotorState> history;
+    DcMotorState state;
+    double *x;
+
+    for (int i = 0; i < context.GetProbesCountTotal(); i++)
+    {
+        x = dcmotor.ComputeNextState(0.001);
+        state.rotorCurrent = x[0];
+        state.angularVelocity = x[1];
+        history.push_back(state);
+    }
+
+    for(int i = 0; i < dcHistory.size(); i++)
+    {
+        cout << dcHistory[i].rotorCurrent << "," << dcHistory[i].angularVelocity << '\n';
+    }
+
+    for(int i = 0; i < history.size(); i++)
+    {
+        cout << history[i].rotorCurrent << "," << history[i].angularVelocity << '\n';
+    }
 
     cout << "Thank you for using N-Simulator. KamilAnd." << endl;
-    // system("PAUSE");
     return 0;
 }

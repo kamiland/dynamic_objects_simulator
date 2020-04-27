@@ -27,28 +27,29 @@ private:
     double T, B, p, J;
     /** Stała obwodu wzbudzenia (stałe magnesowanie) ifn = Ufn / Rf */
     double ifn;
-    /** prędkość kątowa, prąd obwodu wirnika */
-    double angularVelocity, rotorCurrent;
 
     double Gaf;
-
-    typedef vector < double (GenDcMotor::*) (vector <double>) > ODE;
 
 public:
     /** External forces needs to be public in order to freely apply them into the object */
     /** U - napięcie zasilania, Tl - moment obciążenia */
+    double angularVelocity, rotorCurrent;
     double U, Tl;
 
-    ODE Odes;
-    vector <double> State;
+    typedef double (GenDcMotor::*OdeMethod) (double[]);
 
-    GenDcMotor(double angularVelocity, double rotorCurrent);
+    double State[DC_MOTOR_STATE_COUNT];
+    vector <double[DC_MOTOR_STATE_COUNT]> StateHistory;
+
+    GenDcMotor();
     ~GenDcMotor();
 
-    void ComputeNextState(double step);
+    OdeMethod OdeList[DC_MOTOR_STATE_COUNT];
+    OdeMethod Ode;
+
+    double * ComputeNextState(double step);
     void OperationAfterSolve();
-    
+    double f1(double state[DC_MOTOR_STATE_COUNT]);
+    double f2(double state[DC_MOTOR_STATE_COUNT]);
     void SetupODEs();
-    double f1(vector <double> state);
-    double f2(vector <double> state);
 };
