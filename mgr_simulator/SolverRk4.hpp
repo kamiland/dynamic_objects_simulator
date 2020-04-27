@@ -47,7 +47,6 @@ public:
             State[i] = State[i] + (k[i][0] + 2 * k[i][1] + 2 * k[i][2] + k[i][3]) / 6;
         }
 
-        cout << "Rotor current: " << State[0] << ", angular velocity: " << State[1] << endl;
         Model.OperationAfterSolve();
         return State;
     };
