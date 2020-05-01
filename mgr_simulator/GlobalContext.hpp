@@ -1,3 +1,6 @@
+#ifndef ALL_MODELS
+#define ALL_MODELS
+
 #include <iostream>
 using namespace std;
 
@@ -16,3 +19,5 @@ public:
     void SetProbesCountPerSec(int probes);
     long GetProbesCountTotal();
 };
+
+#endif

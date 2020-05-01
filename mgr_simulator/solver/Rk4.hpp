@@ -1,9 +1,12 @@
+#ifndef RK4
+#define RK4
+
 #include <iostream>
 #include <vector>
 #include <cstring>
 using namespace std;
 
-#define RK4_FIXED_K_NUMBER 4
+const int RK4_K = 4; // four steps of RK4 solver
 
 class SolverRk4
 {
@@ -16,14 +19,14 @@ public:
     template <typename S, class T>
     double * Solve(double Step, double State[], S OdeList[])
     {
-        auto k = new double[StateEqCount][RK4_FIXED_K_NUMBER];
+        auto k = new double[StateEqCount][RK4_K];
         memset(k, 0, sizeof(k));
         int denom = 2;
         bool zCheck = false; 
         S Ode; 
         T Model;
 
-        for(int j = 0; j < 4; j++)     // four steps of RK4 solver
+        for(int j = 0; j < RK4_K; j++)     // four steps of RK4 solver
         {
             for(int i = 0; i < StateEqCount; i++)  // iterating through system of ODE's
             {
@@ -51,3 +54,5 @@ public:
         return State;
     };
 };
+
+#endif

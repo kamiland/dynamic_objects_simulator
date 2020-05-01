@@ -1,3 +1,6 @@
+#ifndef DC_MOTOR
+#define DC_MOTOR
+
 #include <iostream>
 #include <vector>
 #include "IStateObject.hpp"
@@ -11,6 +14,8 @@ struct GenDcMotorState
     double rotorCurrent;
     double angularVelocity;
 };
+
+// TODO: Translate to english
 
 class DcMotor : IStateObject
 {   
@@ -37,19 +42,19 @@ public:
     double U, Tl;
 
     typedef double (DcMotor::*OdeMethod) (double[]);
-
+    OdeMethod OdeList[DC_MOTOR_STATE_COUNT];
+    OdeMethod Ode;
     double State[DC_MOTOR_STATE_COUNT];
     vector <double[DC_MOTOR_STATE_COUNT]> StateHistory;
 
     DcMotor();
     ~DcMotor();
-
-    OdeMethod OdeList[DC_MOTOR_STATE_COUNT];
-    OdeMethod Ode;
-
     double * ComputeNextState(double step);
     void OperationAfterSolve();
     double f1(double state[DC_MOTOR_STATE_COUNT]);
     double f2(double state[DC_MOTOR_STATE_COUNT]);
     void SetupODEs();
 };
+
+
+#endif

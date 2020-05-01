@@ -1,3 +1,6 @@
+#ifndef REFERENCE_DC_MOTOR
+#define REFERENCE_DC_MOTOR
+
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -42,3 +45,5 @@ public:
     double * CalculateNextStep(double U, double h);
     vector<DcMotorState> Simulate(long numberOfProbes, double timeStep);
 };
+
+#endif

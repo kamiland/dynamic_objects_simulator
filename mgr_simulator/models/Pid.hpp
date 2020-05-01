@@ -1,3 +1,6 @@
+#ifndef PID
+#define PID
+
 #include <iostream>
 using namespace std;
 
@@ -28,3 +31,5 @@ public:
     void SetSaturation(double min, double max);
     void ResetSaturaion();
 };
+
+#endif

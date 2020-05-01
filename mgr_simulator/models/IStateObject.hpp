@@ -1,3 +1,6 @@
+#ifndef I_STATE_OBJECT
+#define I_STATE_OBJECT
+
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -11,3 +14,5 @@ class IStateObject
     private:
         vector <double> State;
 };
+
+#endif
