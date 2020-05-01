@@ -1,6 +1,6 @@
 #include "DcMotor.hpp"
 
-DcMotor::DcMotor(double rotorCurrent, double angularVelocity)
+DcMotor::DcMotor()
 {
     /** Parametry domyślne  */
     Ra = 0.4;   
@@ -13,9 +13,10 @@ DcMotor::DcMotor(double rotorCurrent, double angularVelocity)
     Laf = 0.363;
     Ufn = 110;
 
-    /** Wartości początkowe dla obiektu silnika   */
-    X[0] = rotorCurrent;
-    X[1] = angularVelocity;
+    U = 230;
+    Tl = 0;
+
+    SetupODEs();
 
     ifn = Ufn / Rf;
     Gaf = p * Laf * ifn;
@@ -27,58 +28,38 @@ DcMotor::~DcMotor()
 {
 }
 
-
-double DcMotor::calculateRotorCurrent(double X1, double X2, double U)
+double DcMotor::f1(double state[])
 {
-    return -(Ra / La) * X1 - (Gaf / La) * X2 + (1 / La) * U;
+    double X1 = state[0];
+    double X2 = state[1];
+    double output = -(Ra / La) * X1 - (Gaf / La) * X2 + (1 / La) * U; // for dbg
+    return output;
 }
 
 
-double DcMotor::calculateAngularVelocity(double X1, double X2, double Tl)
+double DcMotor::f2(double state[])
 {
-    return (Gaf / J) * X1 - (B / J) * X2 + (1 / J) * Tl;
+    double X1 = state[0];
+    double X2 = state[1];
+    double output = (Gaf / J) * X1 - (B / J) * X2 + (1 / J) * Tl; // for dbg
+    return output;
 }
 
-// implementacja algorytmu Rungego-Kutty dla obiektu silnika DC (https://pl.wikipedia.org/wiki/Algorytm_Rungego-Kutty)
-double * DcMotor::CalculateNextStep(double U, double h)
+/** Setup Ordinary Differential Equations (ODEs) */
+void DcMotor::SetupODEs()
 {
-    auto k = new double[2][4];
-
-    /** Wyznaczanie prądu obwodu wirnika    */
-    k[0][0] = h * calculateRotorCurrent(X[0], X[1], U);
-    k[0][1] = h * calculateRotorCurrent(X[0] + k[0][0] / 2, X[1] + k[0][0] / 2, U);
-    k[0][2] = h * calculateRotorCurrent(X[0] + k[0][1] / 2, X[1] + k[0][1] / 2, U);
-    k[0][3] = h * calculateRotorCurrent(X[0] + k[0][2], X[1] + k[0][2], U);
-
-    /** Wyznaczanie prędkości kątowej */
-    k[1][0] = h * calculateAngularVelocity(X[0], X[1], 0);
-    k[1][1] = h * calculateAngularVelocity(X[0] + k[1][0] / 2, X[1] + k[1][0] / 2, 0);
-    k[1][2] = h * calculateAngularVelocity(X[0] + k[1][1] / 2, X[1] + k[1][1] / 2, 0);
-    k[1][3] = h * calculateAngularVelocity(X[0] + k[1][2], X[1] + k[1][2], 0);
-
-    for (int i = 0; i < 2; i++)
-    {
-        X[i] = X[i] + (k[i][0] + 2 * k[i][1] + 2 * k[i][2] + k[i][3]) / 6;
-    }
-    return X;
+    OdeList[0] = &DcMotor::f1;
+    OdeList[1] = &DcMotor::f2;
 }
 
-vector<DcMotorState> DcMotor::Simulate(long numberOfProbes, double timeStep)
+double * DcMotor::ComputeNextState(double step)
 {
-    X[0] = 0; // rotor current
-    X[1] = 0; // angular velocity
-
-    vector<DcMotorState> history;
-    DcMotorState state;
-    double *x;
-
-    for (int i = 0; i < numberOfProbes; i++)
-    {
-        x = CalculateNextStep(230, timeStep);
-        state.rotorCurrent = x[0];
-        state.angularVelocity = x[1];
-        history.push_back(state);
-    }
-
-    return history;
+    SolverRk4 Solver(DC_MOTOR_STATE_COUNT);
+    return Solver.Solve<OdeMethod, DcMotor>(step, State, OdeList);
 }
+
+void DcMotor::OperationAfterSolve()
+{
+
+}
+

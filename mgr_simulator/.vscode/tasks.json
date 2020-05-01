@@ -7,11 +7,11 @@
             "args": [
                 "-g",
                 "-std=c++17",
-                // "${file}", <-- reference to active file I want to compile
-                "${fileDirname}\\*.cpp",
-                "${fileDirname}\\models\\*.cpp",
+                "C:\\MinGW\\msys\\1.0\\home\\kamiland\\mgr_simulator\\mgr_simulator\\*.cpp",
+                "C:\\MinGW\\msys\\1.0\\home\\kamiland\\mgr_simulator\\mgr_simulator\\models\\*.cpp",
+                "C:\\MinGW\\msys\\1.0\\home\\kamiland\\mgr_simulator\\mgr_simulator\\solver\\*.cpp",
                 "-o",
-                "${fileDirname}\\NSimulator.exe"
+                "C:\\MinGW\\msys\\1.0\\home\\kamiland\\mgr_simulator\\mgr_simulator\\NSimulator.exe"
             ],
             "options": {
                 "cwd": "C:\\MinGW\\bin"
@@ -24,3 +24,5 @@
     ],
     "version": "2.0.0"
 }
+
+// "${file} ${fileDirname}", <-- reference to active file/path

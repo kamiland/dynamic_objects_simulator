@@ -1,4 +1,4 @@
-#include "SolverRk4.hpp"
+#include "Rk4.hpp"
 
 SolverRk4::SolverRk4(int _StateEqCount)
 {

@@ -8,7 +8,7 @@
             "name": "(gdb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "C:\\MinGW\\msys\\1.0\\home\\Kamil\\mgr_simulator\\NSimulator.exe",
+            "program": "C:\\MinGW\\msys\\1.0\\home\\kamiland\\mgr_simulator\\mgr_simulator\\NSimulator.exe",
             "args": [],
             "stopAtEntry": true,
             "cwd": "${workspaceFolder}",

@@ -1,44 +1,55 @@
 #include <iostream>
 #include <vector>
+#include "IStateObject.hpp"
+#include "../solver/Rk4.hpp"
 using namespace std;
 
-struct DcMotorState
+const int DC_MOTOR_STATE_COUNT = 2;
+
+struct GenDcMotorState
 {
     double rotorCurrent;
     double angularVelocity;
 };
 
-
-class DcMotor
-{
+class DcMotor : IStateObject
+{   
 private:
-    /* data */
-    /** U - napięcie zasilania, E - siła elektromotoryczna */
-    double U, E;
+    /** E - siła elektromotoryczna */
+    double E;
     /** La - indukcyjność własna wirnika, Ra - rezystancja uzwojenia wirnika, Ua - napięcie twornika    */
     double La, Ra, Ua;
     /** Lf - indukcyjność własna obwodu wzbudzenia, Rf - rezystancja obwodu wzbudzenia, If - prąd obwodu wzbudzenia     */
     double Lf, Rf, If, Ufn;
     /** Laf - indukcyjność wzajemna   */
     double Laf;
-    /**  T - moment napędowy, B - współczynnik tłumienia, p - pary biegunów, Tl - moment obciążenia, J - moment bezwłądności */
-    double T, B, p, Tl, J;
+    /**  T - moment napędowy, B - współczynnik tłumienia, p - pary biegunów, J - moment bezwłądności */
+    double T, B, p, J;
     /** Stała obwodu wzbudzenia (stałe magnesowanie) ifn = Ufn / Rf */
     double ifn;
-    /** prędkość kątowa, prąd obwodu wirnika */
-    double angularVelocity, rotorCurrent;
 
     double Gaf;
 
 public:
-    
-    double X[2];
+    /** External forces needs to be public in order to freely apply them into the object */
+    /** U - napięcie zasilania, Tl - moment obciążenia */
+    double angularVelocity, rotorCurrent;
+    double U, Tl;
 
-    DcMotor(double angularVelocity, double rotorCurrent);
+    typedef double (DcMotor::*OdeMethod) (double[]);
+
+    double State[DC_MOTOR_STATE_COUNT];
+    vector <double[DC_MOTOR_STATE_COUNT]> StateHistory;
+
+    DcMotor();
     ~DcMotor();
 
-    double calculateRotorCurrent(double X1, double X2, double U);
-    double calculateAngularVelocity(double X1, double X2, double Tl);
-    double * CalculateNextStep(double U, double h);
-    vector<DcMotorState> Simulate(long numberOfProbes, double timeStep);
+    OdeMethod OdeList[DC_MOTOR_STATE_COUNT];
+    OdeMethod Ode;
+
+    double * ComputeNextState(double step);
+    void OperationAfterSolve();
+    double f1(double state[DC_MOTOR_STATE_COUNT]);
+    double f2(double state[DC_MOTOR_STATE_COUNT]);
+    void SetupODEs();
 };
