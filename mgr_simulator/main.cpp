@@ -17,6 +17,13 @@ int main()
     Controller Pid(1, 1, 0);
     ReferenceDcMotor ReferenceMotor(0, 0);
     vector<DcMotorState> DcHistory;
+    DoublePendulum DIP;
+    DIP.U = 0;
+    DIP.Z0 = 0;
+    DIP.Z1 = 0;
+    DIP.Z2 = 0;
+    memset(DIP.State, 0, sizeof(DIP.State));
+    DIP.ComputeNextState(0.001);
 
     /**
      * Preparing simulation parameters
@@ -45,12 +52,12 @@ int main()
 
     for(int i = 0; i < DcHistory.size(); i++)
     {
-        cout << DcHistory[i].rotorCurrent << "," << DcHistory[i].angularVelocity << '\n';
+        // cout << DcHistory[i].rotorCurrent << "," << DcHistory[i].angularVelocity << '\n';
     }
 
     for(int i = 0; i < history.size(); i++)
     {
-        cout << history[i].rotorCurrent << "," << history[i].angularVelocity << '\n';
+        // cout << history[i].rotorCurrent << "," << history[i].angularVelocity << '\n';
     }
 
     cout << "Thank you for using N-Simulator. KamilAnd." << endl;
