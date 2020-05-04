@@ -18,13 +18,12 @@ int main()
     ReferenceDcMotor ReferenceMotor(0, 0);
     vector<DcMotorState> DcHistory;
     DoublePendulum DIP;
-    DIP.U = 0;
-    DIP.Z0 = 0;
-    DIP.Z1 = 0;
-    DIP.Z2 = 0;
-    memset(DIP.State, 0, sizeof(DIP.State));
+    DIP.ext.U = 0;
+    DIP.ext.Z0 = 0;
+    DIP.ext.Z1 = 0;
+    DIP.ext.Z2 = 0;
+    memset(DIP.st.State, 0, sizeof(DIP.st.State));
     DIP.ComputeNextState(0.001);
-
     /**
      * Preparing simulation parameters
     */
@@ -34,9 +33,9 @@ int main()
     DcHistory = ReferenceMotor.Simulate(Ctx.GetProbesCountTotal(), 0.001);
 
     DcMotor dcmotor;
-    dcmotor.State[0] = 0.0;
-    dcmotor.State[1] = 0.0;
-    dcmotor.U = 230;
+    dcmotor.st.State[0] = 0.0;
+    dcmotor.st.State[1] = 0.0;
+    dcmotor.ext.U = 230;
     
     vector<DcMotorState> history;
     DcMotorState state;
@@ -52,12 +51,7 @@ int main()
 
     for(int i = 0; i < DcHistory.size(); i++)
     {
-        // cout << DcHistory[i].rotorCurrent << "," << DcHistory[i].angularVelocity << '\n';
-    }
-
-    for(int i = 0; i < history.size(); i++)
-    {
-        // cout << history[i].rotorCurrent << "," << history[i].angularVelocity << '\n';
+        cout << DcHistory[i].rotorCurrent - history[i].rotorCurrent << ", " << DcHistory[i].angularVelocity - history[i].angularVelocity << endl;
     }
 
     cout << "Thank you for using N-Simulator. KamilAnd." << endl;

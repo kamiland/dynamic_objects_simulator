@@ -2,37 +2,40 @@
 
 DcMotor::DcMotor()
 {
-    /** Parametry domyślne  */
-    Ra = 0.4;   
-    La = 0.02;
-    Rf = 65;    
-    Lf = 65;
-    J = 0.11; 
-    B = 0.0053;
-    p = 2;
-    Laf = 0.363;
-    Ufn = 110;
+    ext.U = 230;
+    ext.Tl = 0;
 
-    U = 230;
-    Tl = 0;
-
+    InitParameters();
     SetupODEs();
-
-    ifn = Ufn / Rf;
-    Gaf = p * Laf * ifn;
-    E = Gaf * angularVelocity;
-    T = Gaf * rotorCurrent;
 }
 
 DcMotor::~DcMotor()
 {
 }
 
+void DcMotor::InitParameters(double Ra, double La, double Rf, double Lf, double J, double B, int p, double Laf, double Ufn)
+{
+    this->par.Ra = Ra;   
+    this->par.La = La;
+    this->par.Rf = Rf;    
+    this->par.Lf = Lf;
+    this->par.J = J; 
+    this->par.B = B;
+    this->par.p = p;
+    this->par.Laf = Laf;
+    this->par.Ufn = Ufn;
+
+    this->par.ifn = par.Ufn / par.Rf;
+    this->par.Gaf = par.p * par.Laf * par.ifn;
+    this->par.E = par.Gaf * st.AngularVelocity;
+    this->par.T = par.Gaf * st.RotorCurrent;
+}
+
 double DcMotor::f1(double state[])
 {
     double X1 = state[0];
     double X2 = state[1];
-    double output = -(Ra / La) * X1 - (Gaf / La) * X2 + (1 / La) * U; // for dbg
+    double output = -(par.Ra / par.La) * X1 - (par.Gaf / par.La) * X2 + (1 / par.La) * ext.U; // for dbg
     return output;
 }
 
@@ -41,7 +44,7 @@ double DcMotor::f2(double state[])
 {
     double X1 = state[0];
     double X2 = state[1];
-    double output = (Gaf / J) * X1 - (B / J) * X2 + (1 / J) * Tl; // for dbg
+    double output = (par.Gaf / par.J) * X1 - (par.B / par.J) * X2 + (1 / par.J) * ext.Tl; // for dbg
     return output;
 }
 
@@ -55,7 +58,7 @@ void DcMotor::SetupODEs()
 double * DcMotor::ComputeNextState(double step)
 {
     SolverRk4 Solver(DC_MOTOR_STATE_COUNT);
-    return Solver.Solve<OdeMethod, DcMotor>(step, State, OdeList);
+    return Solver.Solve<OdeMethod, DcMotor>(step, st.State, OdeList);
 }
 
 void DcMotor::OperationAfterSolve()

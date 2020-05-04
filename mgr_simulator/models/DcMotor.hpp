@@ -9,51 +9,61 @@ using namespace std;
 
 const int DC_MOTOR_STATE_COUNT = 2;
 
-struct GenDcMotorState
-{
-    double rotorCurrent;
-    double angularVelocity;
-};
-
-// TODO: Translate to english
 
 class DcMotor : IStateObject
 {   
 private:
-    /** E - siła elektromotoryczna */
-    double E;
-    /** La - indukcyjność własna wirnika, Ra - rezystancja uzwojenia wirnika, Ua - napięcie twornika    */
-    double La, Ra, Ua;
-    /** Lf - indukcyjność własna obwodu wzbudzenia, Rf - rezystancja obwodu wzbudzenia, If - prąd obwodu wzbudzenia     */
-    double Lf, Rf, If, Ufn;
-    /** Laf - indukcyjność wzajemna   */
-    double Laf;
-    /**  T - moment napędowy, B - współczynnik tłumienia, p - pary biegunów, J - moment bezwłądności */
-    double T, B, p, J;
-    /** Stała obwodu wzbudzenia (stałe magnesowanie) ifn = Ufn / Rf */
-    double ifn;
-
-    double Gaf;
+    struct _Parameters
+    {
+        // TODO: Translate to english
+        double E;   // siła elektromotoryczna []
+        double La;  // indukcyjność własna wirnika []
+        double Ra;  // rezystancja uzwojenia wirnika []
+        double Ua;  // napięcie twornika []
+        double Lf;  // indukcyjność własna obwodu wzbudzenia []
+        double Rf;  // rezystancja obwodu wzbudzenia []
+        double If;  // prąd obwodu wzbudzenia []
+        double Ufn; // napięcie obodu wzbudzenia []
+        double Laf; // indukcyjność wzajemna []
+        double T;   // moment napędowy []
+        double B;   // współczynnik tłumienia []
+        int p;      // liczba par biegunów []
+        double J;   // moment bezwłądności []
+        double ifn; // stała obwodu wzbudzenia (stałe magnesowanie) ifn = Ufn / Rf []
+        double Gaf; // Gaf = p * Laf * ifn []
+    } par;
 
 public:
-    /** External forces needs to be public in order to freely apply them into the object */
-    /** U - napięcie zasilania, Tl - moment obciążenia */
-    double angularVelocity, rotorCurrent;
-    double U, Tl;
+    struct _ExternalForces
+    {
+        double U;   // input voltage
+        double Tl;  // Load torque
+    } ext;
+    
+    union _State
+    {
+        double State[DC_MOTOR_STATE_COUNT];
+        struct
+        {
+            double RotorCurrent;
+            double AngularVelocity;
+        };
+    } st;
 
+    vector <double[DC_MOTOR_STATE_COUNT]> StateHistory;
     typedef double (DcMotor::*OdeMethod) (double[]);
     OdeMethod OdeList[DC_MOTOR_STATE_COUNT];
     OdeMethod Ode;
-    double State[DC_MOTOR_STATE_COUNT];
-    vector <double[DC_MOTOR_STATE_COUNT]> StateHistory;
 
     DcMotor();
     ~DcMotor();
-    double * ComputeNextState(double step);
-    void OperationAfterSolve();
+    void InitParameters(double Ra = 0.4, double La = 0.02, double Rf = 65, double Lf = 65, double J = 0.11, double B = 0.0053,
+                        int p = 2, double Laf = 0.363, double Ufn = 110);
     double f1(double state[DC_MOTOR_STATE_COUNT]);
     double f2(double state[DC_MOTOR_STATE_COUNT]);
     void SetupODEs();
+    double * ComputeNextState(double step);
+    void OperationAfterSolve();
 };
 
 

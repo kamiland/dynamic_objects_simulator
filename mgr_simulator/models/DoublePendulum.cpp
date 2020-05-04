@@ -13,74 +13,74 @@ DoublePendulum::~DoublePendulum()
 void DoublePendulum::InitParameters(double g, double m0, double m1, double L1, double l1,double I1, double L2, 
                                     double I2, double m2, double l2, double eta0, double eta1, double eta2, double gantry)
 {
-    this->g = g;
-    this->m0 = m0;
-    this->m1 = m1;
-    this->L1 = L1;
-    this->l1 = l1;
-    this->I1 = I1;
-    this->L2 = L2;
-    this->I2 = I2;
-    this->m2 = m2;
-    this->l2 = l2;
-    this->eta0 = eta0;
-    this->eta1 = eta1;
-    this->eta2 = eta2;
-    this->gantry = gantry;
+    this->par.g = g;
+    this->par.m0 = m0;
+    this->par.m1 = m1;
+    this->par.L1 = L1;
+    this->par.l1 = l1;
+    this->par.I1 = I1;
+    this->par.L2 = L2;
+    this->par.I2 = I2;
+    this->par.m2 = m2;
+    this->par.l2 = l2;
+    this->par.eta0 = eta0;
+    this->par.eta1 = eta1;
+    this->par.eta2 = eta2;
+    this->par.gantry = gantry;
 
-    A = m0 + m1 + m2;
-    B1 = m1 * l1 + m2 * L1;
-    B2 = m2 * l2;
-    C = m1 * l1 * l1 + m2 * L1 * L1 + I1;
-    D1 = m2 * L1 * l2;
-    D2 = m1 * l1 * g + m2 * L1 * g;
-    E = m2 * l2 * l2 + I2;
-    F = m2 * l2 * g;
+    par.A = par.m0 + par.m1 + par.m2;
+    par.B1 = par.m1 * par.l1 + par.m2 * par.L1;
+    par.B2 = par.m2 * par.l2;
+    par.C = par.m1 * par.l1 * par.l1 + par.m2 * par.L1 * par.L1 + par.I1;
+    par.D1 = par.m2 * par.L1 * par.l2;
+    par.D2 = par.m1 * par.l1 * par.g + par.m2 * par.L1 * par.g;
+    par.E = par.m2 * par.l2 * par.l2 + par.I2;
+    par.F = par.m2 * par.l2 * par.g;
 }
 
 double DoublePendulum::f1(double [])
 {
-    return State[3];
+    return st.State[3];
 }
 
 double DoublePendulum::f2(double [])
 {
-    return State[4];
+    return st.State[4];
 }
 
 double DoublePendulum::f3(double [])
 {
-    return State[5];
+    return st.State[5];
 }
 
 double DoublePendulum::f4(double [])
 {
-    double x2 = State[1];
-    double x3 = State[2];
-    double x4 = State[3];
-    double x5 = State[4];
-    double x6 = State[5];
-    return ((U + Z0 - x4 * eta0 + B1 * sin(x2) * pow(x5, 2) + B2 * sin(x3) * pow(x6, 2)) * (C * E - pow(D1, 2) * pow((cos(x2 - x3)), 2)) + (Z1 - x5 * eta1 - (x5 - x6) * eta2 - D1 * sin(x2 - x3) * pow(x6, 2) + D2 * sin(x2)) * (B2 * cos(x3) * D1 * cos(x2 - x3) - B1 * cos(x2) * E) + (Z2 - (x6 - x5) * eta2 + D1 * sin(x2 - x3) * pow(x5, 2) + F * sin(x3)) * (B1 * cos(x2) * D1 * cos(x2 - x3) - B2 * cos(x3) * C)) / (A * C * E + 2 * B1 * cos(x2) * B2 * cos(x3) * D1 * cos(x2 - x3) - pow(B1, 2) * pow((cos(x2)), 2) * E - A * pow(D1, 2) * pow((cos(x2 - x3)), 2) - pow(B2, 2) * pow((cos(x3)), 2) * C);
+    double x2 = st.State[1];
+    double x3 = st.State[2];
+    double x4 = st.State[3];
+    double x5 = st.State[4];
+    double x6 = st.State[5];
+    return ((ext.U + ext.Z0 - x4 * par.eta0 + par.B1 * sin(x2) * pow(x5, 2) + par.B2 * sin(x3) * pow(x6, 2)) * (par.C * par.E - pow(par.D1, 2) * pow((cos(x2 - x3)), 2)) + (ext.Z1 - x5 * par.eta1 - (x5 - x6) * par.eta2 - par.D1 * sin(x2 - x3) * pow(x6, 2) + par.D2 * sin(x2)) * (par.B2 * cos(x3) * par.D1 * cos(x2 - x3) - par.B1 * cos(x2) * par.E) + (ext.Z2 - (x6 - x5) * par.eta2 + par.D1 * sin(x2 - x3) * pow(x5, 2) + par.F * sin(x3)) * (par.B1 * cos(x2) * par.D1 * cos(x2 - x3) - par.B2 * cos(x3) * par.C)) / (par.A * par.C * par.E + 2 * par.B1 * cos(x2) * par.B2 * cos(x3) * par.D1 * cos(x2 - x3) - pow(par.B1, 2) * pow((cos(x2)), 2) * par.E - par.A * pow(par.D1, 2) * pow((cos(x2 - x3)), 2) - pow(par.B2, 2) * pow((cos(x3)), 2) * par.C);
 }
 
 double DoublePendulum::f5(double [])
 {
-    double x2 = State[1];
-    double x3 = State[2];
-    double x4 = State[3];
-    double x5 = State[4];
-    double x6 = State[5];
-    return ((U + Z0 - x4 * eta0 + B1 * sin(x2) * pow(x5, 2) + B2 * sin(x3) * pow(x6, 2)) * (B2 * cos(x3) * D1 * cos(x2 - x3) - B1 * cos(x2) * E) + (Z1 - x5 * eta1 - (x5 - x6) * eta2 - D1 * sin(x2 - x3) * pow(x6, 2) + D2 * sin(x2)) * (A * E - pow(B2, 2) * pow((cos(x3)), 2)) + (Z2 - (x6 - x5) * eta2 + D1 * sin(x2 - x3) * pow(x5, 2) + F * sin(x3)) * (B1 * cos(x2) * B2 * cos(x3) - A * D1 * cos(x2 - x3))) / (A * C * E + 2 * B1 * cos(x2) * B2 * cos(x3) * D1 * cos(x2 - x3) - pow(B1, 2) * pow((cos(x2)), 2) * E - A * pow(D1, 2) * pow((cos(x2 - x3)), 2) - pow(B2, 2) * pow((cos(x3)), 2) * C);
+    double x2 = st.State[1];
+    double x3 = st.State[2];
+    double x4 = st.State[3];
+    double x5 = st.State[4];
+    double x6 = st.State[5];
+    return ((ext.U + ext.Z0 - x4 * par.eta0 + par.B1 * sin(x2) * pow(x5, 2) + par.B2 * sin(x3) * pow(x6, 2)) * (par.B2 * cos(x3) * par.D1 * cos(x2 - x3) - par.B1 * cos(x2) * par.E) + (ext.Z1 - x5 * par.eta1 - (x5 - x6) * par.eta2 - par.D1 * sin(x2 - x3) * pow(x6, 2) + par.D2 * sin(x2)) * (par.A * par.E - pow(par.B2, 2) * pow((cos(x3)), 2)) + (ext.Z2 - (x6 - x5) * par.eta2 + par.D1 * sin(x2 - x3) * pow(x5, 2) + par.F * sin(x3)) * (par.B1 * cos(x2) * par.B2 * cos(x3) - par.A * par.D1 * cos(x2 - x3))) / (par.A * par.C * par.E + 2 * par.B1 * cos(x2) * par.B2 * cos(x3) * par.D1 * cos(x2 - x3) - pow(par.B1, 2) * pow((cos(x2)), 2) * par.E - par.A * pow(par.D1, 2) * pow((cos(x2 - x3)), 2) - pow(par.B2, 2) * pow((cos(x3)), 2) * par.C);
 }
 
 double DoublePendulum::f6(double [])
 {
-    double x2 = State[1];
-    double x3 = State[2];
-    double x4 = State[3];
-    double x5 = State[4];
-    double x6 = State[5];
-    return ((U + Z0 - x4 * eta0 + B1 * sin(x2) * pow(x5, 2) + B2 * sin(x3) * pow(x6, 2)) * (B1 * cos(x2) * D1 * cos(x2 - x3) - B2 * cos(x3) * C) + (Z1 - x5 * eta1 - (x5 - x6) * eta2 - D1 * sin(x2 - x3) * pow(x6, 2) + D2 * sin(x2)) * (B1 * cos(x2) * B2 * cos(x3) - A * D1 * cos(x2 - x3)) + (Z2 - (x6 - x5) * eta2 + D1 * sin(x2 - x3) * pow(x5, 2) + F * sin(x3)) * (A * C - pow(B1, 2) * pow((cos(x2)), 2))) / (A * C * E + 2 * B1 * cos(x2) * B2 * cos(x3) * D1 * cos(x2 - x3) - pow(B1, 2) * pow((cos(x2)), 2) * E - A * pow(D1, 2) * pow((cos(x2 - x3)), 2) - pow(B2, 2) * pow((cos(x3)), 2) * C);
+    double x2 = st.State[1];
+    double x3 = st.State[2];
+    double x4 = st.State[3];
+    double x5 = st.State[4];
+    double x6 = st.State[5];
+    return ((ext.U + ext.Z0 - x4 * par.eta0 + par.B1 * sin(x2) * pow(x5, 2) + par.B2 * sin(x3) * pow(x6, 2)) * (par.B1 * cos(x2) * par.D1 * cos(x2 - x3) - par.B2 * cos(x3) * par.C) + (ext.Z1 - x5 * par.eta1 - (x5 - x6) * par.eta2 - par.D1 * sin(x2 - x3) * pow(x6, 2) + par.D2 * sin(x2)) * (par.B1 * cos(x2) * par.B2 * cos(x3) - par.A * par.D1 * cos(x2 - x3)) + (ext.Z2 - (x6 - x5) * par.eta2 + par.D1 * sin(x2 - x3) * pow(x5, 2) + par.F * sin(x3)) * (par.A * par.C - pow(par.B1, 2) * pow((cos(x2)), 2))) / (par.A * par.C * par.E + 2 * par.B1 * cos(x2) * par.B2 * cos(x3) * par.D1 * cos(x2 - x3) - pow(par.B1, 2) * pow((cos(x2)), 2) * par.E - par.A * pow(par.D1, 2) * pow((cos(x2 - x3)), 2) - pow(par.B2, 2) * pow((cos(x3)), 2) * par.C);
 }
 
 /** Setup Ordinary Differential Equations (ODEs) */
@@ -97,13 +97,13 @@ void DoublePendulum::SetupODEs()
 double * DoublePendulum::ComputeNextState(double step)
 {
     SolverRk4 Solver(DP_STATE_COUNT);
-    return Solver.Solve<OdeMethod, DoublePendulum>(step, State, OdeList);
+    return Solver.Solve<OdeMethod, DoublePendulum>(step, st.State, OdeList);
 }
 
 void DoublePendulum::OperationAfterSolve()
 {
     for (int i = 1; i < 3; i++)
     {
-        State[i] = fmod((State[i] + 3 * M_PI), (M_PI * 2)) - M_PI;
+        st.State[i] = fmod((st.State[i] + 3 * M_PI), (M_PI * 2)) - M_PI;
     }
 }
