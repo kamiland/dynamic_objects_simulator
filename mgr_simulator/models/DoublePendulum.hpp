@@ -44,7 +44,7 @@ private:
 
 public:
 
-    struct ExternalForces
+    struct _ExternalForces
     {
         double U;
         double Z0;
