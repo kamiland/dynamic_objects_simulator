@@ -89,6 +89,7 @@ int main()
     DIP.ext.Z2 = 0;
     memset(DIP.st.State, 0, sizeof(DIP.st.State));
     DIP.ComputeNextState(0.001);
+    
     /**
      * Preparing simulation parameters
     */
