@@ -17,14 +17,14 @@ public:
     ~SolverRk4();
 
     template <typename S, class T>
-    double * Solve(double Step, double State[], S OdeList[])
+    double * Solve(double Step, double State[], S OdeList[], T *Model)
     {
         auto k = new double[StateEqCount][RK4_K];
         memset(k, 0, sizeof(k));
         int denom = 2;
         bool zCheck = false; 
         S Ode; 
-        T Model;
+        // T Model;
 
         for(int j = 0; j < RK4_K; j++)     // four steps of RK4 solver
         {
@@ -40,7 +40,7 @@ public:
                     Rk4State[a] = State[a] + (zCheck ? (k[a][j - 1] / denom) : 0);
                 }
                 Ode = OdeList[i];
-                k[i][j] = Step * (Model.*Ode)(State); // RK4 main equation, modified to system of ODE's
+                k[i][j] = Step * (Model->*Ode)(State); // RK4 main equation, modified to system of ODE's
             }
         }
 
@@ -50,7 +50,7 @@ public:
             State[i] = State[i] + (k[i][0] + 2 * k[i][1] + 2 * k[i][2] + k[i][3]) / 6;
         }
 
-        Model.OperationAfterSolve();
+        Model->OperationAfterSolve();
         return State;
     };
 };

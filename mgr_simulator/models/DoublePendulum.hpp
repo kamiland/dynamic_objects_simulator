@@ -11,7 +11,7 @@ using namespace std;
 
 const int DP_STATE_COUNT = 6;
 
-class DoublePendulum : IStateObject
+class DoublePendulum
 {
 private:
     struct _Parameters
@@ -82,15 +82,15 @@ public:
     ~DoublePendulum();
     void InitParameters(double g = 9.81, double m0 = 0.530168, double m1 = 0.18669, double L1 = 0.232039, double l1 = 0.15927,
         double I1 = 14675.631 / (1000 * 100 * 100), double L2 = 0.260, double I2 = 13518.257 / (1000 * 100 * 100), double m2 = 137.952 / 1000,
-        double l2 = 12.041 / 100, double eta0 = 0.01, double eta1 = 0.001, double eta2 = 0.001, double gantry = 1.0);
-    double f1(double []);
-    double f2(double []);
-    double f3(double []);
-    double f4(double []);
-    double f5(double []);
-    double f6(double []);
+        double l2 = 12.041 / 100, double eta0 = 0.01, double eta1 = 0.001, double eta2 = 0.001, double gantry = 10.0);
+    double f1(double state[DP_STATE_COUNT]);
+    double f2(double state[DP_STATE_COUNT]);
+    double f3(double state[DP_STATE_COUNT]);
+    double f4(double state[DP_STATE_COUNT]);
+    double f5(double state[DP_STATE_COUNT]);
+    double f6(double state[DP_STATE_COUNT]);
     void SetupODEs();
-    double * ComputeNextState(double step);
+    double * ComputeNextState(double step, DoublePendulum *Object);
     void OperationAfterSolve();
 
 };

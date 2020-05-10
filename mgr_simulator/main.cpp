@@ -79,45 +79,50 @@ int main()
      * Declaration of elementary objects and variables
     */
     GlobalContext Ctx;
-    Controller Pid(1, 1, 0);
-    ReferenceDcMotor ReferenceMotor(0, 0);
-    vector<DcMotorState> DcHistory;
     DoublePendulum DIP;
-    DIP.ext.U = 0;
-    DIP.ext.Z0 = 0;
-    DIP.ext.Z1 = 0;
-    DIP.ext.Z2 = 0;
-    memset(DIP.st.State, 0, sizeof(DIP.st.State));
-    DIP.ComputeNextState(0.001);
-    
+    DcMotor DcMotor;
+
+
     /**
      * Preparing simulation parameters
     */
     Ctx.SetSimulationTimeSec(1);
     Ctx.SetProbesCountPerSec(1000);
 
-    DcHistory = ReferenceMotor.Simulate(Ctx.GetProbesCountTotal(), 0.001);
-
-    DcMotor dcmotor;
-    dcmotor.st.State[0] = 0.0;
-    dcmotor.st.State[1] = 0.0;
-    dcmotor.ext.U = 230;
-    vector<double> history[2];
+    
+    DcMotor.st.State[0] = 0.0;
+    DcMotor.st.State[1] = 0.0;
+    DcMotor.ext.U = 230;
+    vector<double> DcHistory[2];
     double *x;
 
     for (int i = 0; i < Ctx.GetProbesCountTotal(); i++)
     {
-        x = dcmotor.ComputeNextState(0.001);
-        history[0].push_back(x[0]);
-        history[1].push_back(x[1]);
+        x = DcMotor.ComputeNextState(0.001, &DcMotor);
+        DcHistory[0].push_back(x[0]);
+        DcHistory[1].push_back(x[1]);
     }
+    WriteToFile(DcHistory);
 
-    for(int i = 0; i < DcHistory.size(); i++)
-    {
-        // cout << DcHistory[i].rotorCurrent - history[i].rotorCurrent << ", " << DcHistory[i].angularVelocity - history[i].angularVelocity << endl;
+    DIP.ext.U = 10;
+    DIP.ext.Z0 = 0;
+    DIP.ext.Z1 = 0;
+    DIP.ext.Z2 = 0;
+    memset(DIP.st.State, 0, sizeof(DIP.st.State));
+    vector<double> DIPHistory[6];
+    double *X;
+    
+    for (int i = 0; i < Ctx.GetProbesCountTotal(); i++)
+    {           
+        X = DIP.ComputeNextState(0.001, &DIP);
+        DIPHistory[0].push_back(X[0]);
+        DIPHistory[1].push_back(X[1]);
+        DIPHistory[2].push_back(X[2]);
+        DIPHistory[3].push_back(X[3]);
+        DIPHistory[4].push_back(X[4]);
+        DIPHistory[5].push_back(X[5]);
     }
-
-    WriteToFile(history);
+    WriteToFile(DIPHistory, "", "csv");
 
     std::cout << "Thank you for using N-Simulator. KamilAnd." << endl;
     return 0;

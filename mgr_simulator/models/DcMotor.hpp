@@ -10,7 +10,7 @@ using namespace std;
 const int DC_MOTOR_STATE_COUNT = 2;
 
 
-class DcMotor : IStateObject
+class DcMotor
 {   
 private:
     struct _Parameters
@@ -62,7 +62,7 @@ public:
     double f1(double state[DC_MOTOR_STATE_COUNT]);
     double f2(double state[DC_MOTOR_STATE_COUNT]);
     void SetupODEs();
-    double * ComputeNextState(double step);
+    double * ComputeNextState(double step, DcMotor *Object);
     void OperationAfterSolve();
 };
 
