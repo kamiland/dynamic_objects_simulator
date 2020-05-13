@@ -24,7 +24,6 @@ public:
         int denom = 2;
         bool zCheck = false; 
         S Ode; 
-        // T Model;
 
         for(int j = 0; j < RK4_K; j++)     // four steps of RK4 solver
         {
