@@ -85,70 +85,36 @@ int main()
     */
     GlobalContext Ctx;
     DcMotor DcMotor;
-    Pendulum IP;
-    DoublePendulum DIP;
+    Controller Pid(8, 4, 0.001);
     
-
-
     /**
      * Preparing simulation parameters
     */
-    Ctx.SetSimulationTimeSec(8);
+    Ctx.SetSimulationTimeSec(5);
     Ctx.SetProbesCountPerSec(1000);
 
-    
-    DcMotor.st.State[0] = 0.0;
-    DcMotor.st.State[1] = 0.0;
-    DcMotor.ext.U = 230;
+
+    DcMotor.st.AngularVelocity = 0.0;
+    DcMotor.st.RotorCurrent = 0.0;
+    DcMotor.ext.U = 0;
     vector<double> DcHistory[2];
     double *Dc_x;
 
     for (int i = 0; i < Ctx.GetProbesCountTotal(); i++)
     {
+        DcMotor.ext.U = Pid.CalculateOutput(150, DcMotor.st.AngularVelocity, 0.001);
+
+        if(i == 1000){ DcMotor.ext.Tl = 80;}
+        if(i == 2500){ DcMotor.ext.Tl = 0;}
+        if(i == 3500){ DcMotor.ext.Tl = -10;}
+
         Dc_x = DcMotor.ComputeNextState(0.001, &DcMotor);
+
+
         DcHistory[0].push_back(Dc_x[0]);
         DcHistory[1].push_back(Dc_x[1]);
     }
     WriteToFile(DcHistory);
-
-    IP.ext.U = 5;
-    IP.ext.Z0 = 0;
-    IP.ext.Z1 = 0;
-    memset(IP.st.State, 0, sizeof(IP.st.State));
-    IP.st.phy.Position.Arm = M_PI;
-    vector<double> IPHistory[4];
-    double *IP_x;
-    
-    for (int i = 0; i < Ctx.GetProbesCountTotal(); i++)
-    {           
-        if(i > 50) { IP.ext.U = 0; }
-        IP_x = IP.ComputeNextState(0.001, &IP);
-        IPHistory[0].push_back(IP_x[0]);
-        IPHistory[1].push_back(IP_x[1]);
-        IPHistory[2].push_back(IP_x[2]);
-        IPHistory[3].push_back(IP_x[3]);
-    }
-    WriteToFile(IPHistory, "ip", "csv");
-
-    DIP.ext.U = 10;
-    DIP.ext.Z0 = 0;
-    DIP.ext.Z1 = 0;
-    DIP.ext.Z2 = 0;
-    memset(DIP.st.State, 0, sizeof(DIP.st.State));
-    vector<double> DIPHistory[6];
-    double *DIP_x;
-    
-    for (int i = 0; i < Ctx.GetProbesCountTotal(); i++)
-    {           
-        DIP_x = DIP.ComputeNextState(0.001, &DIP);
-        DIPHistory[0].push_back(DIP_x[0]);
-        DIPHistory[1].push_back(DIP_x[1]);
-        DIPHistory[2].push_back(DIP_x[2]);
-        DIPHistory[3].push_back(DIP_x[3]);
-        DIPHistory[4].push_back(DIP_x[4]);
-        DIPHistory[5].push_back(DIP_x[5]);
-    }
-    WriteToFile(DIPHistory, "dip");
 
     std::cout << "Thank you for using N-Simulator. KamilAnd." << endl;
     return 0;

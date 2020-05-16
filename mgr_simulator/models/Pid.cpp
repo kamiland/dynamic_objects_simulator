@@ -1,4 +1,5 @@
 #include "Pid.hpp"
+#include <algorithm>
 
 Controller::Controller(double initialKp, double initialKi, double initialKd)
 {
@@ -53,8 +54,8 @@ double Controller::CalculateOutput(double setpoint, double pv, double dt = 0.001
 
     if(true == saturationEnable)
     {
-        controllerOutput = std::min(controllerOutput, saturationMax);
-        controllerOutput = std::max(controllerOutput, saturationMin);
+        controllerOutput = min(controllerOutput, saturationMax);
+        controllerOutput = max(controllerOutput, saturationMin);
     }
 
     return controllerOutput;
