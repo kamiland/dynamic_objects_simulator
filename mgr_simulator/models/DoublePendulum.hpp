@@ -69,7 +69,6 @@ public:
                 double InnerArm;
                 double ExternalArm;
             } Velocity;
-
         } phy;
     } st;
 

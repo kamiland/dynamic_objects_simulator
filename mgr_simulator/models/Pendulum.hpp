@@ -55,7 +55,6 @@ public:
                 double Cart;
                 double Arm;
             } Velocity;
-
         } phy;
     } st;
 
@@ -67,7 +66,7 @@ public:
     Pendulum();
     ~Pendulum();
     void InitParameters(double g = 9.81, double m0 = 0.530168, double m1 = 0.18669, double l = 0.15927,
-        double I = 14675.631 / (1000 * 100 * 100), double eta0 = 0.01, double eta1 = 0.001, double gantry = 10.0);
+        double I = 14675.631 / (1000 * 100 * 100), double eta0 = 0.1, double eta1 = 0.01, double gantry = 10.0);
     double f1(double state[P_STATE_COUNT]);
     double f2(double state[P_STATE_COUNT]);
     double f3(double state[P_STATE_COUNT]);

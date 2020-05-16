@@ -34,7 +34,7 @@ string GetDateString()
     std::stringstream SS;
     auto Now = std::chrono::system_clock::now();
     auto DateStamp = std::chrono::system_clock::to_time_t(Now);
-    SS << std::put_time(std::localtime(&DateStamp), "%y.%m.%d-%H_%M_%S");
+    SS << std::put_time(std::localtime(&DateStamp), "%d.%m.%y-%H_%M_%S");
     return SS.str();
 }
 
@@ -49,6 +49,11 @@ void WriteToFile(T (&History)[N], string FileName = "", string FileType = "txt",
     {
         FileName = GetDateString();
     }
+    else
+    {
+        FileName.append("-" + GetDateString());
+    }
+    
     FileName.append("." + FileType);
 
     if (CreateDirectory(Path.c_str(), NULL) || ERROR_ALREADY_EXISTS == GetLastError())
@@ -88,7 +93,7 @@ int main()
     /**
      * Preparing simulation parameters
     */
-    Ctx.SetSimulationTimeSec(1);
+    Ctx.SetSimulationTimeSec(8);
     Ctx.SetProbesCountPerSec(1000);
 
     
@@ -106,22 +111,24 @@ int main()
     }
     WriteToFile(DcHistory);
 
-    IP.ext.U = 10;
+    IP.ext.U = 5;
     IP.ext.Z0 = 0;
     IP.ext.Z1 = 0;
     memset(IP.st.State, 0, sizeof(IP.st.State));
+    IP.st.phy.Position.Arm = M_PI;
     vector<double> IPHistory[4];
     double *IP_x;
     
     for (int i = 0; i < Ctx.GetProbesCountTotal(); i++)
     {           
+        if(i > 50) { IP.ext.U = 0; }
         IP_x = IP.ComputeNextState(0.001, &IP);
         IPHistory[0].push_back(IP_x[0]);
         IPHistory[1].push_back(IP_x[1]);
         IPHistory[2].push_back(IP_x[2]);
         IPHistory[3].push_back(IP_x[3]);
     }
-    WriteToFile(IPHistory, "", "csv");
+    WriteToFile(IPHistory, "ip", "csv");
 
     DIP.ext.U = 10;
     DIP.ext.Z0 = 0;
@@ -141,7 +148,7 @@ int main()
         DIPHistory[4].push_back(DIP_x[4]);
         DIPHistory[5].push_back(DIP_x[5]);
     }
-    WriteToFile(DIPHistory, "", "csvdip");
+    WriteToFile(DIPHistory, "dip");
 
     std::cout << "Thank you for using N-Simulator. KamilAnd." << endl;
     return 0;

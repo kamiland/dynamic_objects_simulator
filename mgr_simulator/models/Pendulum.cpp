@@ -44,7 +44,8 @@ double Pendulum::f3(double state[])
     double x1 = state[1];
     double x2 = state[2];
     double x3 = state[3];
-    return ((ext.U + ext.Z0 - par.eta0 * x2 + par.B * sin(x1) * pow(x3, 2)) * par.D - (par.B * cos(x1) * (ext.Z1 - par.eta1 * x3 - par.C * sin(x1)))) / (par.A * par.D - pow(par.B * cos(x1), 2));
+    return ((ext.U + ext.Z0 - par.eta0 * x2 + par.B * sin(x1) * pow(x3, 2)) * par.D - (par.B * cos(x1) * (ext.Z1 - par.eta1 * x3 - par.C * sin(x1))))
+    / (par.A * par.D - pow(par.B * cos(x1), 2));
 }
 
 double Pendulum::f4(double state[])
@@ -52,7 +53,8 @@ double Pendulum::f4(double state[])
     double x1 = state[1];
     double x2 = state[2];
     double x3 = state[3];
-    return (par.A * (ext.Z1 - par.eta1 * x3 - par.C * sin(x1)) - ((ext.U + ext.Z0 - par.eta0 * x2 + par.B * sin(x1) * pow(x3, 2)) * par.B * cos(x1))) / (par.A * par.D - pow(par.B * cos(x1), 2));
+    return (par.A * (ext.Z1 - par.eta1 * x3 - par.C * sin(x1)) - ((ext.U + ext.Z0 - par.eta0 * x2 + par.B * sin(x1) * pow(x3, 2)) * par.B * cos(x1)))
+    / (par.A * par.D - pow(par.B * cos(x1), 2));
 }
 
 

@@ -60,7 +60,8 @@ double DoublePendulum::f4(double state[])
     double x4 = state[3];
     double x5 = state[4];
     double x6 = state[5];
-    return ((ext.U + ext.Z0 - x4 * par.eta0 + par.B1 * sin(x2) * pow(x5, 2) + par.B2 * sin(x3) * pow(x6, 2)) * (par.C * par.E - pow(par.D1, 2) * pow((cos(x2 - x3)), 2)) + (ext.Z1 - x5 * par.eta1 - (x5 - x6) * par.eta2 - par.D1 * sin(x2 - x3) * pow(x6, 2) + par.D2 * sin(x2)) * (par.B2 * cos(x3) * par.D1 * cos(x2 - x3) - par.B1 * cos(x2) * par.E) + (ext.Z2 - (x6 - x5) * par.eta2 + par.D1 * sin(x2 - x3) * pow(x5, 2) + par.F * sin(x3)) * (par.B1 * cos(x2) * par.D1 * cos(x2 - x3) - par.B2 * cos(x3) * par.C)) / (par.A * par.C * par.E + 2 * par.B1 * cos(x2) * par.B2 * cos(x3) * par.D1 * cos(x2 - x3) - pow(par.B1, 2) * pow((cos(x2)), 2) * par.E - par.A * pow(par.D1, 2) * pow((cos(x2 - x3)), 2) - pow(par.B2, 2) * pow((cos(x3)), 2) * par.C);
+    return ((ext.U + ext.Z0 - x4 * par.eta0 + par.B1 * sin(x2) * pow(x5, 2) + par.B2 * sin(x3) * pow(x6, 2)) * (par.C * par.E - pow(par.D1, 2) * pow((cos(x2 - x3)), 2)) + (ext.Z1 - x5 * par.eta1 - (x5 - x6) * par.eta2 - par.D1 * sin(x2 - x3) * pow(x6, 2) + par.D2 * sin(x2)) * (par.B2 * cos(x3) * par.D1 * cos(x2 - x3) - par.B1 * cos(x2) * par.E) + (ext.Z2 - (x6 - x5) * par.eta2 + par.D1 * sin(x2 - x3) * pow(x5, 2) + par.F * sin(x3)) * (par.B1 * cos(x2) * par.D1 * cos(x2 - x3) - par.B2 * cos(x3) * par.C))
+    / (par.A * par.C * par.E + 2 * par.B1 * cos(x2) * par.B2 * cos(x3) * par.D1 * cos(x2 - x3) - pow(par.B1, 2) * pow((cos(x2)), 2) * par.E - par.A * pow(par.D1, 2) * pow((cos(x2 - x3)), 2) - pow(par.B2, 2) * pow((cos(x3)), 2) * par.C);
 }
 
 double DoublePendulum::f5(double state[])
@@ -70,7 +71,8 @@ double DoublePendulum::f5(double state[])
     double x4 = state[3];
     double x5 = state[4];
     double x6 = state[5];
-    return ((ext.U + ext.Z0 - x4 * par.eta0 + par.B1 * sin(x2) * pow(x5, 2) + par.B2 * sin(x3) * pow(x6, 2)) * (par.B2 * cos(x3) * par.D1 * cos(x2 - x3) - par.B1 * cos(x2) * par.E) + (ext.Z1 - x5 * par.eta1 - (x5 - x6) * par.eta2 - par.D1 * sin(x2 - x3) * pow(x6, 2) + par.D2 * sin(x2)) * (par.A * par.E - pow(par.B2, 2) * pow((cos(x3)), 2)) + (ext.Z2 - (x6 - x5) * par.eta2 + par.D1 * sin(x2 - x3) * pow(x5, 2) + par.F * sin(x3)) * (par.B1 * cos(x2) * par.B2 * cos(x3) - par.A * par.D1 * cos(x2 - x3))) / (par.A * par.C * par.E + 2 * par.B1 * cos(x2) * par.B2 * cos(x3) * par.D1 * cos(x2 - x3) - pow(par.B1, 2) * pow((cos(x2)), 2) * par.E - par.A * pow(par.D1, 2) * pow((cos(x2 - x3)), 2) - pow(par.B2, 2) * pow((cos(x3)), 2) * par.C);
+    return ((ext.U + ext.Z0 - x4 * par.eta0 + par.B1 * sin(x2) * pow(x5, 2) + par.B2 * sin(x3) * pow(x6, 2)) * (par.B2 * cos(x3) * par.D1 * cos(x2 - x3) - par.B1 * cos(x2) * par.E) + (ext.Z1 - x5 * par.eta1 - (x5 - x6) * par.eta2 - par.D1 * sin(x2 - x3) * pow(x6, 2) + par.D2 * sin(x2)) * (par.A * par.E - pow(par.B2, 2) * pow((cos(x3)), 2)) + (ext.Z2 - (x6 - x5) * par.eta2 + par.D1 * sin(x2 - x3) * pow(x5, 2) + par.F * sin(x3)) * (par.B1 * cos(x2) * par.B2 * cos(x3) - par.A * par.D1 * cos(x2 - x3)))
+    / (par.A * par.C * par.E + 2 * par.B1 * cos(x2) * par.B2 * cos(x3) * par.D1 * cos(x2 - x3) - pow(par.B1, 2) * pow((cos(x2)), 2) * par.E - par.A * pow(par.D1, 2) * pow((cos(x2 - x3)), 2) - pow(par.B2, 2) * pow((cos(x3)), 2) * par.C);
 }
 
 double DoublePendulum::f6(double state[])
@@ -80,7 +82,8 @@ double DoublePendulum::f6(double state[])
     double x4 = state[3];
     double x5 = state[4];
     double x6 = state[5];
-    return ((ext.U + ext.Z0 - x4 * par.eta0 + par.B1 * sin(x2) * pow(x5, 2) + par.B2 * sin(x3) * pow(x6, 2)) * (par.B1 * cos(x2) * par.D1 * cos(x2 - x3) - par.B2 * cos(x3) * par.C) + (ext.Z1 - x5 * par.eta1 - (x5 - x6) * par.eta2 - par.D1 * sin(x2 - x3) * pow(x6, 2) + par.D2 * sin(x2)) * (par.B1 * cos(x2) * par.B2 * cos(x3) - par.A * par.D1 * cos(x2 - x3)) + (ext.Z2 - (x6 - x5) * par.eta2 + par.D1 * sin(x2 - x3) * pow(x5, 2) + par.F * sin(x3)) * (par.A * par.C - pow(par.B1, 2) * pow((cos(x2)), 2))) / (par.A * par.C * par.E + 2 * par.B1 * cos(x2) * par.B2 * cos(x3) * par.D1 * cos(x2 - x3) - pow(par.B1, 2) * pow((cos(x2)), 2) * par.E - par.A * pow(par.D1, 2) * pow((cos(x2 - x3)), 2) - pow(par.B2, 2) * pow((cos(x3)), 2) * par.C);
+    return ((ext.U + ext.Z0 - x4 * par.eta0 + par.B1 * sin(x2) * pow(x5, 2) + par.B2 * sin(x3) * pow(x6, 2)) * (par.B1 * cos(x2) * par.D1 * cos(x2 - x3) - par.B2 * cos(x3) * par.C) + (ext.Z1 - x5 * par.eta1 - (x5 - x6) * par.eta2 - par.D1 * sin(x2 - x3) * pow(x6, 2) + par.D2 * sin(x2)) * (par.B1 * cos(x2) * par.B2 * cos(x3) - par.A * par.D1 * cos(x2 - x3)) + (ext.Z2 - (x6 - x5) * par.eta2 + par.D1 * sin(x2 - x3) * pow(x5, 2) + par.F * sin(x3)) * (par.A * par.C - pow(par.B1, 2) * pow((cos(x2)), 2)))
+    / (par.A * par.C * par.E + 2 * par.B1 * cos(x2) * par.B2 * cos(x3) * par.D1 * cos(x2 - x3) - pow(par.B1, 2) * pow((cos(x2)), 2) * par.E - par.A * pow(par.D1, 2) * pow((cos(x2 - x3)), 2) - pow(par.B2, 2) * pow((cos(x3)), 2) * par.C);
 }
 
 /** Setup Ordinary Differential Equations (ODEs) */
