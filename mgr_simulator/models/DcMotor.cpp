@@ -35,7 +35,7 @@ double DcMotor::f1(double state[])
 {
     double X1 = state[0];
     double X2 = state[1];
-    return -(par.Ra / par.La) * X1 - (par.Gaf / par.La) * X2 + (1 / par.La) * ext.U; // for dbg
+    return -(par.Ra / par.La) * X1 - (par.Gaf / par.La) * X2 + (1 / par.La) * ext.U;
 }
 
 
@@ -43,7 +43,7 @@ double DcMotor::f2(double state[])
 {
     double X1 = state[0];
     double X2 = state[1];
-    return (par.Gaf / par.J) * X1 - (par.B / par.J) * X2 + (1 / par.J) * ext.Tl; // for dbg
+    return (par.Gaf / par.J) * X1 - (par.B / par.J) * X2 + (1 / par.J) * ext.Tl;
 }
 
 /** Setup Ordinary Differential Equations (ODEs) */

@@ -3,3 +3,4 @@
 #include "models\DcMotor.hpp"
 #include "models\Pendulum.hpp"
 #include "models\DoublePendulum.hpp"
+#include "models\SeriesRLC.hpp"

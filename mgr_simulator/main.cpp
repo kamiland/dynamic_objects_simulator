@@ -86,35 +86,57 @@ int main()
     GlobalContext Ctx;
     DcMotor DcMotor;
     Controller Pid(8, 4, 0.001);
+
+    SeriesRLC Rlc;
     
     /**
      * Preparing simulation parameters
     */
-    Ctx.SetSimulationTimeSec(5);
+    Ctx.SetSimulationTimeSec(0.5);
     Ctx.SetProbesCountPerSec(1000);
 
 
-    DcMotor.st.AngularVelocity = 0.0;
-    DcMotor.st.RotorCurrent = 0.0;
-    DcMotor.ext.U = 0;
-    vector<double> DcHistory[2];
-    double *Dc_x;
+    // DcMotor.st.AngularVelocity = 0.0;
+    // DcMotor.st.RotorCurrent = 0.0;
+    // DcMotor.ext.U = 0;
+    // vector<double> DcHistory[2];
+    // double *Dc_x;
 
+    // for (int i = 0; i < Ctx.GetProbesCountTotal(); i++)
+    // {
+    //     DcMotor.ext.U = Pid.CalculateOutput(150, DcMotor.st.AngularVelocity, 0.001);
+
+    //     if(i == 1000){ DcMotor.ext.Tl = 80;}
+    //     if(i == 2500){ DcMotor.ext.Tl = 0;}
+    //     if(i == 3500){ DcMotor.ext.Tl = -10;}
+
+    //     Dc_x = DcMotor.ComputeNextState(0.001, &DcMotor);
+
+
+    //     DcHistory[0].push_back(Dc_x[0]);
+    //     DcHistory[1].push_back(Dc_x[1]);
+    // }
+    // WriteToFile(DcHistory);
+
+
+    vector<double> RlcHistory[2];
+    double *Rlc_x;
+    Rlc.InitParameters(50, 0.2, 0.0002);
+    Rlc.st.CapacitorVoltage = 0;
+    Rlc.st.CircuitCurrent = 0;
+
+    Rlc.ext.U = 5;
+    
     for (int i = 0; i < Ctx.GetProbesCountTotal(); i++)
     {
-        DcMotor.ext.U = Pid.CalculateOutput(150, DcMotor.st.AngularVelocity, 0.001);
+        if(i == 10){ Rlc.ext.U = 0;}
 
-        if(i == 1000){ DcMotor.ext.Tl = 80;}
-        if(i == 2500){ DcMotor.ext.Tl = 0;}
-        if(i == 3500){ DcMotor.ext.Tl = -10;}
+        Rlc_x = Rlc.ComputeNextState(0.001, &Rlc);
 
-        Dc_x = DcMotor.ComputeNextState(0.001, &DcMotor);
-
-
-        DcHistory[0].push_back(Dc_x[0]);
-        DcHistory[1].push_back(Dc_x[1]);
+        RlcHistory[0].push_back(Rlc_x[0]);
+        RlcHistory[1].push_back(Rlc_x[1]);
     }
-    WriteToFile(DcHistory);
+    WriteToFile(RlcHistory, "SeriesRLC");
 
     std::cout << "Thank you for using N-Simulator. KamilAnd." << endl;
     return 0;
