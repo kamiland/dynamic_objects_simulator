@@ -96,27 +96,27 @@ int main()
     Ctx.SetProbesCountPerSec(1000);
 
 
-    // DcMotor.st.AngularVelocity = 0.0;
-    // DcMotor.st.RotorCurrent = 0.0;
-    // DcMotor.ext.U = 0;
-    // vector<double> DcHistory[2];
-    // double *Dc_x;
+    DcMotor.st.AngularVelocity = 0.0;
+    DcMotor.st.RotorCurrent = 0.0;
+    DcMotor.ext.U = 0;
+    vector<double> DcHistory[2];
+    double *Dc_x;
 
-    // for (int i = 0; i < Ctx.GetProbesCountTotal(); i++)
-    // {
-    //     DcMotor.ext.U = Pid.CalculateOutput(150, DcMotor.st.AngularVelocity, 0.001);
+    for (int i = 0; i < Ctx.GetProbesCountTotal(); i++)
+    {
+        DcMotor.ext.U = Pid.CalculateOutput(150, DcMotor.st.AngularVelocity, 0.001);
 
-    //     if(i == 1000){ DcMotor.ext.Tl = 80;}
-    //     if(i == 2500){ DcMotor.ext.Tl = 0;}
-    //     if(i == 3500){ DcMotor.ext.Tl = -10;}
+        if(i == 1000){ DcMotor.ext.Tl = 80;}
+        if(i == 2500){ DcMotor.ext.Tl = 0;}
+        if(i == 3500){ DcMotor.ext.Tl = -10;}
 
-    //     Dc_x = DcMotor.ComputeNextState(0.001, &DcMotor);
+        Dc_x = DcMotor.ComputeNextState(0.001, &DcMotor);
 
 
-    //     DcHistory[0].push_back(Dc_x[0]);
-    //     DcHistory[1].push_back(Dc_x[1]);
-    // }
-    // WriteToFile(DcHistory);
+        DcHistory[0].push_back(Dc_x[0]);
+        DcHistory[1].push_back(Dc_x[1]);
+    }
+    WriteToFile(DcHistory, "dc");
 
 
     vector<double> RlcHistory[2];

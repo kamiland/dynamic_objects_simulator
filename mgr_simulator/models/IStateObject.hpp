@@ -5,6 +5,10 @@
 #include <vector>
 using namespace std;
 
+#define MILI(X) ((double) X / 1000)
+#define MICRO(X) ((double) X / 1000000)
+#define NANO(X) ((double) X / 1000000000)
+
 class IStateObject
 {
     public:
