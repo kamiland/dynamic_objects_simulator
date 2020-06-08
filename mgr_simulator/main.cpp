@@ -11,7 +11,9 @@
 #include <windows.h>
 #include "GlobalContext.hpp"
 #include "AllModels.hpp"
+#include "json/json.hpp"
 using namespace std;
+using json = nlohmann::json;
 
 bool DirExists(const std::string& dirName_in)
 {
@@ -51,7 +53,7 @@ void WriteToFile(T (&History)[N], string FileName = "", string FileType = "txt",
     }
     else
     {
-        FileName.append("-" + GetDateString());
+        // FileName.append("-" + GetDateString());
     }
     
     FileName.append("." + FileType);
@@ -85,14 +87,44 @@ int main()
     */
     GlobalContext Ctx;
     DcMotor DcMotor;
-    Controller Pid(8, 4, 0.001);
+    Controller Pid(3, 3, 0);
 
     SeriesRLC Rlc;
     
     /**
+     * JSON library test
+    */
+
+    // create an empty structure (null)
+    json j;
+
+    // add a number that is stored as double (note the implicit conversion of j to an object)
+    j["year"] = 2020;
+
+    // add a Boolean that is stored as bool
+    j["mgr"] = true;
+
+    // add a string that is stored as std::string
+    j["name"] = "Kamil Tomasz Andrzejewski";
+
+    // add another null object by passing nullptr
+    j["nothing"] = nullptr;
+
+    // add an object inside the object
+    j["double_pendulum"]["inner_arm_length"] = 22.31;
+
+    // add an array that is stored as std::vector (using an initializer list)
+    j["list_of_solvers"] = { 4, 5 };
+
+    // add another object (using an initializer list of pairs)
+    j["object"] = { {"pendulum", "double"}, {"value", 153000} };
+
+    std::cout << j.dump(4) << std::endl;
+    
+    /**
      * Preparing simulation parameters
     */
-    Ctx.SetSimulationTimeSec(0.5);
+    Ctx.SetSimulationTimeSec(4);
     Ctx.SetProbesCountPerSec(1000);
 
 
