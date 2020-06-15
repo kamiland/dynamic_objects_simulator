@@ -2,7 +2,7 @@
 
 DcMotor::DcMotor()
 {
-    ext.U = 230;
+    ext.U = 0;
     ext.Tl = 0;
 
     InitParameters();
