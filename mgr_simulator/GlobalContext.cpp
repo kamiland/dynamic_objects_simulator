@@ -27,3 +27,8 @@ long GlobalContext::GetProbesCountTotal()
     probesCountTotal = simulationTimeSec * probesCountPerSec;
     return probesCountTotal;
 }
+
+double GlobalContext::GetStep()
+{
+    return 1 / probesCountPerSec;
+}

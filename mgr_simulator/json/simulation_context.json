@@ -1,4 +1,144 @@
 {
-  "time": 3.0,
-  "probes_per_second": 1000
+  "context":
+  {
+    "time": 0.1,
+    "probes_per_second": 1000
+  },
+
+  "pid": 
+  {
+    "kp": 8.574,
+    "ki": 2.66,
+    "kd": 1.453,
+    "saturation": 
+    {
+      "set": true,
+      "min": 0.0,
+      "max": 230.0
+    },
+    "setpoint": 150.0
+  },
+
+  "dc":
+  {
+    "parameters":
+    {
+      "La": 0.02,
+      "Ra": 0.4,
+      "Lf": 65,
+      "Rf": 65,
+      "Ufn": 110,
+      "Laf": 0.363,
+      "B": 0.0053,
+      "p": 2,
+      "J": 0.11
+    },
+    "init_state":
+    {
+      "rotor_current": 0.0,
+      "angular_velocity": 0.0
+    },
+    "external_forces":
+    {
+      "U": 0.0,
+      "Tl": 0.0
+    }
+  },
+
+  "series_rlc":
+  {
+    "parameters":
+    {
+      "R": 55,
+      "L": 0.2,
+      "C": 0.0003
+    },
+    "init_state":
+    {
+      "circuit_current": 0,
+      "capacitor_voltage" : 0
+    },
+    "external_forces":
+    {
+      "U": 5
+    }
+  },
+
+  "pendulum":
+  {
+    "parameters":
+    {
+      "g": 9.81,
+      "m0": 0.530168,
+      "m1": 0.18669,
+      "l": 0.15927,
+      "I": 0.00146756309,
+      "eta0": 0.1,
+      "eta1": 0.01,
+      "gantry": 10.0
+    },
+    "init_state":
+    {
+      "position":
+      {
+        "cart": 0.0,
+        "arm": 0.0
+      }, 
+      "velocity":
+      {
+        "cart": 0.0,
+        "arm": 0.0
+      }
+    },
+    "external_forces":
+    {
+      "U": 0,
+      "Z0": 0,
+      "Z1": 0
+    }
+  },
+
+  "double_pendulum":
+  {
+    "parameters":
+    {
+      "g": 9.81,
+      "m0": 0.530168,
+      "m1": 0.18669,
+      "L1": 0.232039,
+      "l1": 0.15927,
+      "I1": 0.00146756309,
+      "L2": 0.260,
+      "I2": 0.00135182569,
+      "m2": 0.137952,
+      "l2": 0.12041,
+      "eta0": 0.1,
+      "eta1": 0.01,
+      "eta2": 0.01,
+      "gantry": 10.0
+    },
+    "init_state":
+    {
+      "position":
+      {
+        "cart": 0.0,
+        "inner_arm": 0.0,
+        "exter_arm": 0.0
+      }, 
+      "velocity":
+      {
+        "cart": 0.0,
+        "inner_arm": 0.0,
+        "exter_arm": 0.0
+      }
+    },
+    "external_forces":
+    {
+      "U": 0,
+      "Z0": 0,
+      "Z1": 0,
+      "Z2": 0
+    }
+  }
+  
 }

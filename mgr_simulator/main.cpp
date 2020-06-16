@@ -89,35 +89,46 @@ string ReadFromFile(string FileName)
 int main() 
 {
     /**
-     * Declaration of elementary objects and variables
+     * Reading JSON with configuration of simulation
     */
-    GlobalContext Ctx;
-    DcMotor DcMotor;
-    Controller Pid(8.574, 0.66, 0.453);
-    Pid.SetSaturation(0, 230);
-
-    SeriesRLC Rlc;
-    
-    json SimulationJson;
+    json j;
     string RawJsonString = ReadFromFile("./json/simulation_context.json");
-    SimulationJson = json::parse(RawJsonString);
+    j = json::parse(RawJsonString);
+
 
     /**
-     * Preparing simulation parameters
+     * Preparing simulation context and parameters
     */
-    Ctx.SetSimulationTimeSec(SimulationJson["time"]);
-    Ctx.SetProbesCountPerSec(SimulationJson["probes_per_second"]);
+    GlobalContext Ctx;
+    Ctx.SetSimulationTimeSec(j["context"]["time"]);
+    Ctx.SetProbesCountPerSec(j["context"]["probes_per_second"]);
+
+    /**
+     * Declaration of elementary objects and variables
+    */
+    DcMotor DcMotor;
+    Controller Pid(j["pid"]["kp"], j["pid"]["ki"], j["pid"]["kd"]);
+    if (true == j["pid"]["saturation"]["set"])
+    {
+        Pid.SetSaturation(j["pid"]["saturation"]["min"], j["pid"]["saturation"]["max"]);
+    }
+
+    SeriesRLC Rlc;
 
 
-    DcMotor.st.AngularVelocity = 0.0;
-    DcMotor.st.RotorCurrent = 0.0;
-    DcMotor.ext.U = 0;
+    /**
+     * Execution of simulation and research
+    */
+
+    DcMotor.st.AngularVelocity = j["dc"]["init_state"]["angular_velocity"];
+    DcMotor.st.RotorCurrent = j["dc"]["init_state"]["rotor_current"];
+    DcMotor.ext.U = j["dc"]["external_forces"]["U"];
     vector<double> DcHistory[2];
     double *Dc_x;
 
     for (int i = 0; i < Ctx.GetProbesCountTotal(); i++)
     {
-        DcMotor.ext.U = Pid.CalculateOutput(150, DcMotor.st.AngularVelocity, 0.001);
+        DcMotor.ext.U = Pid.CalculateOutput(j["pid"]["setpoint"], DcMotor.st.AngularVelocity, 0.001);
 
         if(i == 1000){ DcMotor.ext.Tl = 80;}
         if(i == 2500){ DcMotor.ext.Tl = 0;}
@@ -132,24 +143,25 @@ int main()
     WriteToFile(DcHistory, "dc");
 
 
+
+    Rlc.InitParameters(j["series_rlc"]["parameters"]["R"], j["series_rlc"]["parameters"]["L"], j["series_rlc"]["parameters"]["C"]);
+    Rlc.st.CapacitorVoltage = j["series_rlc"]["init_state"]["capacitor_voltage"];
+    Rlc.st.CircuitCurrent = j["series_rlc"]["init_state"]["circuit_current"];
     vector<double> RlcHistory[2];
     double *Rlc_x;
-    Rlc.InitParameters(50, 0.2, 0.0002);
-    Rlc.st.CapacitorVoltage = 0;
-    Rlc.st.CircuitCurrent = 0;
 
-    Rlc.ext.U = 5;
+    Rlc.ext.U = j["series_rlc"]["external_forces"]["U"];
     
     for (int i = 0; i < Ctx.GetProbesCountTotal(); i++)
     {
-        if(i == 10){ Rlc.ext.U = 0;}
+        if(i == 2){ Rlc.ext.U = 0;}
 
         Rlc_x = Rlc.ComputeNextState(0.001, &Rlc);
 
         RlcHistory[0].push_back(Rlc_x[0]);
         RlcHistory[1].push_back(Rlc_x[1]);
     }
-    WriteToFile(RlcHistory, "SeriesRLC");
+    WriteToFile(RlcHistory, "rlc");
 
     std::cout << "Thank you for using N-Simulator. KamilAnd." << endl;
     return 0;

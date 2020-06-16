@@ -7,7 +7,7 @@ T = []
 dt = 0.001
 t = 0
 
-with open('./data/dc.txt', 'r') as csvfile:
+with open('./data/rlc.txt', 'r') as csvfile:
     plots = csv.reader(csvfile, delimiter=',')
     for row in plots:
         t = t + dt

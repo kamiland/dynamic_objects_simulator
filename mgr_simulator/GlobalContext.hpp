@@ -18,6 +18,7 @@ public:
     void SetSimulationTimeSec(float seconds);
     void SetProbesCountPerSec(int probes);
     long GetProbesCountTotal();
+    double GetStep();
 };
 
 #endif
