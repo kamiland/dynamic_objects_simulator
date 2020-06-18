@@ -86,6 +86,22 @@ string ReadFromFile(string FileName)
     return Str;
 }
 
+bool TimeCheck(int i, double Time, double Step)
+{
+    if(i * Step == Time)
+    {
+        return true;
+    }
+    else if ((i * Step - Step) < Time < (i * Step + Step))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
 int main() 
 {
     /**
@@ -94,7 +110,6 @@ int main()
     json j;
     string RawJsonString = ReadFromFile("./json/simulation_context.json");
     j = json::parse(RawJsonString);
-
 
     /**
      * Preparing simulation context and parameters
@@ -150,11 +165,26 @@ int main()
     vector<double> RlcHistory[2];
     double *Rlc_x;
 
-    Rlc.ext.U = j["series_rlc"]["external_forces"]["U"];
+    Rlc.ext.U = j["series_rlc"]["external_forces"]["U"]["value"][0];
     
     for (int i = 0; i < Ctx.GetProbesCountTotal(); i++)
     {
-        if(i == 2){ Rlc.ext.U = 0;}
+        if(TimeCheck(i, j["series_rlc"]["external_forces"]["U"]["time"][1], Ctx.GetStep()))
+        {
+            Rlc.ext.U = j["series_rlc"]["external_forces"]["U"]["value"][1];
+        }
+        if(TimeCheck(i, j["series_rlc"]["external_forces"]["U"]["time"][2], Ctx.GetStep()))
+        {
+            Rlc.ext.U = j["series_rlc"]["external_forces"]["U"]["value"][2];
+        }
+        if(TimeCheck(i, j["series_rlc"]["external_forces"]["U"]["time"][3], Ctx.GetStep()))
+        {
+            Rlc.ext.U = j["series_rlc"]["external_forces"]["U"]["value"][3];
+        }
+        if(TimeCheck(i, j["series_rlc"]["external_forces"]["U"]["time"][4], Ctx.GetStep()))
+        {
+            Rlc.ext.U = j["series_rlc"]["external_forces"]["U"]["value"][4];
+        }
 
         Rlc_x = Rlc.ComputeNextState(0.001, &Rlc);
 
