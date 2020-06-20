@@ -102,6 +102,13 @@ bool TimeCheck(int i, double Time, double Step)
     }
 }
 
+void PidSettingsFromJson(const json& j, Controller& p) 
+{
+    j.at("pid").at("kp").get_to(p.Kp);
+    j.at("pid").at("ki").get_to(p.Ki);
+    j.at("pid").at("kd").get_to(p.Kd);
+}
+
 int main() 
 {
     /**
@@ -122,42 +129,19 @@ int main()
      * Declaration of elementary objects and variables
     */
     DcMotor DcMotor;
-    Controller Pid(j["pid"]["kp"], j["pid"]["ki"], j["pid"]["kd"]);
+    Controller Pid(0, 0, 0);
+    PidSettingsFromJson(j, Pid);
+
+
     if (true == j["pid"]["saturation"]["set"])
     {
         Pid.SetSaturation(j["pid"]["saturation"]["min"], j["pid"]["saturation"]["max"]);
     }
 
     SeriesRLC Rlc;
-
-
     /**
      * Execution of simulation and research
     */
-
-    DcMotor.st.AngularVelocity = j["dc"]["init_state"]["angular_velocity"];
-    DcMotor.st.RotorCurrent = j["dc"]["init_state"]["rotor_current"];
-    DcMotor.ext.U = j["dc"]["external_forces"]["U"];
-    vector<double> DcHistory[2];
-    double *Dc_x;
-
-    for (int i = 0; i < Ctx.GetProbesCountTotal(); i++)
-    {
-        DcMotor.ext.U = Pid.CalculateOutput(j["pid"]["setpoint"], DcMotor.st.AngularVelocity, 0.001);
-
-        if(i == 1000){ DcMotor.ext.Tl = 80;}
-        if(i == 2500){ DcMotor.ext.Tl = 0;}
-        if(i == 3500){ DcMotor.ext.Tl = -10;}
-
-        Dc_x = DcMotor.ComputeNextState(0.001, &DcMotor);
-
-
-        DcHistory[0].push_back(Dc_x[0]);
-        DcHistory[1].push_back(Dc_x[1]);
-    }
-    WriteToFile(DcHistory, "dc");
-
-
 
     Rlc.InitParameters(j["series_rlc"]["parameters"]["R"], j["series_rlc"]["parameters"]["L"], j["series_rlc"]["parameters"]["C"]);
     Rlc.st.CapacitorVoltage = j["series_rlc"]["init_state"]["capacitor_voltage"];
@@ -165,26 +149,20 @@ int main()
     vector<double> RlcHistory[2];
     double *Rlc_x;
 
-    Rlc.ext.U = j["series_rlc"]["external_forces"]["U"]["value"][0];
-    
-    for (int i = 0; i < Ctx.GetProbesCountTotal(); i++)
+    vector <double> Time = j["series_rlc"]["external_forces"]["U"]["time"];
+    vector <double> Value = j["series_rlc"]["external_forces"]["U"]["value"];
+
+    for (unsigned int t = 0; t < Ctx.GetProbesCountTotal(); t++)
     {
-        if(TimeCheck(i, j["series_rlc"]["external_forces"]["U"]["time"][1], Ctx.GetStep()))
+        for(unsigned int j = 0; j < Time.size(); j++)
         {
-            Rlc.ext.U = j["series_rlc"]["external_forces"]["U"]["value"][1];
-        }
-        if(TimeCheck(i, j["series_rlc"]["external_forces"]["U"]["time"][2], Ctx.GetStep()))
-        {
-            Rlc.ext.U = j["series_rlc"]["external_forces"]["U"]["value"][2];
-        }
-        if(TimeCheck(i, j["series_rlc"]["external_forces"]["U"]["time"][3], Ctx.GetStep()))
-        {
-            Rlc.ext.U = j["series_rlc"]["external_forces"]["U"]["value"][3];
-        }
-        if(TimeCheck(i, j["series_rlc"]["external_forces"]["U"]["time"][4], Ctx.GetStep()))
-        {
-            Rlc.ext.U = j["series_rlc"]["external_forces"]["U"]["value"][4];
-        }
+            if(TimeCheck(t, Time[j], Ctx.GetStep()))
+            {
+                Rlc.ext.U = Value[j];
+                Time.erase(Time.begin() + j);
+                Value.erase(Value.begin() + j);
+            }
+        }   
 
         Rlc_x = Rlc.ComputeNextState(0.001, &Rlc);
 
