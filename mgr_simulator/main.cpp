@@ -128,21 +128,8 @@ int main()
     /**
      * Declaration of elementary objects and variables
     */
-    DcMotor DcMotor;
-    Controller Pid(0, 0, 0);
-    PidSettingsFromJson(j, Pid);
-
-
-    if (true == j["pid"]["saturation"]["set"])
-    {
-        Pid.SetSaturation(j["pid"]["saturation"]["min"], j["pid"]["saturation"]["max"]);
-    }
-
     SeriesRLC Rlc;
-    /**
-     * Execution of simulation and research
-    */
-
+    
     Rlc.InitParameters(j["series_rlc"]["parameters"]["R"], j["series_rlc"]["parameters"]["L"], j["series_rlc"]["parameters"]["C"]);
     Rlc.st.CapacitorVoltage = j["series_rlc"]["init_state"]["capacitor_voltage"];
     Rlc.st.CircuitCurrent = j["series_rlc"]["init_state"]["circuit_current"];
@@ -152,17 +139,24 @@ int main()
     vector <double> Time = j["series_rlc"]["external_forces"]["U"]["time"];
     vector <double> Value = j["series_rlc"]["external_forces"]["U"]["value"];
 
+    if(Time.size() > Value.size())
+    {
+        cout << "[ERROR] Time vector is longer than Value vector. Terminatig the simulator." << endl;
+        return (1);
+    }
+
+    /**
+     * Execution of simulation and research
+    */
+
     for (unsigned int t = 0; t < Ctx.GetProbesCountTotal(); t++)
     {
-        for(unsigned int j = 0; j < Time.size(); j++)
+        if(false == Time.empty() && TimeCheck(t, Time[0], Ctx.GetStep()))
         {
-            if(TimeCheck(t, Time[j], Ctx.GetStep()))
-            {
-                Rlc.ext.U = Value[j];
-                Time.erase(Time.begin() + j);
-                Value.erase(Value.begin() + j);
-            }
-        }   
+            Rlc.ext.U = Value[0];
+            Time.erase(Time.begin());
+            Value.erase(Value.begin());
+        }
 
         Rlc_x = Rlc.ComputeNextState(0.001, &Rlc);
 
@@ -171,6 +165,6 @@ int main()
     }
     WriteToFile(RlcHistory, "rlc");
 
-    std::cout << "Thank you for using N-Simulator. KamilAnd." << endl;
+    cout << "Thank you for using N-Simulator. KamilAnd." << endl;
     return 0;
 }
