@@ -30,6 +30,5 @@ long GlobalContext::GetProbesCountTotal()
 
 double GlobalContext::GetStep()
 {
-    double Step = 1.0 / probesCountPerSec; 
-    return Step; 
+    return 1.0 / probesCountPerSec;
 }
