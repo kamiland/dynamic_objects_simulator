@@ -1,96 +1,135 @@
 #include "NeuralNetwork.hpp"
 
+#define MY_RAND ((double) rand() / (RAND_MAX))
+
 NeuralNetwork::NeuralNetwork()
 {
     /**
      * PSEUDOCODE
     */
+    NodesCount = {5, 10, 1};
+    ActivationFunctions = {RELU, RELU, LOG};
+    LayersCount = NodesCount.size();
 
-    // for(ii in range(1, self.layers_count))
-    // {
-    //     biases.append(np.zeros(self.nodes_count[ii]))
-    //     deltas.append(np.zeros(self.nodes_count[ii]))
-    //     weights.append(np.zeros((self.nodes_count[ii], self.nodes_count[ii - 1])))
-    // }
+    for(int ii = 1; ii < LayersCount; ii++)
+    {
+        Biases.push_back(np.zeros(NodesCount[ii]));
+        Deltas.push_back(np.zeros(NodesCount[ii]));
+        Weights.push_back(np.zeros((NodesCount[ii], NodesCount[ii - 1])));
+    }
 
-    // for(ii in range(self.layers_count))
-    // {
-    //     layers.append(np.zeros(self.nodes_count[ii]))
-    //     z_layers.append(np.zeros(self.nodes_count[ii]))
-    //     dz_layers.append(np.zeros(self.nodes_count[ii]))
-    //     deltas_layers.append(np.zeros(self.nodes_count[ii]))
-    // }
+    for(int ii = 0; ii < LayersCount; ii++)
+    {
+        Layers.push_back(np.zeros(NodesCount[ii]));
+        LayersActiv.push_back(np.zeros(NodesCount[ii]));
+        LayersActivPrim.push_back(np.zeros(NodesCount[ii]));
+        LayersDeltas.push_back(np.zeros(NodesCount[ii]));
+    }
 }
 
 NeuralNetwork::~NeuralNetwork()
 {
 }
 
-double NeuralNetwork::Feedforward()
+void NeuralNetwork::WeightsRandomize(double weights_range)
+{
+    for(int ii = 0; ii < Weights.size(); ii++)
+    {
+        for(int jj = 0; jj < Weights[ii].size(); jj++)
+        {
+            for(int kk = 0; kk < Weights[ii][0].size(); kk++)
+            {
+                Weights[ii][jj][kk] = ((MY_RAND * 2) - 1) * weights_range;
+            }
+        }
+    }
+}
+
+void NeuralNetwork::BiasesRandomize(double biases_range)
+{
+    for(int ii = 0; ii < Biases.size(); ii++)
+    {
+        for(int jj = 0; jj < Biases[ii].size(); jj++)
+        {
+            Biases[ii][jj] = ((MY_RAND * 2) - 1) * biases_range;
+        }
+    }
+}
+
+void NeuralNetwork::Randomization(double weights_range, double biases_range, double _control_constant)
+{
+    WeightsRandomize(weights_range);
+    BiasesRandomize(biases_range);
+    ControlConstant = MY_RAND * _control_constant;
+}
+
+double * NeuralNetwork::Feedforward(double Input[])
 {
 
     /**
      * PSEUDOCODE
     */
-    
-    // self.layers[0] = _input
+    LayersActiv[0] = {1, 2};
 
-    // // loop through layers
-    // for(layer in range(self.layers_count - 1))
-    // {
-    //     // loop through nodes
-    //     for(node_next in range(self.nodes_count[layer + 1]))
-    //     {
-    //         temp = 0
-    //         // calculate value for each node
-    //         for(node_current in range(self.nodes_count[layer]))
-    //         {
-    //             temp = temp + self.layers[layer][node_current] * self.weights[layer][node_next][node_current]
-    //         }   
+    // loop through layers
+    for(int layer = 0; layer < (LayersCount - 1); layer++)
+    {
+        // loop through nodes
+        for(int node_next = 0; node_next < NodesCount[layer + 1]; node_next++)
+        {
+            double temp = 0.0;
+            // calculate value for each node
+            for(int node_current = 0; node_current < NodesCount[layer]; node_current++)
+            {
+                temp = temp + LayersActiv[layer][node_current] * Weights[layer][node_next][node_current];
+            }   
 
-    //         self.layers[layer + 1][node_next] = temp + self.biases[layer][node_next]
-    //         self.z_layers[layer + 1][node_next] = self.layers[layer + 1][node_next]
-    //     }
+            LayersActiv[layer + 1][node_next] = temp + Biases[layer][node_next];
+            Layers[layer + 1][node_next] = LayersActiv[layer + 1][node_next];
+        }
 
-    //     // activation
-    //     if(self.activation_functions[layer] == 'relu')
-    //     {
-    //         for(node in range(self.layers[layer + 1].__len__()))
-    //         {
-    //             if(self.layers[layer + 1][node] < 0)
-    //             {
-    //                 self.layers[layer + 1][node] = 0
-    //             }
-    //             if(self.z_layers[layer + 1][node] > 0)
-    //             {
-    //                 self.dz_layers[layer + 1][node] = 1
-    //             }
-    //             else
-    //             {
-    //                 self.dz_layers[layer + 1][node] = 0
-    //             }
-    //         }
-    //     }
-    //     else if(self.activation_functions[layer] == 'log')
-    //     {
-    //         for(node in range(self.layers[layer + 1].__len__()))
-    //         {
-    //             self.layers[layer + 1][node] = logistic(self.layers[layer + 1][node])
-    //             self.dz_layers[layer + 1][node] = logistic_d(self.z_layers[layer + 1][node])
-    //         }
-    //     }
-    //     else if(self.activation_functions[layer] == 'none')
-    //     {
-    //         for(node in range(self.layers[layer + 1].__len__()))
-    //         {
-    //             self.layers[layer + 1][node] = none(self.layers[layer + 1][node])
-    //         }
-    //     }
-    //     else
-    //     {
-    //         cout << "Not supported activation function" << endl;
-    //     }
-    // }
-    // self.output = self.layers[-1][-1]
-    // return self.layers[-1]
+        // activation
+        switch(ActivationFunctions[layer])
+        {
+            case NONE:
+                for(int node = 0; node < LayersActiv[layer + 1].size(); node++)
+                {
+                    LayersActiv[layer + 1][node] = LayersActiv[layer + 1][node];
+                }
+                break;
+
+            case RELU:
+                for(int node = 0; node < LayersActiv[layer + 1].size(); node++)
+                {
+                    if(LayersActiv[layer + 1][node] < 0)
+                    {
+                        LayersActiv[layer + 1][node] = 0;
+                    }
+                    if(Layers[layer + 1][node] > 0)
+                    {
+                        LayersActivPrim[layer + 1][node] = 1;
+                    }
+                    else
+                    {
+                        LayersActivPrim[layer + 1][node] = 0;
+                    }
+                }
+                break;
+
+            case LOG:
+                for(int node = 0; node < LayersActiv[layer + 1].size(); node++)
+                {
+                    LayersActiv[layer + 1][node] = logistic(LayersActiv[layer + 1][node]);
+                    LayersActivPrim[layer + 1][node] = logistic_d(Layers[layer + 1][node]);
+                }
+                break;
+
+            default:
+                cout << "Not supported activation function" << endl;
+                break;
+        }
+    }
+
+    *Output = *LayersActiv.back();
+    return LayersActiv.back();
 }
