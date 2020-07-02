@@ -7,11 +7,12 @@
             "args": [
                 "-g",
                 "-std=c++17",
-                "C:\\MinGW\\msys\\1.0\\home\\kamiland\\mgr_simulator\\mgr_simulator\\*.cpp",
-                "C:\\MinGW\\msys\\1.0\\home\\kamiland\\mgr_simulator\\mgr_simulator\\models\\*.cpp",
-                "C:\\MinGW\\msys\\1.0\\home\\kamiland\\mgr_simulator\\mgr_simulator\\solver\\*.cpp",
+                "C:\\MinGW\\msys\\1.0\\home\\kamil\\mgr_simulator\\*.cpp",
+                "C:\\MinGW\\msys\\1.0\\home\\kamil\\mgr_simulator\\models\\*.cpp",
+                "C:\\MinGW\\msys\\1.0\\home\\kamil\\mgr_simulator\\solver\\*.cpp",
+                "C:\\MinGW\\msys\\1.0\\home\\kamil\\mgr_simulator\\algorithms\\*.cpp",
                 "-o",
-                "C:\\MinGW\\msys\\1.0\\home\\kamiland\\mgr_simulator\\mgr_simulator\\NSimulator.exe"
+                "C:\\MinGW\\msys\\1.0\\home\\kamil\\mgr_simulator\\NSimulator.exe"
             ],
             "options": {
                 "cwd": "C:\\MinGW\\bin"

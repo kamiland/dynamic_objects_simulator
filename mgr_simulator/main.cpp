@@ -125,11 +125,56 @@ int main()
     Ctx.SetSimulationTimeSec(j["context"]["time"]);
     Ctx.SetProbesCountPerSec(j["context"]["probes_per_second"]);
 
+    auto Now = std::chrono::system_clock::now();
+    auto DateStamp = std::chrono::system_clock::to_time_t(Now);
+    srand((unsigned int) DateStamp);
+
     /**
      * Declaration of elementary objects and variables
     */
     SeriesRLC Rlc;
-    
+    NeuralNetwork NN;
+    NN.Randomization(j["neural_network"]["weights_range"],
+                     j["neural_network"]["biases_range"],
+                     j["neural_network"]["control_constant_range"]);
+
+    cout << "Biases size: " << NN.Biases.size() << endl;
+    for ( auto it = NN.Biases.begin(); it != NN.Biases.end(); ++it)
+    {                                    
+        for ( auto it2 = it->begin(); it2 != it->end(); ++it2)
+        {                         
+            cout << *it2 << " ";                                
+        }              
+        cout << endl;                                                                              
+    }      
+    cout << endl;
+    cout << "Weights size: " << NN.Weights.size() << endl;
+    for ( auto it = NN.Weights.begin(); it != NN.Weights.end(); ++it)
+    {                                    
+        for ( auto it2 = it->begin(); it2 != it->end(); ++it2)
+        {                         
+            for ( auto it3 = it2->begin(); it3 != it2->end(); ++it3)
+            {                         
+                cout << *it3 << " ";                                
+            }                      
+            cout << endl;          
+        }              
+        cout << endl;                                                                              
+    }   
+
+    double Input[] = {1.5, 2.5};
+    vector <double> Output;
+    Output = NN.Feedforward(Input);
+
+    cout << "NN output: " << Output.size() << endl;
+
+    for (auto it = Output.begin(); it != Output.end(); ++it)
+    {                         
+        cout << *it << " ";                                
+    }
+    cout << endl;
+
+
     Rlc.InitParameters(j["series_rlc"]["parameters"]["R"], j["series_rlc"]["parameters"]["L"], j["series_rlc"]["parameters"]["C"]);
     Rlc.st.CapacitorVoltage = j["series_rlc"]["init_state"]["capacitor_voltage"];
     Rlc.st.CircuitCurrent = j["series_rlc"]["init_state"]["circuit_current"];

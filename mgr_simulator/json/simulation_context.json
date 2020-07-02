@@ -19,6 +19,15 @@
     "setpoint": 150.0
   },
 
+  "neural_network": 
+  {
+    "NodesCount": [2, 5, 3],
+    "ActivationFunctions": ["RELU", "LOG"],
+    "weights_range": 0.5,
+    "biases_range": 0.05,
+    "control_constant_range": 150.0
+  },
+
   "dc":
   {
     "parameters":

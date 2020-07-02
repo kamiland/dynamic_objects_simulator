@@ -2,28 +2,60 @@
 
 #define MY_RAND ((double) rand() / (RAND_MAX))
 
+double logistic(double x)
+{
+    return 1.0 / (1.0 + exp(-x));
+}
+
+double logistic_d(double x)
+{
+    return logistic(x) * (1.0 - logistic(x));
+}
+
+double none(double x)
+{
+    return x;
+}
+
 NeuralNetwork::NeuralNetwork()
 {
-    /**
-     * PSEUDOCODE
-    */
-    NodesCount = {5, 10, 1};
-    ActivationFunctions = {RELU, RELU, LOG};
+    NodesCount = {2, 5, 3};
+    ActivationFunctions = {RELU, LOG};
     LayersCount = NodesCount.size();
+
+    vector <vector <vector <double>>> Weights(LayersCount - 1);
+    vector <vector <double>> Biases(LayersCount - 1);
+    vector <vector <double>> Deltas(LayersCount - 1);
+    this->Weights = Weights;
+    this->Biases = Biases;
+    this->Deltas = Deltas;
+
+    vector <vector <double>> Layers(LayersCount);
+    vector <vector <double>> LayersActiv(LayersCount);
+    vector <vector <double>> LayersActivPrim(LayersCount);
+    vector <vector <double>> LayersDeltas(LayersCount);
+    this->Layers = Layers;
+    this->LayersActiv = LayersActiv;
+    this->LayersActivPrim = LayersActivPrim;
+    this->LayersDeltas = LayersDeltas;      
 
     for(int ii = 1; ii < LayersCount; ii++)
     {
-        Biases.push_back(np.zeros(NodesCount[ii]));
-        Deltas.push_back(np.zeros(NodesCount[ii]));
-        Weights.push_back(np.zeros((NodesCount[ii], NodesCount[ii - 1])));
+        this->Biases[ii - 1].resize(NodesCount[ii]);
+        this->Deltas[ii - 1].resize(NodesCount[ii]);
+        this->Weights[ii - 1].resize(NodesCount[ii]);
+        for(int jj = 0; jj < this->Weights[ii - 1].size(); jj++)
+        {
+            this->Weights[ii - 1][jj].resize(NodesCount[ii-1]);
+        }
     }
 
     for(int ii = 0; ii < LayersCount; ii++)
     {
-        Layers.push_back(np.zeros(NodesCount[ii]));
-        LayersActiv.push_back(np.zeros(NodesCount[ii]));
-        LayersActivPrim.push_back(np.zeros(NodesCount[ii]));
-        LayersDeltas.push_back(np.zeros(NodesCount[ii]));
+        this->Layers[ii].resize(NodesCount[ii]);
+        this->LayersActiv[ii].resize(NodesCount[ii]);
+        this->LayersActivPrim[ii].resize(NodesCount[ii]);
+        this->LayersDeltas[ii].resize(NodesCount[ii]);
     }
 }
 
@@ -33,13 +65,13 @@ NeuralNetwork::~NeuralNetwork()
 
 void NeuralNetwork::WeightsRandomize(double weights_range)
 {
-    for(int ii = 0; ii < Weights.size(); ii++)
-    {
-        for(int jj = 0; jj < Weights[ii].size(); jj++)
-        {
-            for(int kk = 0; kk < Weights[ii][0].size(); kk++)
-            {
-                Weights[ii][jj][kk] = ((MY_RAND * 2) - 1) * weights_range;
+    for (auto it = Weights.begin(); it != Weights.end(); ++it)
+    {                                    
+        for (auto it2 = it->begin(); it2 != it->end(); ++it2)
+        {                         
+            for (auto it3 = it2->begin(); it3 != it2->end(); ++it3)
+            {         
+                *it3 = ((MY_RAND * 2) - 1) * weights_range;
             }
         }
     }
@@ -47,11 +79,11 @@ void NeuralNetwork::WeightsRandomize(double weights_range)
 
 void NeuralNetwork::BiasesRandomize(double biases_range)
 {
-    for(int ii = 0; ii < Biases.size(); ii++)
-    {
-        for(int jj = 0; jj < Biases[ii].size(); jj++)
+    for (auto it = Biases.begin(); it != Biases.end(); ++it)
+    {                                    
+        for (auto it2 = it->begin(); it2 != it->end(); ++it2)
         {
-            Biases[ii][jj] = ((MY_RAND * 2) - 1) * biases_range;
+            *it2 = ((MY_RAND * 2) - 1) * biases_range; 
         }
     }
 }
@@ -61,75 +93,4 @@ void NeuralNetwork::Randomization(double weights_range, double biases_range, dou
     WeightsRandomize(weights_range);
     BiasesRandomize(biases_range);
     ControlConstant = MY_RAND * _control_constant;
-}
-
-double * NeuralNetwork::Feedforward(double Input[])
-{
-
-    /**
-     * PSEUDOCODE
-    */
-    LayersActiv[0] = {1, 2};
-
-    // loop through layers
-    for(int layer = 0; layer < (LayersCount - 1); layer++)
-    {
-        // loop through nodes
-        for(int node_next = 0; node_next < NodesCount[layer + 1]; node_next++)
-        {
-            double temp = 0.0;
-            // calculate value for each node
-            for(int node_current = 0; node_current < NodesCount[layer]; node_current++)
-            {
-                temp = temp + LayersActiv[layer][node_current] * Weights[layer][node_next][node_current];
-            }   
-
-            LayersActiv[layer + 1][node_next] = temp + Biases[layer][node_next];
-            Layers[layer + 1][node_next] = LayersActiv[layer + 1][node_next];
-        }
-
-        // activation
-        switch(ActivationFunctions[layer])
-        {
-            case NONE:
-                for(int node = 0; node < LayersActiv[layer + 1].size(); node++)
-                {
-                    LayersActiv[layer + 1][node] = LayersActiv[layer + 1][node];
-                }
-                break;
-
-            case RELU:
-                for(int node = 0; node < LayersActiv[layer + 1].size(); node++)
-                {
-                    if(LayersActiv[layer + 1][node] < 0)
-                    {
-                        LayersActiv[layer + 1][node] = 0;
-                    }
-                    if(Layers[layer + 1][node] > 0)
-                    {
-                        LayersActivPrim[layer + 1][node] = 1;
-                    }
-                    else
-                    {
-                        LayersActivPrim[layer + 1][node] = 0;
-                    }
-                }
-                break;
-
-            case LOG:
-                for(int node = 0; node < LayersActiv[layer + 1].size(); node++)
-                {
-                    LayersActiv[layer + 1][node] = logistic(LayersActiv[layer + 1][node]);
-                    LayersActivPrim[layer + 1][node] = logistic_d(Layers[layer + 1][node]);
-                }
-                break;
-
-            default:
-                cout << "Not supported activation function" << endl;
-                break;
-        }
-    }
-
-    *Output = *LayersActiv.back();
-    return LayersActiv.back();
 }
