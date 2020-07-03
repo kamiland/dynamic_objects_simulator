@@ -17,10 +17,10 @@ double none(double x)
     return x;
 }
 
-NeuralNetwork::NeuralNetwork()
+NeuralNetwork::NeuralNetwork(vector <unsigned int> _NodesCount, vector <ActivationFunction> _ActivationFunctions)
 {
-    NodesCount = {2, 5, 3};
-    ActivationFunctions = {RELU, LOG};
+    NodesCount = _NodesCount;
+    ActivationFunctions = _ActivationFunctions;
     LayersCount = NodesCount.size();
 
     vector <vector <vector <double>>> Weights(LayersCount - 1);

@@ -133,7 +133,12 @@ int main()
      * Declaration of elementary objects and variables
     */
     SeriesRLC Rlc;
-    NeuralNetwork NN;
+
+    vector <unsigned int> _NodesCount = j["neural_network"]["nodes_count"];
+    vector <ActivationFunction> _ActivationFunctions = j["neural_network"]["activation_functions"];
+    
+    NeuralNetwork NN(_NodesCount, _ActivationFunctions);
+    
     NN.Randomization(j["neural_network"]["weights_range"],
                      j["neural_network"]["biases_range"],
                      j["neural_network"]["control_constant_range"]);

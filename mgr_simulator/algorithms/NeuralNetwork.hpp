@@ -25,7 +25,7 @@ private:
     unsigned int LayersCount; // NodesCount.size()
     vector <ActivationFunction> ActivationFunctions;
 public:
-    NeuralNetwork();
+    NeuralNetwork(vector <unsigned int> _NodesCount, vector <ActivationFunction> _ActivationFunctions);
     ~NeuralNetwork();
     void BiasesRandomize(double biases_range);
     void WeightsRandomize(double weights_range);

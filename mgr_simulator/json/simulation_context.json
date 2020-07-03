@@ -21,10 +21,10 @@
 
   "neural_network": 
   {
-    "NodesCount": [2, 5, 3],
-    "ActivationFunctions": ["RELU", "LOG"],
-    "weights_range": 0.5,
-    "biases_range": 0.05,
+    "nodes_count": [2, 10, 3],
+    "activation_functions": [1, 2],
+    "weights_range": 1,
+    "biases_range": 0.1,
     "control_constant_range": 150.0
   },
 
