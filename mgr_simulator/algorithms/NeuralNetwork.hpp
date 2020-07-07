@@ -7,6 +7,8 @@
 #include <math.h>
 using namespace std;
 
+#define MY_RAND ((double) rand() / (RAND_MAX))
+
 enum ActivationFunction
 {
     NONE = 0,
@@ -30,6 +32,8 @@ public:
     void BiasesRandomize(double biases_range);
     void WeightsRandomize(double weights_range);
     void Randomization(double weights_range, double biases_range, double _control_constant);
+    NeuralNetwork Tweak(double weight_tweak_range, double bias_tweak_range);
+    NeuralNetwork Crossover(NeuralNetwork ObjectToCrossWith);
     template <class T, size_t N>
     vector <double> Feedforward(T (&Input)[N]);
     void Backpropagation();
@@ -44,7 +48,7 @@ public:
     vector <vector <double>> LayersDeltas; // --> self.deltas_layers
 
     double ControlConstant;
-    double Output[];
+    // double Output[];
 };
 
 template <class T, size_t N>
