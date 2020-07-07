@@ -143,6 +143,7 @@ int main()
                      j["neural_network"]["biases_range"],
                      j["neural_network"]["control_constant_range"]);
 
+    cout << "***************************************" << endl;
     cout << "Biases size: " << NN.Biases.size() << endl;
     for ( auto it = NN.Biases.begin(); it != NN.Biases.end(); ++it)
     {                                    
@@ -179,6 +180,84 @@ int main()
     }
     cout << endl;
 
+    NeuralNetwork TweakedNN = NN.Tweak(10, 10);
+    NeuralNetwork CrossedNN = NN.Crossover(TweakedNN);
+
+    cout << "***************************************" << endl;
+    cout << "Tweaked Biases size: " << TweakedNN.Biases.size() << endl;
+    for ( auto it = TweakedNN.Biases.begin(); it != TweakedNN.Biases.end(); ++it)
+    {                                    
+        for ( auto it2 = it->begin(); it2 != it->end(); ++it2)
+        {                         
+            cout << *it2 << " ";                                
+        }              
+        cout << endl;                                                                              
+    }      
+    cout << endl;
+    cout << "Tweaked Weights size: " << TweakedNN.Weights.size() << endl;
+    for ( auto it = TweakedNN.Weights.begin(); it != TweakedNN.Weights.end(); ++it)
+    {                                    
+        for ( auto it2 = it->begin(); it2 != it->end(); ++it2)
+        {                         
+            for ( auto it3 = it2->begin(); it3 != it2->end(); ++it3)
+            {                         
+                cout << *it3 << " ";                                
+            }                      
+            cout << endl;          
+        }              
+        cout << endl;                                                                              
+    }   
+
+    double Input2[] = {1.5, 2.5};
+    vector <double> Output2;
+    Output2 = TweakedNN.Feedforward(Input2);
+
+    cout << "TweakedNN output: " << Output2.size() << endl;
+
+    for (auto it = Output2.begin(); it != Output2.end(); ++it)
+    {                         
+        cout << *it << " ";                                
+    }
+    cout << endl;
+
+
+    cout << "***************************************" << endl;
+    cout << "Crossed Biases size: " << CrossedNN.Biases.size() << endl;
+    for ( auto it = CrossedNN.Biases.begin(); it != CrossedNN.Biases.end(); ++it)
+    {                                    
+        for ( auto it2 = it->begin(); it2 != it->end(); ++it2)
+        {                         
+            cout << *it2 << " ";                                
+        }              
+        cout << endl;                                                                              
+    }      
+    cout << endl;
+    cout << "Crossed Weights size: " << CrossedNN.Weights.size() << endl;
+    for ( auto it = CrossedNN.Weights.begin(); it != CrossedNN.Weights.end(); ++it)
+    {                                    
+        for ( auto it2 = it->begin(); it2 != it->end(); ++it2)
+        {                         
+            for ( auto it3 = it2->begin(); it3 != it2->end(); ++it3)
+            {                         
+                cout << *it3 << " ";                                
+            }                      
+            cout << endl;          
+        }              
+        cout << endl;                                                                              
+    }   
+
+    double Input3[] = {1.5, 2.5};
+    vector <double> Output3;
+    Output3 = CrossedNN.Feedforward(Input3);
+
+    cout << "CrossedNN output: " << Output3.size() << endl;
+
+    for (auto it = Output3.begin(); it != Output3.end(); ++it)
+    {                         
+        cout << *it << " ";                                
+    }
+    cout << endl;
+    cout << "***************************************" << endl;
 
     Rlc.InitParameters(j["series_rlc"]["parameters"]["R"], j["series_rlc"]["parameters"]["L"], j["series_rlc"]["parameters"]["C"]);
     Rlc.st.CapacitorVoltage = j["series_rlc"]["init_state"]["capacitor_voltage"];
