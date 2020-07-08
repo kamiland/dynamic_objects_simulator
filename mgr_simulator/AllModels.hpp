@@ -6,3 +6,4 @@
 #include "models\SeriesRLC.hpp"
 
 #include "algorithms\NeuralNetwork.hpp"
+#include "algorithms\NeuralRegulator.hpp"

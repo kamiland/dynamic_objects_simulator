@@ -9,6 +9,9 @@ using namespace std;
 
 #define MY_RAND ((double) rand() / (RAND_MAX))
 
+typedef vector <vector <double>> VectorDouble2D;
+typedef vector <vector <vector <double>>> VectorDouble3D;
+
 enum ActivationFunction
 {
     NONE = 0,
@@ -23,10 +26,24 @@ double none(double x);
 class NeuralNetwork
 {
 private:
-    vector <unsigned int> NodesCount;
-    unsigned int LayersCount; // NodesCount.size()
-    vector <ActivationFunction> ActivationFunctions;
+
 public:
+    vector <unsigned int> NodesCount;
+    vector <ActivationFunction> ActivationFunctions;
+    unsigned int LayersCount;
+    
+    VectorDouble2D Biases;
+    VectorDouble3D Weights;
+    VectorDouble2D Deltas;
+
+    VectorDouble2D Layers; // not activated layers: Wx + b --> self.z_layers
+    VectorDouble2D LayersActiv; // activated layers: A(Wx + b) --> self.layers
+    VectorDouble2D LayersActivPrim; // derivative activated layers: A'(Wx + b) --> self.dz_layers
+    VectorDouble2D LayersDeltas; // --> self.deltas_layers
+
+    double ControlConstant;
+    // double Output[];
+    
     NeuralNetwork(vector <unsigned int> _NodesCount, vector <ActivationFunction> _ActivationFunctions);
     ~NeuralNetwork();
     void BiasesRandomize(double biases_range);
@@ -37,18 +54,6 @@ public:
     template <class T, size_t N>
     vector <double> Feedforward(T (&Input)[N]);
     void Backpropagation();
-
-    vector <vector <double>> Biases;
-    vector <vector <vector <double>>> Weights;
-    vector <vector <double>> Deltas;
-
-    vector <vector <double>> Layers; // not activated layers: Wx + b --> self.z_layers
-    vector <vector <double>> LayersActiv; // activated layers: A(Wx + b) --> self.layers
-    vector <vector <double>> LayersActivPrim; // derivative activated layers: A'(Wx + b) --> self.dz_layers
-    vector <vector <double>> LayersDeltas; // --> self.deltas_layers
-
-    double ControlConstant;
-    // double Output[];
 };
 
 template <class T, size_t N>

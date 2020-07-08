@@ -259,6 +259,61 @@ int main()
     cout << endl;
     cout << "***************************************" << endl;
 
+
+
+    NeuralRegulator NR(CrossedNN);
+
+    cout << "***************************************" << endl;
+    cout << "NR Biases size: " << NR.NeuralNet.Biases.size() << endl;
+    for ( auto it = NR.NeuralNet.Biases.begin(); it != NR.NeuralNet.Biases.end(); ++it)
+    {                                    
+        for ( auto it2 = it->begin(); it2 != it->end(); ++it2)
+        {                         
+            cout << *it2 << " ";                                
+        }              
+        cout << endl;                                                                              
+    }      
+    cout << endl;
+    cout << "NR Weights size: " << NR.NeuralNet.Weights.size() << endl;
+    for ( auto it = NR.NeuralNet.Weights.begin(); it != NR.NeuralNet.Weights.end(); ++it)
+    {                                    
+        for ( auto it2 = it->begin(); it2 != it->end(); ++it2)
+        {                         
+            for ( auto it3 = it2->begin(); it3 != it2->end(); ++it3)
+            {                         
+                cout << *it3 << " ";                                
+            }                      
+            cout << endl;          
+        }              
+        cout << endl;                                                                              
+    }   
+
+    double Input4[] = {1.5, 2.5};
+    vector <double> Output4;
+    Output4 = NR.NeuralNet.Feedforward(Input4);
+
+    cout << "NR-NN output: " << Output4.size() << endl;
+
+    for(auto it = Output4.begin(); it != Output4.end(); ++it)
+    {                         
+        cout << *it << " ";                                
+    }
+    cout << endl;
+    cout << "NR output: " << endl;
+
+    vector <double> NRoutput = NR.CalculateOutput(Input4);
+
+    for(auto it = NRoutput.begin(); it != NRoutput.end(); ++it)
+    {                         
+        cout << *it << " ";                                
+    }
+    cout << endl;
+    cout << "***************************************" << endl;
+
+
+
+
+
     Rlc.InitParameters(j["series_rlc"]["parameters"]["R"], j["series_rlc"]["parameters"]["L"], j["series_rlc"]["parameters"]["C"]);
     Rlc.st.CapacitorVoltage = j["series_rlc"]["init_state"]["capacitor_voltage"];
     Rlc.st.CircuitCurrent = j["series_rlc"]["init_state"]["circuit_current"];
@@ -273,6 +328,11 @@ int main()
         cout << "[ERROR] Time vector is longer than Value vector. Terminatig the simulator." << endl;
         return (1);
     }
+
+
+
+
+
 
     /**
      * Execution of simulation and research

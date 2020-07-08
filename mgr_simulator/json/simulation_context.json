@@ -21,8 +21,8 @@
 
   "neural_network": 
   {
-    "nodes_count": [2, 1],
-    "activation_functions": [1, 1],
+    "nodes_count": [2, 5, 1],
+    "activation_functions": [1, 1, 2],
     "weights_range": 1,
     "biases_range": 0.1,
     "control_constant_range": 150.0
