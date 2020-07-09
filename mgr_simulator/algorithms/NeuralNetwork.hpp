@@ -48,7 +48,7 @@ public:
     ~NeuralNetwork();
     void BiasesRandomize(double biases_range);
     void WeightsRandomize(double weights_range);
-    void Randomization(double weights_range, double biases_range, double _control_constant);
+    void Randomization(double weights_range, double biases_range, double _control_constant_range);
     NeuralNetwork Tweak(double weight_tweak_range, double bias_tweak_range);
     NeuralNetwork Crossover(NeuralNetwork ObjectToCrossWith);
     template <class T, size_t N>

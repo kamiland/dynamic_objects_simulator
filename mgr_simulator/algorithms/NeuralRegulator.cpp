@@ -25,10 +25,10 @@ NeuralRegulator NeuralRegulator::Tweak(double weight_tweak_range, double bias_tw
     return TweakedNR;
 }
 
-NeuralRegulator NeuralRegulator::Crossover(NeuralNetwork ObjectToCrossWith)
+NeuralRegulator NeuralRegulator::Crossover(NeuralRegulator ObjectToCrossWith)
 {
 
-    NeuralNetwork CrossedNN = this->NeuralNet.Crossover(ObjectToCrossWith);
+    NeuralNetwork CrossedNN = this->NeuralNet.Crossover(ObjectToCrossWith.NeuralNet);
     NeuralRegulator CrossedNR(CrossedNN);
     double RandomValue = MY_RAND;
     CrossedNR.ControlConstant = RandomValue * ObjectToCrossWith.ControlConstant + (1 - RandomValue) * this->ControlConstant;

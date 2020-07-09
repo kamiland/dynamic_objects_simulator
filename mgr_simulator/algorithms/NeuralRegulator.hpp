@@ -13,7 +13,7 @@ class NeuralRegulator
 private:
     
 public:
-    double Fitness = 0.0;
+    double Fitness = 0.001;
     double ControlConstant = 100.0;
     double DefaultCcRrange = 10.0;
     double DefaultCcTweakRange = 0.1;
@@ -22,8 +22,8 @@ public:
     NeuralRegulator(NeuralNetwork _NeuralNet, bool RandomCc = 0);
     ~NeuralRegulator();
     void InitNeuralNetwork();
-    NeuralRegulator Tweak(double weight_tweak_range, double bias_tweak_range);
-    NeuralRegulator Crossover(NeuralNetwork ObjectToCrossWith);
+    NeuralRegulator Tweak(double weight_tweak_range = 0.1, double bias_tweak_range = 0.1);
+    NeuralRegulator Crossover(NeuralRegulator ObjectToCrossWith);
     // NeuralRegulator Mutation();
     double EvaluateFitness();
     template <class T, size_t N>

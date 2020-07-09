@@ -21,17 +21,17 @@ NeuralNetwork::NeuralNetwork(vector <unsigned int> _NodesCount, vector <Activati
     ActivationFunctions = _ActivationFunctions;
     LayersCount = NodesCount.size();
 
-    vector <vector <vector <double>>> Weights(LayersCount - 1);
-    vector <vector <double>> Biases(LayersCount - 1);
-    vector <vector <double>> Deltas(LayersCount - 1);
+    VectorDouble3D Weights(LayersCount - 1);
+    VectorDouble2D Biases(LayersCount - 1);
+    VectorDouble2D Deltas(LayersCount - 1);
     this->Weights = Weights;
     this->Biases = Biases;
     this->Deltas = Deltas;
 
-    vector <vector <double>> Layers(LayersCount);
-    vector <vector <double>> LayersActiv(LayersCount);
-    vector <vector <double>> LayersActivPrim(LayersCount);
-    vector <vector <double>> LayersDeltas(LayersCount);
+    VectorDouble2D Layers(LayersCount);
+    VectorDouble2D LayersActiv(LayersCount);
+    VectorDouble2D LayersActivPrim(LayersCount);
+    VectorDouble2D LayersDeltas(LayersCount);
     this->Layers = Layers;
     this->LayersActiv = LayersActiv;
     this->LayersActivPrim = LayersActivPrim;
@@ -86,11 +86,11 @@ void NeuralNetwork::BiasesRandomize(double biases_range)
     }
 }
 
-void NeuralNetwork::Randomization(double weights_range, double biases_range, double _control_constant)
+void NeuralNetwork::Randomization(double weights_range, double biases_range, double _control_constant_range)
 {
     WeightsRandomize(weights_range);
     BiasesRandomize(biases_range);
-    ControlConstant = MY_RAND * _control_constant;
+    ControlConstant = MY_RAND * _control_constant_range;
 }
 
 NeuralNetwork NeuralNetwork::Tweak(double weight_tweak_range, double bias_tweak_range)

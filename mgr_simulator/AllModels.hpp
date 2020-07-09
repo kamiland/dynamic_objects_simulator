@@ -7,3 +7,4 @@
 
 #include "algorithms\NeuralNetwork.hpp"
 #include "algorithms\NeuralRegulator.hpp"
+#include "algorithms\EvolutionaryAlgorithm.hpp"

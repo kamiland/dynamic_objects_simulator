@@ -310,8 +310,8 @@ int main()
     cout << endl;
     cout << "***************************************" << endl;
 
-
-
+    EvolutionaryAlgorithm EVA(5, NN);
+    EVA.EvolveNextGeneration();
 
 
     Rlc.InitParameters(j["series_rlc"]["parameters"]["R"], j["series_rlc"]["parameters"]["L"], j["series_rlc"]["parameters"]["C"]);

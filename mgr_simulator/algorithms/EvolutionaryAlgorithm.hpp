@@ -1,43 +1,42 @@
-// #ifndef EVOLUTION
-// #define EVOLUTION
+#ifndef EVOLUTION
+#define EVOLUTION
 
-// #include <iostream>
-// #include <vector>
-// #define _USE_MATH_DEFINES
-// #include <math.h>
-// #include "NeuralNetwork.hpp"
-// using namespace std;
+#include <iostream>
+#include <vector>
+#define _USE_MATH_DEFINES
+#include <math.h>
+#include "NeuralRegulator.hpp"
+using namespace std;
 
-// class EvolutionaryAlgorithm
-// {
-// private:
+class EvolutionaryAlgorithm
+{
+private:
     
-// public:
+public:
 
-//     unsigned int PopulationCount;
-//     vector <NeuralNetwork> ObjectGeneration;
-//     vector <NeuralNetwork> ObjectNextGeneration;
-//     NeuralNetwork ObjectBest;
-//     NeuralNetwork BestInCurrentGeneration;
-//     double MeanFitnessInCurrentGeneration;
-//     unsigned int NodesCount;
-//     unsigned int NonZero;
+    unsigned int PopulationCount;
+    vector <unsigned int> NodesCount;
+    vector <NeuralRegulator> ObjectGeneration;
+    vector <NeuralRegulator> ObjectNextGeneration;
+    NeuralRegulator BestObject;
+    NeuralRegulator BestInCurrentGeneration;
+    double AverageFitnessInCurrentGeneration;
+    unsigned int NonZero;
+    NeuralNetwork ReferenceNN;
 
-//     EvolutionaryAlgorithm();
-//     ~EvolutionaryAlgorithm();
-//     void PrintGenerationFitness();
-//     void PrintBest();
-//     void FindBest();
-//     void EvaluateMeanFitness();
-//     void PickAndTweak();
-//     void PickAndCross();
-//     void Mutation();
-//     void Tweak();
-//     void Crossover();
-//     void ReplicateChosenOne();
-//     void NormalizeFitness();
-//     void RunSimulation();
-//     void EvolceNextGeneration();
-// };
+    EvolutionaryAlgorithm(unsigned int _PopulationCount, NeuralNetwork _NeuralNet);
+    ~EvolutionaryAlgorithm();
+    void PrintGenerationFitness();
+    void PrintBest();
+    void FindBest();
+    double EvaluateAverageFitness();
+    void PickAndTweak(unsigned int ii);
+    void PickAndCross(unsigned int ii);
+    void Mutation(unsigned int ii);
+    void ReplicateChosenOne(NeuralRegulator ChosenObject);
+    void NormalizeFitness();
+    void RunSimulation();
+    void EvolveNextGeneration();
+};
 
-// #endif
+#endif
