@@ -36,15 +36,12 @@ NeuralRegulator NeuralRegulator::Crossover(NeuralRegulator ObjectToCrossWith)
     return CrossedNR;
 }
 
-double NeuralRegulator::EvaluateFitness()
-{
-    // function self = evaluate_fitness(self)
-    // mean_count = 1;
-    // self.fitness = sum(temp_fitness)/mean_count;
-    // self.success = sum(temp_success)/mean_count;
+// double NeuralRegulator::EvaluateFitness()
+// {
+//     this->Fitness = 0.1; /* 1 / 1 + całka z błędu */
 
-    return 0.0;
-}
+//     return 0.0;
+// }
 
 void NeuralRegulator:: ExportNeuralRegulator()
 {

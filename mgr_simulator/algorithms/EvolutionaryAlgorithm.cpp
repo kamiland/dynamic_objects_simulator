@@ -1,4 +1,5 @@
 #include "EvolutionaryAlgorithm.hpp"
+#include "..\models\DcMotor.hpp"
 
 EvolutionaryAlgorithm::EvolutionaryAlgorithm(unsigned int _PopulationCount, NeuralNetwork _NeuralNet)
 : ReferenceNN(_NeuralNet.NodesCount, _NeuralNet.ActivationFunctions), BestInCurrentGeneration(_NeuralNet), BestObject(_NeuralNet)
@@ -194,11 +195,40 @@ void EvolutionaryAlgorithm::NormalizeFitness()
 
 void EvolutionaryAlgorithm::RunSimulation()
 {
-    // ??? WTF is that ???
     // Run simulation
+    DcMotor DcMotor;
+
+    DcMotor.st.AngularVelocity = 0.0;
+    DcMotor.st.RotorCurrent = 0.0;
+    DcMotor.ext.U = 0;
+    vector<double> DcHistory[2];
+    double *Dc_x;
+    double Input[] = {0, 0, 0};
+    double ErrorIntegral = 0.0;
+    double Setpoint = 150;
+
     for(auto it = ObjectGeneration.begin(); it != ObjectGeneration.end(); ++it)
     {
-        // *it = it->EvaluateFitness();
+        for (int i = 0; i < 10000; i++)
+        {
+            Input[0] = Setpoint;
+            Input[1] = DcMotor.st.AngularVelocity;
+            Input[1] = DcMotor.st.RotorCurrent;
+            DcMotor.ext.U = it->CalculateOutput(Input)[0];
+
+            if(i == 1000){ DcMotor.ext.Tl = 80;}
+            if(i == 2500){ DcMotor.ext.Tl = 0;}
+            if(i == 3500){ DcMotor.ext.Tl = -10;}
+
+            Dc_x = DcMotor.ComputeNextState(0.001, &DcMotor);
+
+            DcHistory[0].push_back(Dc_x[0]);
+            DcHistory[1].push_back(Dc_x[1]);
+
+            ErrorIntegral += pow(Setpoint - DcMotor.st.RotorCurrent, 2);
+
+        }
+        it->Fitness = 1 / (1 + ErrorIntegral);
     }
 
 }

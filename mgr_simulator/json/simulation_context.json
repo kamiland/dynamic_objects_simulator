@@ -1,7 +1,7 @@
 {
   "context":
   {
-    "time": 1,
+    "time": 10,
     "probes_per_second": 1000
   },
 
@@ -21,11 +21,11 @@
 
   "neural_network": 
   {
-    "nodes_count": [2, 5, 1],
-    "activation_functions": [1, 1, 2],
-    "weights_range": 1,
-    "biases_range": 0.1,
-    "control_constant_range": 150.0
+    "nodes_count": [3, 10, 1],
+    "activation_functions": [1, 2],
+    "weights_range": 0.011,
+    "biases_range": 0.001,
+    "control_constant_range": 10.0
   },
 
   "dc":

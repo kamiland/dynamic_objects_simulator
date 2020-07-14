@@ -13,7 +13,7 @@ class NeuralRegulator
 private:
     
 public:
-    double Fitness = 0.001;
+    double Fitness = 0.0;
     double ControlConstant = 100.0;
     double DefaultCcRrange = 10.0;
     double DefaultCcTweakRange = 0.1;
