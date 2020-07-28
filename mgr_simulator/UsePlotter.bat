@@ -6,5 +6,5 @@ REM errorhandling, errorlevel >= 1
 ECHO Complition Code: %ERRORLEVEL%.
 GOTO end
 :no_error
-START /MIN python plotter.py
+START /MIN python Plotter.py
 :end

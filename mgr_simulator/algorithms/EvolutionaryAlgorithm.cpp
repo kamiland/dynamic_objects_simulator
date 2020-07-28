@@ -1,6 +1,7 @@
 #include "EvolutionaryAlgorithm.hpp"
 #include "..\models\DcMotor.hpp"
 
+
 EvolutionaryAlgorithm::EvolutionaryAlgorithm(unsigned int _PopulationCount, NeuralNetwork _NeuralNet)
 : ReferenceNN(_NeuralNet.NodesCount, _NeuralNet.ActivationFunctions), BestInCurrentGeneration(_NeuralNet), BestObject(_NeuralNet)
 {
@@ -14,6 +15,8 @@ EvolutionaryAlgorithm::EvolutionaryAlgorithm(unsigned int _PopulationCount, Neur
         this->ObjectGeneration.push_back(NR);
         this->ObjectNextGeneration.push_back(NR);
     }
+
+    BestFitness = 0.0;
 }
 
 EvolutionaryAlgorithm::~EvolutionaryAlgorithm()
@@ -34,7 +37,7 @@ void EvolutionaryAlgorithm::PrintBest()
     cout << "Fitness of best object: " <<  BestObject.Fitness << endl;
 }
 
-void EvolutionaryAlgorithm::FindBest()
+NeuralRegulator EvolutionaryAlgorithm::FindBest()
 {
     // Find and overwrite best
     double CurrentGenerationBestFitness = 0;
@@ -46,25 +49,27 @@ void EvolutionaryAlgorithm::FindBest()
             CurrentGenerationBestFitness = it->Fitness;
             BestInCurrentGeneration = *it;
         }
-        if(it->Fitness > BestObject.Fitness)
-        {
-            BestObject = *it;
-        }
+        // if(it->Fitness > BestObject.Fitness)
+        // {
+        //     BestObject = *it;
+        // }
+        
     }
+    return BestInCurrentGeneration;
 }
 
-double EvolutionaryAlgorithm::EvaluateAverageFitness()
-{
-    // Evaluating average Fitness
-    double AverageFitness = 0.0;
-    for(auto it = ObjectGeneration.begin(); it != ObjectGeneration.end(); ++it)
-    {
-        AverageFitness = AverageFitness + it->Fitness;
-    }
-    this->AverageFitnessInCurrentGeneration = AverageFitness / ObjectGeneration.size();
+// double EvolutionaryAlgorithm::EvaluateAverageFitness()
+// {
+//     // Evaluating average Fitness
+//     double AverageFitness = 0.0;
+//     for(auto it = ObjectGeneration.begin(); it != ObjectGeneration.end(); ++it)
+//     {
+//         AverageFitness = AverageFitness + it->Fitness;
+//     }
+//     this->AverageFitnessInCurrentGeneration = AverageFitness / ObjectGeneration.size();
     
-    return this->AverageFitnessInCurrentGeneration;
-}
+//     return this->AverageFitnessInCurrentGeneration;
+// }
 
 void EvolutionaryAlgorithm::PickAndTweak(unsigned int ii)
 {
@@ -75,7 +80,7 @@ void EvolutionaryAlgorithm::PickAndTweak(unsigned int ii)
         bool picked = false;
         while(false == picked)
         {
-            unsigned int RandomIndex = (unsigned int) floor(1 + MY_RAND * PopulationCount);
+            unsigned int RandomIndex = (unsigned int) floor(MY_RAND * PopulationCount);
             if(MY_RAND <= ObjectGeneration[RandomIndex].Fitness)
             {
                 Parent = ObjectGeneration[RandomIndex];
@@ -101,7 +106,7 @@ void EvolutionaryAlgorithm::PickAndCross(unsigned int ii)
 
     while(false == PickedA)
     {
-        RandomIndexA = (unsigned int) floor(1 + MY_RAND * PopulationCount);
+        RandomIndexA = (unsigned int) floor(MY_RAND * PopulationCount);
         if(MY_RAND <= ObjectGeneration[RandomIndexA].Fitness)
         {
             ParentA = ObjectGeneration[RandomIndexA];
@@ -114,7 +119,7 @@ void EvolutionaryAlgorithm::PickAndCross(unsigned int ii)
         PickedB = false;
         while(false == PickedB)
         {
-            unsigned int RandomIndexB = (unsigned int) floor(1 + MY_RAND * PopulationCount);
+            unsigned int RandomIndexB = (unsigned int) floor(MY_RAND * PopulationCount);
             if((RandomIndexA != RandomIndexB) && (MY_RAND <= ObjectGeneration[RandomIndexB].Fitness))
             {
                 ParentB = ObjectGeneration[RandomIndexB];
@@ -167,10 +172,17 @@ void EvolutionaryAlgorithm::NormalizeFitness()
         if(it->Fitness > MaxFitness)
         {
             MaxFitness = it->Fitness;
+            if(MaxFitness > this->BestFitness)
+            {
+                this->BestFitness = MaxFitness;
+                BestObject = *it;
+            }
         }
+
     }
 
     MinFitness = MaxFitness;
+
     for(auto it = ObjectGeneration.begin(); it != ObjectGeneration.end(); ++it)
     {
         if(it->Fitness < MinFitness)
@@ -178,11 +190,12 @@ void EvolutionaryAlgorithm::NormalizeFitness()
             MinFitness = it->Fitness;
         }
     }
+
     if(MaxFitness != 0 && (MaxFitness - MinFitness) != 0)
     {
         for(auto it = ObjectGeneration.begin(); it != ObjectGeneration.end(); ++it)
         {
-            it->Fitness = it->Fitness - MinFitness;
+            it->Fitness -= MinFitness;
             it->Fitness = (it->Fitness / (MaxFitness - MinFitness));
             if(it->Fitness > 0)
             {
@@ -209,23 +222,22 @@ void EvolutionaryAlgorithm::RunSimulation()
 
     for(auto it = ObjectGeneration.begin(); it != ObjectGeneration.end(); ++it)
     {
-        for (int i = 0; i < 10000; i++)
+        ErrorIntegral = 0.0;
+        for (int i = 0; i < 450; i++)
         {
-            Input[0] = Setpoint;
+            Input[0] = (Setpoint - DcMotor.st.AngularVelocity);
             Input[1] = DcMotor.st.AngularVelocity;
             Input[1] = DcMotor.st.RotorCurrent;
             DcMotor.ext.U = it->CalculateOutput(Input)[0];
 
-            if(i == 1000){ DcMotor.ext.Tl = 80;}
-            if(i == 2500){ DcMotor.ext.Tl = 0;}
-            if(i == 3500){ DcMotor.ext.Tl = -10;}
+            
+            if(i == 100){ DcMotor.ext.Tl = 80;}
+            if(i == 250){ DcMotor.ext.Tl = 0;}
+            if(i == 350){ DcMotor.ext.Tl = -10;}
 
-            Dc_x = DcMotor.ComputeNextState(0.001, &DcMotor);
+            Dc_x = DcMotor.ComputeNextState(0.01, &DcMotor);
 
-            DcHistory[0].push_back(Dc_x[0]);
-            DcHistory[1].push_back(Dc_x[1]);
-
-            ErrorIntegral += pow(Setpoint - DcMotor.st.RotorCurrent, 2);
+            ErrorIntegral += pow(Setpoint - DcMotor.st.AngularVelocity, 2);
 
         }
         it->Fitness = 1 / (1 + ErrorIntegral);
@@ -233,14 +245,17 @@ void EvolutionaryAlgorithm::RunSimulation()
 
 }
 
-void EvolutionaryAlgorithm::EvolveNextGeneration()
+NeuralRegulator EvolutionaryAlgorithm::EvolveNextGeneration()
 {
     double Defaults[] = {4, 0.5, 0.1, 0, 0.7};
     
     RunSimulation();
-    FindBest();
-    EvaluateAverageFitness();
+    // FindBest();
+    // EvaluateAverageFitness();
+    NormalizeFitness();
+    // PrintGenerationFitness();
     PrintBest();
+    
     unsigned int NonZeroCount = NonZero;
     double RandomValue;
 
@@ -251,32 +266,32 @@ void EvolutionaryAlgorithm::EvolveNextGeneration()
             RandomValue = MY_RAND;
             if(RandomValue >= Defaults[1])
             {
-                PickAndTweak(ii);
+                PickAndTweak(ii); // 50% chance of tweaking
             }
             else if(RandomValue >= Defaults[2])
             {
-                PickAndCross(ii);
+                PickAndCross(ii); // 40% chance of crossing
             }
             else
             {
-                Mutation(ii);
+                Mutation(ii); // 10% chance of new random object
             }
         }
-        else if(NonZeroCount > Defaults[3])
+        else if(NonZeroCount > Defaults[3]) // When max 4 models have non zero fitness value
         {
             RandomValue = MY_RAND;
             if(RandomValue >= Defaults[4])
             {
-                PickAndTweak(ii);
+                PickAndTweak(ii); // 70% chance of tweaking
             }
             else
             {
-                Mutation(ii);
+                Mutation(ii); // 30% chance of new random object
             }
         }
-        else
+        else 
         {
-            Mutation(ii);
+            Mutation(ii); // when all models have 0 fitness value
         }
     }
 
@@ -285,4 +300,7 @@ void EvolutionaryAlgorithm::EvolveNextGeneration()
     {
         *it = *itt;
     }
+
+    return FindBest();
+
 }

@@ -16,13 +16,13 @@ public:
     double Fitness = 0.0;
     double ControlConstant = 100.0;
     double DefaultCcRrange = 10.0;
-    double DefaultCcTweakRange = 0.1;
+    double DefaultCcTweakRange = 200;
 
     NeuralNetwork NeuralNet;
     NeuralRegulator(NeuralNetwork _NeuralNet, bool RandomCc = 0);
     ~NeuralRegulator();
     void InitNeuralNetwork();
-    NeuralRegulator Tweak(double weight_tweak_range = 0.1, double bias_tweak_range = 0.1);
+    NeuralRegulator Tweak(double weight_tweak_range = 0.1, double bias_tweak_range = 0.0);
     NeuralRegulator Crossover(NeuralRegulator ObjectToCrossWith);
     // NeuralRegulator Mutation();
     double EvaluateFitness();

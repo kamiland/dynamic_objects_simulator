@@ -1,8 +1,8 @@
 {
   "context":
   {
-    "time": 10,
-    "probes_per_second": 1000
+    "time": 1.5,
+    "probes_per_second": 100
   },
 
   "pid": 

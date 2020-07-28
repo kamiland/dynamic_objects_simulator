@@ -3,6 +3,7 @@ import csv
 
 x0 = []
 x1 = []
+x2 = []
 T = []
 dt = 0.001
 t = 0
@@ -14,9 +15,11 @@ with open('./data/dc.txt', 'r') as csvfile:
         T.append(t) 
         x0.append(float(row[0]))
         x1.append(float(row[1]))
+        x2.append(float(row[2]))
         
 
 plt.plot(T, x0)
 plt.plot(T, x1)
+plt.plot(T, x2)
 plt.grid(linestyle=':')
 plt.show()

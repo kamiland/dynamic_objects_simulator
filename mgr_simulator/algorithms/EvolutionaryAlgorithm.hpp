@@ -8,6 +8,7 @@
 #include "NeuralRegulator.hpp"
 using namespace std;
 
+
 class EvolutionaryAlgorithm
 {
 private:
@@ -23,12 +24,13 @@ public:
     double AverageFitnessInCurrentGeneration;
     unsigned int NonZero;
     NeuralNetwork ReferenceNN;
+    double BestFitness;
 
     EvolutionaryAlgorithm(unsigned int _PopulationCount, NeuralNetwork _NeuralNet);
     ~EvolutionaryAlgorithm();
     void PrintGenerationFitness();
     void PrintBest();
-    void FindBest();
+    NeuralRegulator FindBest();
     double EvaluateAverageFitness();
     void PickAndTweak(unsigned int ii);
     void PickAndCross(unsigned int ii);
@@ -36,7 +38,7 @@ public:
     void ReplicateChosenOne(NeuralRegulator ChosenObject);
     void NormalizeFitness();
     void RunSimulation();
-    void EvolveNextGeneration();
+    NeuralRegulator EvolveNextGeneration();
 };
 
 #endif

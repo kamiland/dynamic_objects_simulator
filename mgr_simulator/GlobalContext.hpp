@@ -1,5 +1,5 @@
-#ifndef ALL_MODELS
-#define ALL_MODELS
+#ifndef GLOBAL_CONTEXT
+#define GLOBAL_CONTEXT
 
 #include <iostream>
 using namespace std;
