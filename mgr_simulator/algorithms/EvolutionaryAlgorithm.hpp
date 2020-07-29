@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <vector>
+#include <ctime>
 #define _USE_MATH_DEFINES
 #include <math.h>
 #include "NeuralRegulator.hpp"

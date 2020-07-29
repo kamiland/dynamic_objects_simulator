@@ -17,6 +17,7 @@ EvolutionaryAlgorithm::EvolutionaryAlgorithm(unsigned int _PopulationCount, Neur
     }
 
     BestFitness = 0.0;
+    srand((unsigned) time(NULL));
 }
 
 EvolutionaryAlgorithm::~EvolutionaryAlgorithm()
@@ -227,7 +228,7 @@ void EvolutionaryAlgorithm::RunSimulation()
         {
             Input[0] = (Setpoint - DcMotor.st.AngularVelocity);
             Input[1] = DcMotor.st.AngularVelocity;
-            Input[1] = DcMotor.st.RotorCurrent;
+            Input[2] = DcMotor.st.RotorCurrent;
             DcMotor.ext.U = it->CalculateOutput(Input)[0];
 
             

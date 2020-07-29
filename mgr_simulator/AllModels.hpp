@@ -8,3 +8,5 @@
 #include "algorithms\NeuralNetwork.hpp"
 #include "algorithms\NeuralRegulator.hpp"
 #include "algorithms\EvolutionaryAlgorithm.hpp"
+#include "algorithms\Noise.hpp"
+#include "algorithms\Filter.hpp"

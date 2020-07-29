@@ -1,0 +1,1 @@
+#define MY_RAND ((double) rand() / (RAND_MAX))

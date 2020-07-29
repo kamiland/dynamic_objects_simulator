@@ -5,9 +5,9 @@
 #include <vector>
 #define _USE_MATH_DEFINES
 #include <math.h>
+#include "MyMath.hpp"
 using namespace std;
 
-#define MY_RAND ((double) rand() / (RAND_MAX))
 
 typedef vector <vector <double>> VectorDouble2D;
 typedef vector <vector <vector <double>>> VectorDouble3D;
@@ -16,7 +16,8 @@ enum ActivationFunction
 {
     NONE = 0,
     RELU,
-    LOG
+    LOG,
+    TANH
 };
 
 double logistic(double x);
@@ -113,6 +114,13 @@ vector <double> NeuralNetwork::Feedforward(T (&Input)[N])
                     LayersActivPrim[layer + 1][node] = logistic_d(Layers[layer + 1][node]);
                 }
                 break;
+            case TANH:
+            for(int node = 0; node < LayersActiv[layer + 1].size(); node++)
+            {
+                LayersActiv[layer + 1][node] = tanh(LayersActiv[layer + 1][node]);
+                LayersActivPrim[layer + 1][node] = tanh(Layers[layer + 1][node]);
+            }
+            break;
 
             default:
                 cout << "Not supported activation function" << endl;
