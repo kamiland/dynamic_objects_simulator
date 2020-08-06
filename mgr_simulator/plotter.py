@@ -24,11 +24,12 @@ with open('./data/dc.txt', 'r') as csvfile:
         setp.append(150)
         
 
-plt.plot(T, x0)
-plt.plot(T, x1)
-plt.plot(T, x2)
-plt.plot(T, x3)
-plt.plot(T, x4)
-plt.plot(T, setp)
+plt.plot(T, x0, label="Angular Velocity")
+plt.plot(T, x1, label="Rotor Current")
+plt.plot(T, x2, label="NN output = Input Voltage")
+plt.plot(T, x3, label="Noised rotor current")
+plt.plot(T, x4, label="External torque")
+plt.plot(T, setp, label="Setpoint")
 plt.grid(linestyle=':')
+leg = plt.legend()
 plt.show()

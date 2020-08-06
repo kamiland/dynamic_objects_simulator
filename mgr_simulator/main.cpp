@@ -60,15 +60,15 @@ int main()
      * 
     */
  
-    EvolutionaryAlgorithm EVA(70, NN);
+    EvolutionaryAlgorithm EVA(80, NN);
 
-    for (int i = 0; i < 50; i++)
+    for (int i = 0; i < 35; i++)
     {
         NR = EVA.EvolveNextGeneration();
     }
 
 
-        // Run simulation
+    // Run simulation
     DcMotor DcMotor;
 
     DcMotor.st.AngularVelocity = 0.0;
@@ -81,7 +81,7 @@ int main()
     double Setpoint = 150;
 
     Noise Noiser(0);
-    Noise NoiseBig(5);
+    Noise NoiseBig(3);
     Filter LPF(4, 0.5);
     double filtered = 0.0;
     for (int i = 0; i < 650; i++)
@@ -92,19 +92,17 @@ int main()
         DcMotor.ext.U = NR.CalculateOutput(Input)[0];
         filtered = LPF.LowPass(DcMotor.st.RotorCurrent + NoiseBig.Get());
 
-        
-
-        if(i == 80){ DcMotor.ext.Tl = 100;}
+        if(i == 80){ DcMotor.ext.Tl = 30;}
         if(i == 190){ DcMotor.ext.Tl = 0;}
-        if(i == 310){ DcMotor.ext.Tl = -30; }
+        if(i == 310){ DcMotor.ext.Tl = -15; }
 
         Dc_x = DcMotor.ComputeNextState(0.01, &DcMotor);
 
-        DcHistory[0].push_back(Dc_x[1]);
-        DcHistory[1].push_back(Input[2]);
+        DcHistory[0].push_back(Dc_x[0]);
+        DcHistory[1].push_back(Dc_x[1]);
         DcHistory[2].push_back(DcMotor.ext.U);
-        DcHistory[3].push_back(Dc_x[0]);
-        DcHistory[4].push_back(filtered);
+        DcHistory[3].push_back(Input[2]);
+        DcHistory[4].push_back(DcMotor.ext.Tl);
     }
     WriteToFile(DcHistory, "dc");
 
