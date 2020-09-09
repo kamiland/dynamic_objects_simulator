@@ -39,7 +39,7 @@ public:
                     Rk4State[a] = State[a] + (zCheck ? (k[a][j - 1] / denom) : 0);
                 }
                 Ode = OdeList[i];
-                k[i][j] = Step * (Model->*Ode)(State); // RK4 main equation, modified to system of ODE's
+                k[i][j] = Step * (Model->*Ode)(Rk4State); // RK4 main equation, modified to system of ODE's
             }
         }
 
