@@ -1,5 +1,6 @@
 #include "EvolutionaryAlgorithm.hpp"
 #include "..\models\DcMotor.hpp"
+#include "..\algorithms\Noise.hpp"
 
 
 EvolutionaryAlgorithm::EvolutionaryAlgorithm(unsigned int _PopulationCount, NeuralNetwork _NeuralNet)
@@ -220,23 +221,29 @@ void EvolutionaryAlgorithm::RunSimulation()
     double Input[] = {0, 0, 0};
     double ErrorIntegral = 0.0;
     double Setpoint = 150;
+    
+    Noise Noiser(0);
+    Noise NoiseBig(3);  
 
     for(auto it = ObjectGeneration.begin(); it != ObjectGeneration.end(); ++it)
     {
         ErrorIntegral = 0.0;
-        for (int i = 0; i < 450; i++)
+        for (int i = 0; i < Ctx.GetProbesCountTotal(); i++)
         {
             Input[0] = (Setpoint - DcMotor.st.AngularVelocity);
-            Input[1] = DcMotor.st.AngularVelocity;
-            Input[2] = DcMotor.st.RotorCurrent;
+            Input[1] = DcMotor.st.AngularVelocity + Noiser.Get();
+            Input[2] = DcMotor.st.RotorCurrent + NoiseBig.Get();
             DcMotor.ext.U = it->CalculateOutput(Input)[0];
 
             
             if(i == 100){ DcMotor.ext.Tl = 80;}
             if(i == 250){ DcMotor.ext.Tl = 0;}
             if(i == 350){ DcMotor.ext.Tl = -10;}
+            if(i == 550){ DcMotor.ext.Tl = 50;}
+            if(i == 950){ DcMotor.ext.Tl = 0;}
+            if(i == 1150){ DcMotor.ext.Tl = 63;}
 
-            Dc_x = DcMotor.ComputeNextState(0.01, &DcMotor);
+            Dc_x = DcMotor.ComputeNextState(Ctx.GetStep(), &DcMotor);
 
             ErrorIntegral += pow(Setpoint - DcMotor.st.AngularVelocity, 2);
 

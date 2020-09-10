@@ -1,6 +1,7 @@
 #include "DoublePendulum.hpp"
 
 DoublePendulum::DoublePendulum()
+: Solver(DP_STATE_COUNT)
 {
     InitParameters();
     SetupODEs();
@@ -99,8 +100,8 @@ void DoublePendulum::SetupODEs()
 
 double * DoublePendulum::ComputeNextState(double step, DoublePendulum *Object)
 {
-    SolverRk4 Solver(DP_STATE_COUNT);
     return Solver.Solve<OdeMethod, DoublePendulum>(step, st.State, OdeList, Object);
+    // return Solver.SolveEuler<OdeMethod, DoublePendulum>(step, st.State, OdeList, Object);
 }
 
 void DoublePendulum::OperationAfterSolve()

@@ -43,6 +43,7 @@ public:
     typedef double (SeriesRLC::*OdeMethod) (double[]);
     OdeMethod OdeList[SERIES_RLC_STATE_COUNT];
     OdeMethod Ode;
+    SolverRk4 Solver;
 
     SeriesRLC();
     ~SeriesRLC();

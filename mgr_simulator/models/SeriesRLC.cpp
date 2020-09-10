@@ -1,6 +1,7 @@
 #include "SeriesRLC.hpp"
 
 SeriesRLC::SeriesRLC()
+: Solver(SERIES_RLC_STATE_COUNT)
 {
     ext.U = 0;
 
@@ -43,7 +44,6 @@ void SeriesRLC::SetupODEs()
 
 double * SeriesRLC::ComputeNextState(double step, SeriesRLC *Object)
 {
-    SolverRk4 Solver(SERIES_RLC_STATE_COUNT);
     return Solver.Solve<OdeMethod, SeriesRLC>(step, st.State, OdeList, Object);
     // return Solver.SolveEuler<OdeMethod, SeriesRLC>(step, st.State, OdeList, Object);
 }

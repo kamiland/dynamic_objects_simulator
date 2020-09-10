@@ -14,9 +14,9 @@ private:
     
 public:
     double Fitness = 0.0;
-    double ControlConstant = 10.0;
-    double DefaultCcRrange = 10.0;
-    double DefaultCcTweakRange = 10;
+    double ControlConstant = 100.0;
+    double DefaultCcRrange = 110.0;
+    double DefaultCcTweakRange = 20;
 
     NeuralNetwork NeuralNet;
     NeuralRegulator(NeuralNetwork _NeuralNet, bool RandomCc = 0);

@@ -1,6 +1,7 @@
 #include "DcMotor.hpp"
 
 DcMotor::DcMotor()
+: Solver(DC_MOTOR_STATE_COUNT)
 {
     ext.U = 0;
     ext.Tl = 0;
@@ -55,7 +56,6 @@ void DcMotor::SetupODEs()
 
 double * DcMotor::ComputeNextState(double step, DcMotor *Object)
 {
-    SolverRk4 Solver(DC_MOTOR_STATE_COUNT);
     return Solver.Solve<OdeMethod, DcMotor>(step, st.State, OdeList, Object);
     // return Solver.SolveEuler<OdeMethod, DcMotor>(step, st.State, OdeList, Object);
 }

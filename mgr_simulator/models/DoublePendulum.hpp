@@ -76,7 +76,7 @@ public:
     typedef double (DoublePendulum::*OdeMethod) (double[]);
     OdeMethod OdeList[DP_STATE_COUNT];
     OdeMethod Ode;
-
+    SolverRk4 Solver;
     DoublePendulum();
     ~DoublePendulum();
     void InitParameters(double g = 9.81, double m0 = 0.530168, double m1 = 0.18669, double L1 = 0.232039, double l1 = 0.15927,
@@ -89,6 +89,7 @@ public:
     double f5(double state[DP_STATE_COUNT]);
     double f6(double state[DP_STATE_COUNT]);
     void SetupODEs();
+    // void d();
     double * ComputeNextState(double step, DoublePendulum *Object);
     void OperationAfterSolve();
 

@@ -1,6 +1,7 @@
 #include "Pendulum.hpp"
 
 Pendulum::Pendulum()
+: Solver(P_STATE_COUNT)
 {
     InitParameters();
     SetupODEs();
@@ -69,7 +70,6 @@ void Pendulum::SetupODEs()
 
 double * Pendulum::ComputeNextState(double step, Pendulum *Object)
 {
-    SolverRk4 Solver(P_STATE_COUNT);
     return Solver.Solve<OdeMethod, Pendulum>(step, st.State, OdeList, Object);
 }
 

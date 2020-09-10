@@ -9,6 +9,7 @@
                 "-std=c++17",
                 "-static-libgcc",
                 "-static-libstdc++",
+                "-o3",
                 "C:\\MinGW\\msys\\1.0\\home\\kamil\\mgr_simulator\\*.cpp",
                 "C:\\MinGW\\msys\\1.0\\home\\kamil\\mgr_simulator\\models\\*.cpp",
                 "C:\\MinGW\\msys\\1.0\\home\\kamil\\mgr_simulator\\solver\\*.cpp",

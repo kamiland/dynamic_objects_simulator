@@ -62,6 +62,7 @@ public:
     typedef double (Pendulum::*OdeMethod) (double[]);
     OdeMethod OdeList[P_STATE_COUNT];
     OdeMethod Ode;
+    SolverRk4 Solver;
 
     Pendulum();
     ~Pendulum();

@@ -54,6 +54,7 @@ public:
     typedef double (DcMotor::*OdeMethod) (double[]);
     OdeMethod OdeList[DC_MOTOR_STATE_COUNT];
     OdeMethod Ode;
+    SolverRk4 Solver;
 
     DcMotor();
     ~DcMotor();

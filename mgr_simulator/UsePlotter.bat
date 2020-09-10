@@ -1,5 +1,5 @@
-@ECHO OFF
-NSimulator.exe
+@ECHO ON
+NSimulator.exe >> log.txt
 
 IF NOT ERRORLEVEL 1 GOTO no_error
 REM errorhandling, errorlevel >= 1
