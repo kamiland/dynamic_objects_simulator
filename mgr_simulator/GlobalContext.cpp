@@ -19,7 +19,7 @@ void GlobalContext::SetSimulationTimeSec(float seconds)
 
 void GlobalContext::SetProbesCountPerSec(int probes)
 {
-    probesCountPerSec = probes;
+    this->probesCountPerSec = probes;
 }
 
 long GlobalContext::GetProbesCountTotal()

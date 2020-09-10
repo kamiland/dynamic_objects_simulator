@@ -1,8 +1,8 @@
 {
   "context":
   {
-    "time": 1.5,
-    "probes_per_second": 100
+    "time": 8,
+    "probes_per_second": 1000
   },
 
   "pid": 
@@ -21,50 +21,24 @@
 
   "neural_network": 
   {
-    "nodes_count": [3, 6, 6, 1],
+    "nodes_count": [4, 10, 10, 1],
     "activation_functions": [1, 1, 3],
-    "weights_range": 0.011,
+    "weights_range": 0.1,
     "biases_range": 0.001,
-    "control_constant_range": 10.0
-  },
-
-  "dc":
-  {
-    "parameters":
-    {
-      "La": 0.02,
-      "Ra": 0.4,
-      "Lf": 65,
-      "Rf": 65,
-      "Ufn": 110,
-      "Laf": 0.363,
-      "B": 0.0053,
-      "p": 2,
-      "J": 0.11
-    },
-    "init_state":
-    {
-      "rotor_current": 0.0,
-      "angular_velocity": 0.0
-    },
-    "external_forces":
-    {
-      "U": 0.0,
-      "Tl": 0.0
-    }
+    "control_constant_range": 1		
   },
 
   "series_rlc":
   {
     "parameters":
     {
-      "R": 55,
-      "L": 0.2,
-      "C": 0.0003
+      "r": 0.1,
+      "l": 0.2,
+      "c": 0.2
     },
     "init_state":
     {
-      "circuit_current": 0,
+      "circuit_current": 1,
       "capacitor_voltage" : 0
     },
     "external_forces":
@@ -74,6 +48,32 @@
         "time":   [0.0, 0.003, 0.15, 0.20, 0.3, 0.32, 0.7, 0.8],
         "value":  [2.4, 0.000, 0.15, 0.00, 1.2, 0.00, 0.5, 0.0]
       }
+    }
+  },
+
+  "dc":
+  {
+    "parameters":
+    {
+      "la": 0.02,
+      "ra": 0.4,
+      "lf": 65,
+      "rf": 65,
+      "ufn": 110,
+      "laf": 0.363,
+      "b": 0.0053,
+      "p": 2,
+      "j": 0.11
+    },
+    "init_state":
+    {
+      "rotor_current": 0.0,
+      "angular_velocity": 110.0
+    },
+    "external_forces":
+    {
+      "u": 0.0,
+      "tl": 0.0
     }
   },
 
@@ -95,11 +95,11 @@
       "position":
       {
         "cart": 0.0,
-        "arm": 0.0
+        "arm": 3.14
       }, 
       "velocity":
       {
-        "cart": 0.0,
+        "cart": 0.00,
         "arm": 0.0
       }
     },
@@ -125,7 +125,7 @@
       "I2": 0.00135182569,
       "m2": 0.137952,
       "l2": 0.12041,
-      "eta0": 0.1,
+      "eta0": 0.01,
       "eta1": 0.01,
       "eta2": 0.01,
       "gantry": 10.0
@@ -135,7 +135,7 @@
       "position":
       {
         "cart": 0.0,
-        "inner_arm": 0.0,
+        "inner_arm": 0.1,
         "exter_arm": 0.0
       }, 
       "velocity":

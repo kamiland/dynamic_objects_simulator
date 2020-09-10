@@ -7,8 +7,10 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
 #include "NeuralRegulator.hpp"
+#include "..\GlobalContext.hpp"
 using namespace std;
 
+extern GlobalContext Ctx;
 
 class EvolutionaryAlgorithm
 {

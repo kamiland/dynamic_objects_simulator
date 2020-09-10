@@ -45,6 +45,7 @@ double * SeriesRLC::ComputeNextState(double step, SeriesRLC *Object)
 {
     SolverRk4 Solver(SERIES_RLC_STATE_COUNT);
     return Solver.Solve<OdeMethod, SeriesRLC>(step, st.State, OdeList, Object);
+    // return Solver.SolveEuler<OdeMethod, SeriesRLC>(step, st.State, OdeList, Object);
 }
 
 void SeriesRLC::OperationAfterSolve()

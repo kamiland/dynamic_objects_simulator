@@ -76,5 +76,5 @@ double * Pendulum::ComputeNextState(double step, Pendulum *Object)
 void Pendulum::OperationAfterSolve()
 {
     uint16_t i = 1; 
-    st.State[i] = fmod((st.State[i] + 3 * M_PI), (M_PI * 2)) - M_PI;
+    this->st.State[i] = fmod(st.State[i] + 3 * M_PI, M_PI * 2) - M_PI;
 }

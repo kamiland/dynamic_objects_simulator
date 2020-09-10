@@ -52,6 +52,24 @@ public:
         Model->OperationAfterSolve();
         return State;
     };
+
+    template <typename S, class T>
+    double * SolveEuler(double Step, double State[], S OdeList[], T *Model)
+    {
+        auto StateNew = new double[StateEqCount];
+        S Ode; 
+
+        for(int i = 0; i < StateEqCount; i++)
+        {
+            Ode = OdeList[i];
+            StateNew[i] = Step * (Model->*Ode)(State);
+            State[i] = State[i] + StateNew[i];
+        }
+
+        Model->OperationAfterSolve();
+        return State;
+    };
+
 };
 
 #endif
