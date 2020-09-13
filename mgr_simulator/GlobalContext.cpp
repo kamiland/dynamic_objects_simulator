@@ -9,7 +9,7 @@ GlobalContext::GlobalContext(/* args */)
 
 GlobalContext::~GlobalContext()
 {
-    cout << "Destroying GlobalContext." << endl; 
+
 }
 
 void GlobalContext::SetSimulationTimeSec(float seconds)

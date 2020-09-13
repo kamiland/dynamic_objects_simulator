@@ -41,7 +41,7 @@ string GetDateString()
 }
 
 template <typename T, size_t N>
-void WriteToFile(T (&History)[N], string FileName = "", string FileType = "txt", uint16_t Precision = 8)
+void WriteToFile(T (&History)[N], string FileName = "", string FileType = "txt", uint16_t Precision = 16)
 {
     ofstream fout;
     uint16_t StateCount = N;
