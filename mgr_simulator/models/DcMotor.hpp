@@ -55,6 +55,7 @@ public:
     OdeMethod OdeList[DC_MOTOR_STATE_COUNT];
     OdeMethod Ode;
     SolverRk4 Solver;
+    SolverType SolverType;
 
     DcMotor();
     ~DcMotor();

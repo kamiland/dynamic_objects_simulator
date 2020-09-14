@@ -3,6 +3,7 @@
 DoublePendulum::DoublePendulum()
 : Solver(DP_STATE_COUNT)
 {
+    SolverType = SOLVER_RK4;
     InitParameters();
     SetupODEs();
 }
@@ -100,8 +101,17 @@ void DoublePendulum::SetupODEs()
 
 double * DoublePendulum::ComputeNextState(double step, DoublePendulum *Object)
 {
-    return Solver.Solve<OdeMethod, DoublePendulum>(step, st.State, OdeList, Object);
-    // return Solver.SolveEuler<OdeMethod, DoublePendulum>(step, st.State, OdeList, Object);
+    switch (SolverType)
+    {
+    case SOLVER_EULER:
+        return Solver.SolveEuler<OdeMethod, DoublePendulum>(step, st.State, OdeList, Object);
+
+    case SOLVER_RK4:
+        return Solver.Solve<OdeMethod, DoublePendulum>(step, st.State, OdeList, Object);
+    
+    default:
+        return NULL;
+    }
 }
 
 void DoublePendulum::OperationAfterSolve()

@@ -63,6 +63,7 @@ public:
     OdeMethod OdeList[P_STATE_COUNT];
     OdeMethod Ode;
     SolverRk4 Solver;
+    SolverType SolverType;
 
     Pendulum();
     ~Pendulum();

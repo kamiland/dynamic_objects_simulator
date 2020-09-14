@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import csv
 
-dt = 0.001
+dt = 0.1
 
 x0 = []
 x1 = []
@@ -60,9 +60,9 @@ try:
         plt.plot(T, x0, label="Prąd wirnika - i(t) [A]")
         plt.plot(T, x1, label="Prędkość obrotowa wirnika - \u03C9(t) [obr/min]")
         plt.plot(T, x2, label="Napięcie wejściowe - u(t) [V]")
-        plt.plot(T, x3, label="Zaszumiony pomiar prądu wirnika - i'(t) [A]")
-        plt.plot(T, x4, label="Moment obciążenia wału - T(t) [Nm]")
-        plt.plot(T, setp, label="Prędkość zadana - S(t) [obr/min]")
+        # plt.plot(T, x3, label="Zaszumiony pomiar prądu wirnika - i'(t) [A]")
+        # plt.plot(T, x4, label="Moment obciążenia wału - T(t) [Nm]")
+        # plt.plot(T, setp, label="Prędkość zadana - S(t) [obr/min]")
         plt.grid(linestyle=':')
         leg = plt.legend()
 except:
@@ -99,8 +99,8 @@ try:
         plt.plot(T, x1, label="Pozycja ramienia - \u03B81 [rad]")
         plt.plot(T, x2, label="Prędkość wózka - \u03B80' [m/s]", linestyle='--')
         plt.plot(T, x3, label="Prędkość ramienia - \u03B81' [rad/s]", linestyle='--')
-        plt.plot(T, setp, label="\u03C0", linestyle=':', color="grey")
-        plt.plot(T, setp2, label="-\u03C0", linestyle=':', color="grey")
+        plt.plot(T, setp, label="\u03C0; -\u03C0", linestyle=':', color="grey")
+        plt.plot(T, setp2, linestyle=':', color="grey")
         plt.grid(linestyle=':')
         leg = plt.legend()
 except:
@@ -134,22 +134,28 @@ try:
             setp2.append(-3.14)
 
         plt.figure()
-        # plt.plot(T, x0, label="Pozycja wózka - \u03B80 [m]")
-        # plt.plot(T, x1, label="Pozycja ramienia 1 - \u03B81 [rad]")
-        # plt.plot(T, x2, label="Pozycja ramienia 2 - \u03B81 [rad]")
+        plt.plot(T, x0, label="Pozycja wózka - \u03B80 [m]")
+        plt.plot(T, x1, label="Pozycja ramienia 1 - \u03B81 [rad]")
+        plt.plot(T, x2, label="Pozycja ramienia 2 - \u03B81 [rad]")
         plt.plot(T, x3, label="Prędkość wózka - \u03B80' [m/s]", linestyle='--')
         plt.plot(T, x4, label="Prędkość ramienia 1 - \u03B81' [rad/s]", linestyle='--')
         plt.plot(T, x5, label="Prędkość ramienia 2 - \u03B82' [rad/s]", linestyle='--')
-        plt.plot(T, setp, label="\u03C0", linestyle=':', color="grey")
-        plt.plot(T, setp2, label="-\u03C0", linestyle=':', color="grey")
+        plt.plot(T, setp, label="\u03C0; -\u03C0", linestyle=':', color="grey")
+        plt.plot(T, setp2, linestyle=':', color="grey")
         plt.grid(linestyle=':')
         leg = plt.legend()
 except:
     print("Dip.txt file not found.")
 
 
-
-
+# plt.figure()
+# plt.plot(T, x3, label="Prędkość wózka - \u03B80' [m/s]")
+# plt.plot(T, x4, label="Prędkość ramienia 1 - \u03B81' [rad/s]")
+# plt.plot(T, x5, label="Prędkość ramienia 2 - \u03B82' [rad/s]")
+# plt.plot(T, setp, label="\u03C0", linestyle=':', color="grey")
+# plt.plot(T, setp2, label="-\u03C0", linestyle=':', color="grey")
+# plt.grid(linestyle=':')
+# leg = plt.legend()
 
 
 

@@ -6,6 +6,8 @@ DcMotor::DcMotor()
     ext.U = 0;
     ext.Tl = 0;
 
+    SolverType = SOLVER_RK4;
+
     InitParameters();
     SetupODEs();
 }
@@ -56,8 +58,17 @@ void DcMotor::SetupODEs()
 
 double * DcMotor::ComputeNextState(double step, DcMotor *Object)
 {
-    return Solver.Solve<OdeMethod, DcMotor>(step, st.State, OdeList, Object);
-    // return Solver.SolveEuler<OdeMethod, DcMotor>(step, st.State, OdeList, Object);
+    switch (this->SolverType)
+    {
+    case SOLVER_EULER:
+        return Solver.SolveEuler<OdeMethod, DcMotor>(step, st.State, OdeList, Object);
+
+    case SOLVER_RK4:
+        return Solver.Solve<OdeMethod, DcMotor>(step, st.State, OdeList, Object);
+        
+    default:
+        return NULL;
+    }
 }
 
 void DcMotor::OperationAfterSolve()

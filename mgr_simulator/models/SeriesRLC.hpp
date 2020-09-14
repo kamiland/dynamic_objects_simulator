@@ -44,7 +44,8 @@ public:
     OdeMethod OdeList[SERIES_RLC_STATE_COUNT];
     OdeMethod Ode;
     SolverRk4 Solver;
-
+    SolverType SolverType;
+    
     SeriesRLC();
     ~SeriesRLC();
     void InitParameters(double R = 50, double L = 0.1, double C = MICRO(100));

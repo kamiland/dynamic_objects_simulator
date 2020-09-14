@@ -6,6 +6,12 @@
 #include <cstring>
 using namespace std;
 
+enum SolverType
+{
+    SOLVER_EULER = 0,
+    SOLVER_RK4
+};
+
 const int RK4_K = 4; // four steps of RK4 solver
 
 class SolverRk4

@@ -1,0 +1,221 @@
+RK4 10s 100p
+Thank you for using N-Simulator. KamilAnd.
+Evolution Time [s]: 0
+Simulation Time [ms]: 118
+Thank you for using N-Simulator. KamilAnd.
+Evolution Time [s]: 0
+Simulation Time [ms]: 118
+Thank you for using N-Simulator. KamilAnd.
+Evolution Time [s]: 0
+Simulation Time [ms]: 116
+Thank you for using N-Simulator. KamilAnd.
+Evolution Time [s]: 0
+Simulation Time [ms]: 117
+Thank you for using N-Simulator. KamilAnd.
+Evolution Time [s]: 0
+Simulation Time [ms]: 118
+Thank you for using N-Simulator. KamilAnd.
+Evolution Time [s]: 0
+Simulation Time [ms]: 117
+Thank you for using N-Simulator. KamilAnd.
+Evolution Time [s]: 0
+Simulation Time [ms]: 119
+Thank you for using N-Simulator. KamilAnd.
+Evolution Time [s]: 0
+Simulation Time [ms]: 122
+Thank you for using N-Simulator. KamilAnd.
+Evolution Time [s]: 0
+Simulation Time [ms]: 117
+Thank you for using N-Simulator. KamilAnd.
+Evolution Time [s]: 0
+Simulation Time [ms]: 119
+Thank you for using N-Simulator. KamilAnd.
+Evolution Time [s]: 0
+Simulation Time [ms]: 117
+
+RK4 10s, 100p: [ms] 118  +- 4
+________________________________
+EULER 10s, 100p					|
+________________________________|
+
+Thank you for using N-Simulator. KamilAnd.
+Evolution Time [s]: 0
+Simulation Time [ms]: 96
+Thank you for using N-Simulator. KamilAnd.
+Evolution Time [s]: 0
+Simulation Time [ms]: 95
+Thank you for using N-Simulator. KamilAnd.
+Evolution Time [s]: 0
+Simulation Time [ms]: 98
+Thank you for using N-Simulator. KamilAnd.
+Evolution Time [s]: 0
+Simulation Time [ms]: 100
+Thank you for using N-Simulator. KamilAnd.
+Evolution Time [s]: 0
+Simulation Time [ms]: 95
+Thank you for using N-Simulator. KamilAnd.
+Evolution Time [s]: 0
+Simulation Time [ms]: 96
+Thank you for using N-Simulator. KamilAnd.
+Evolution Time [s]: 0
+Simulation Time [ms]: 97
+Thank you for using N-Simulator. KamilAnd.
+Evolution Time [s]: 0
+
+EULER 10s, 100p: [ms] 96 +- 4 
+
+EULER 100s,1000p
+Thank you for using N-Simulator. KamilAnd.
+Evolution Time [s]: 0
+Simulation Time [ms]: 7132
+Thank you for using N-Simulator. KamilAnd.
+Evolution Time [s]: 0
+Simulation Time [ms]: 7205
+Thank you for using N-Simulator. KamilAnd.
+Evolution Time [s]: 0
+Simulation Time [ms]: 7128
+Thank you for using N-Simulator. KamilAnd.
+Evolution Time [s]: 0
+Simulation Time [ms]: 7204
+
+EULER 100s, 1000p: [ms] 7152 +- 50
+
+RK4 100s,1000p
+Thank you for using N-Simulator. KamilAnd.
+Evolution Time [s]: 0
+Simulation Time [ms]: 9500
+Thank you for using N-Simulator. KamilAnd.
+Evolution Time [s]: 0
+Simulation Time [ms]: 9738
+Thank you for using N-Simulator. KamilAnd.
+Evolution Time [s]: 0
+Simulation Time [ms]: 10070
+Thank you for using N-Simulator. KamilAnd.
+Evolution Time [s]: 0
+Simulation Time [ms]: 9532
+Thank you for using N-Simulator. KamilAnd.
+Evolution Time [s]: 0
+Simulation Time [ms]: 9585
+
+RK4 100s, 1000p: [ms] 9738 +- 200
+
+KOLEJNY DZIEN
+
+RK4 10s, 10p: [ms] 23 +- 1
+
+Thank you for using N-Simulator. KamilAnd.
+Evolution Time [s]: 0
+Simulation Time [ms]: 23
+Thank you for using N-Simulator. KamilAnd.
+Evolution Time [s]: 0
+Simulation Time [ms]: 25
+Thank you for using N-Simulator. KamilAnd.
+Evolution Time [s]: 0
+Simulation Time [ms]: 23
+Thank you for using N-Simulator. KamilAnd.
+Evolution Time [s]: 0
+Simulation Time [ms]: 23
+Thank you for using N-Simulator. KamilAnd.
+Evolution Time [s]: 0
+Simulation Time [ms]: 23
+Thank you for using N-Simulator. KamilAnd.
+Evolution Time [s]: 0
+Simulation Time [ms]: 23
+Thank you for using N-Simulator. KamilAnd.
+Evolution Time [s]: 0
+Simulation Time [ms]: 23
+Thank you for using N-Simulator. KamilAnd.
+Evolution Time [s]: 0
+Simulation Time [ms]: 22
+Thank you for using N-Simulator. KamilAnd.
+Evolution Time [s]: 0
+Simulation Time [ms]: 24
+
+
+EULER 10s, 10p: [ms] 16 +- 1
+
+Thank you for using N-Simulator. KamilAnd.
+Evolution Time [s]: 0
+Simulation Time [ms]: 17
+Thank you for using N-Simulator. KamilAnd.
+Evolution Time [s]: 0
+Simulation Time [ms]: 17
+Thank you for using N-Simulator. KamilAnd.
+Evolution Time [s]: 0
+Simulation Time [ms]: 16
+Thank you for using N-Simulator. KamilAnd.
+Evolution Time [s]: 0
+Simulation Time [ms]: 15
+Thank you for using N-Simulator. KamilAnd.
+Evolution Time [s]: 0
+Simulation Time [ms]: 17
+Thank you for using N-Simulator. KamilAnd.
+Evolution Time [s]: 0
+Simulation Time [ms]: 16
+Thank you for using N-Simulator. KamilAnd.
+Evolution Time [s]: 0
+Simulation Time [ms]: 17
+
+
+EULER 10s, 1000p: [ms] 729 +- 20
+
+Thank you for using N-Simulator. KamilAnd.
+Evolution Time [s]: 0
+Simulation Time [ms]: 738
+Thank you for using N-Simulator. KamilAnd.
+Evolution Time [s]: 0
+Simulation Time [ms]: 725
+Thank you for using N-Simulator. KamilAnd.
+Evolution Time [s]: 0
+Simulation Time [ms]: 736
+Thank you for using N-Simulator. KamilAnd.
+Evolution Time [s]: 0
+Simulation Time [ms]: 747
+Thank you for using N-Simulator. KamilAnd.
+Evolution Time [s]: 0
+Simulation Time [ms]: 742
+Thank you for using N-Simulator. KamilAnd.
+Evolution Time [s]: 0
+Simulation Time [ms]: 720
+Thank you for using N-Simulator. KamilAnd.
+Evolution Time [s]: 0
+Simulation Time [ms]: 729
+Thank you for using N-Simulator. KamilAnd.
+Evolution Time [s]: 0
+Simulation Time [ms]: 743
+
+
+RK4 10s, 1000p: [ms] 
+
+
+Thank you for using N-Simulator. KamilAnd.
+Evolution Time [s]: 0
+Simulation Time [ms]: 999
+
+Thank you for using N-Simulator. KamilAnd.
+Evolution Time [s]: 0
+Simulation Time [ms]: 1004
+Thank you for using N-Simulator. KamilAnd.
+Evolution Time [s]: 0
+Simulation Time [ms]: 989
+Thank you for using N-Simulator. KamilAnd.
+Evolution Time [s]: 0
+Simulation Time [ms]: 1002
+Thank you for using N-Simulator. KamilAnd.
+Evolution Time [s]: 0
+Simulation Time [ms]: 978
+Thank you for using N-Simulator. KamilAnd.
+Evolution Time [s]: 0
+Simulation Time [ms]: 953
+Thank you for using N-Simulator. KamilAnd.
+Evolution Time [s]: 0
+Simulation Time [ms]: 992
+Thank you for using N-Simulator. KamilAnd.
+Evolution Time [s]: 0
+Simulation Time [ms]: 981
+Thank you for using N-Simulator. KamilAnd.
+Evolution Time [s]: 0
+Simulation Time [ms]: 993
+Thank you for using N-Simulator. KamilAnd.
+Evolution Time [s]: 0
+Simulation Time [ms]: 1003

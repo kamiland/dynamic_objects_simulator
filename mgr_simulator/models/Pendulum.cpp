@@ -3,6 +3,7 @@
 Pendulum::Pendulum()
 : Solver(P_STATE_COUNT)
 {
+    SolverType = SOLVER_RK4;
     InitParameters();
     SetupODEs();
 }
@@ -70,7 +71,17 @@ void Pendulum::SetupODEs()
 
 double * Pendulum::ComputeNextState(double step, Pendulum *Object)
 {
-    return Solver.Solve<OdeMethod, Pendulum>(step, st.State, OdeList, Object);
+    switch (SolverType)
+    {
+    case SOLVER_EULER:
+        return Solver.SolveEuler<OdeMethod, Pendulum>(step, st.State, OdeList, Object);
+
+    case SOLVER_RK4:
+        return Solver.Solve<OdeMethod, Pendulum>(step, st.State, OdeList, Object);
+    
+    default:
+        return NULL;
+    }
 }
 
 void Pendulum::OperationAfterSolve()

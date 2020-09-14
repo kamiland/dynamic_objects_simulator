@@ -4,7 +4,7 @@ SeriesRLC::SeriesRLC()
 : Solver(SERIES_RLC_STATE_COUNT)
 {
     ext.U = 0;
-
+    SolverType = SOLVER_RK4;
     InitParameters();
     SetupODEs();
 }
@@ -44,8 +44,17 @@ void SeriesRLC::SetupODEs()
 
 double * SeriesRLC::ComputeNextState(double step, SeriesRLC *Object)
 {
-    return Solver.Solve<OdeMethod, SeriesRLC>(step, st.State, OdeList, Object);
-    // return Solver.SolveEuler<OdeMethod, SeriesRLC>(step, st.State, OdeList, Object);
+    switch (SolverType)
+    {
+    case SOLVER_EULER:
+        return Solver.SolveEuler<OdeMethod, SeriesRLC>(step, st.State, OdeList, Object);
+
+    case SOLVER_RK4:
+        return Solver.Solve<OdeMethod, SeriesRLC>(step, st.State, OdeList, Object);
+    
+    default:
+        return NULL;
+    }
 }
 
 void SeriesRLC::OperationAfterSolve()
