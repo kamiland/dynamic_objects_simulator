@@ -28,6 +28,7 @@ public:
     unsigned int NonZero;
     NeuralNetwork ReferenceNN;
     double BestFitness;
+    bool OutOfRange;
 
     EvolutionaryAlgorithm(unsigned int _PopulationCount, NeuralNetwork _NeuralNet);
     ~EvolutionaryAlgorithm();
@@ -41,7 +42,8 @@ public:
     void ReplicateChosenOne(NeuralRegulator ChosenObject);
     void NormalizeFitness();
     void RunSimulation();
-    NeuralRegulator EvolveNextGeneration();
+    void RunDipSimulation(nlohmann::json J);
+    NeuralRegulator EvolveNextGeneration(nlohmann::json J);
 };
 
 #endif

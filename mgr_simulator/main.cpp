@@ -11,10 +11,8 @@
 #include <windows.h>
 #include "GlobalContext.hpp"
 #include "AllModels.hpp"
-#include "json/json.hpp"
 #include "UsefulFunctions.hpp"
-#define _USE_MATH_DEFINES
-#include <math.h>
+
 using namespace std;
 using json = nlohmann::json;
 
@@ -26,9 +24,9 @@ int main()
      * Reading JSON with configuration of simulation
      * 
     */
-    json j;
+    json J;
     string RawJsonString = ReadFromFile("./json/simulation_context.json");
-    j = json::parse(RawJsonString);
+    J = json::parse(RawJsonString);
 
 
     /**
@@ -36,8 +34,8 @@ int main()
      * 
     */
     // GlobalContext Ctx;
-    Ctx.SetSimulationTimeSec(j["context"]["time"]);
-    Ctx.SetProbesCountPerSec(j["context"]["probes_per_second"]);
+    Ctx.SetSimulationTimeSec(J["context"]["time"]);
+    Ctx.SetProbesCountPerSec(J["context"]["probes_per_second"]);
 
     auto Now = chrono::system_clock::now();
     auto DateStamp = chrono::system_clock::to_time_t(Now);
@@ -48,12 +46,12 @@ int main()
      * Declaration of elementary objects and variables
      * 
     */
-    vector <unsigned int> _NodesCount = j["neural_network"]["nodes_count"];
-    vector <ActivationFunction> _ActivationFunctions = j["neural_network"]["activation_functions"];
+    vector <unsigned int> _NodesCount = J["neural_network"]["nodes_count"];
+    vector <ActivationFunction> _ActivationFunctions = J["neural_network"]["activation_functions"];
     NeuralNetwork NN(_NodesCount, _ActivationFunctions);
     
-    NN.Randomization(j["neural_network"]["weights_range"], j["neural_network"]["biases_range"], 
-                     j["neural_network"]["control_constant_range"]);
+    NN.Randomization(J["neural_network"]["weights_range"], J["neural_network"]["biases_range"], 
+                     J["neural_network"]["control_constant_range"]);
 
     NeuralRegulator NR(NN);
 
@@ -64,25 +62,22 @@ int main()
     */
     auto StartEvo = std::chrono::high_resolution_clock::now(); 
 
-    EvolutionaryAlgorithm EVA(j["evo"]["population"], NN);
-    for (int i = 0; i < j["evo"]["generation"]; i++)
+    EvolutionaryAlgorithm EVA(J["evo"]["population"], NN);
+    for (int i = 0; i < J["evo"]["generation"]; i++)
     {
-        NR = EVA.EvolveNextGeneration();
+        NR = EVA.EvolveNextGeneration(J);
     }
 
 
     // Run simulation
     auto StartSim = std::chrono::high_resolution_clock::now(); 
 
-    ///////////////// RLC /////////////////
-    #define RLC_P j["series_rlc"]["parameters"]
-    #define RLC_S j["series_rlc"]["init_state"]
-    #define RLC_E j["series_rlc"]["external_forces"] // TODO
 
-    if(j["onoff"]["series_rlc"])
+    ///////////////// RLC /////////////////
+    if(J["onoff"]["series_rlc"])
     {
         SeriesRLC Rlc;
-        Rlc.SolverType = j["context"]["solver_type"];
+        Rlc.SolverType = J["context"]["solver_type"];
         Rlc.InitParameters
         (
             RLC_P["r"],
@@ -106,15 +101,13 @@ int main()
         }
         WriteToFile(RlcHistory, "rlc");
     }
-    ///////////////// DC MOTOR /////////////////
-    #define DC_P j["dc"]["parameters"]
-    #define DC_S j["dc"]["init_state"]
-    #define DC_E j["dc"]["external_forces"]
 
-    if(j["onoff"]["dc"])
+
+    ///////////////// DC MOTOR /////////////////
+    if(J["onoff"]["dc"])
     {
         DcMotor DcMotor;
-        DcMotor.SolverType = j["context"]["solver_type"];
+        DcMotor.SolverType = J["context"]["solver_type"];
         DcMotor.InitParameters
         (
             DC_P["ra"],
@@ -146,19 +139,19 @@ int main()
         double filtered = 0.0;
         for (int i = 0; i < Ctx.GetProbesCountTotal(); i++)
         {
-            // Input[0] = (Setpoint - DcMotor.st.AngularVelocity);
-            // Input[1] = DcMotor.st.AngularVelocity + Noiser.Get();
-            // Input[2] = DcMotor.st.RotorCurrent + NoiseBig.Get();
-            // DcMotor.ext.U = NR.CalculateOutput(Input)[0];
-            // filtered = LPF.LowPass(DcMotor.st.RotorCurrent + NoiseBig.Get());
+            Input[0] = (Setpoint - DcMotor.st.AngularVelocity);
+            Input[1] = DcMotor.st.AngularVelocity + Noiser.Get();
+            Input[2] = DcMotor.st.RotorCurrent + NoiseBig.Get();
+            DcMotor.ext.U = 150; //NR.CalculateOutput(Input)[0];
+            filtered = LPF.LowPass(DcMotor.st.RotorCurrent + NoiseBig.Get());
 
-            // if(i == 80){ DcMotor.ext.Tl = 15;}
-            // if(i == 190){ DcMotor.ext.Tl = 0;}
-            // if(i == 310){ DcMotor.ext.Tl = -7; }
-            // if(i == 650){ DcMotor.ext.Tl = 20;}
-            // if(i == 850){ DcMotor.ext.Tl = -13;}
-            // if(i == 1200){ DcMotor.ext.Tl = 29;}
-            // if(i == 1600){ DcMotor.ext.Tl = 0;}
+            if(i == 80){ DcMotor.ext.Tl = 15;}
+            if(i == 190){ DcMotor.ext.Tl = 0;}
+            if(i == 310){ DcMotor.ext.Tl = -7; }
+            if(i == 650){ DcMotor.ext.Tl = 20;}
+            if(i == 850){ DcMotor.ext.Tl = -13;}
+            if(i == 1200){ DcMotor.ext.Tl = 29;}
+            if(i == 1600){ DcMotor.ext.Tl = 0;}
 
             Dc_x = DcMotor.ComputeNextState(Ctx.GetStep(), &DcMotor);
 
@@ -173,14 +166,10 @@ int main()
 
 
     ///////////////// PENDULUM /////////////////
-    #define P_P j["pendulum"]["parameters"]
-    #define P_S j["pendulum"]["init_state"]
-    #define P_E j["pendulum"]["external_forces"]
-
-    if(j["onoff"]["pendulum"])
+    if(J["onoff"]["pendulum"])
     {
         Pendulum Pen;
-        Pen.SolverType = j["context"]["solver_type"];
+        Pen.SolverType = J["context"]["solver_type"];
         Pen.InitParameters
         (      
             P_P["g"],
@@ -225,14 +214,11 @@ int main()
     
 
     ///////////////// DOUBLE PENDULUM /////////////////
-    #define DP_P j["double_pendulum"]["parameters"]
-    #define DP_S j["double_pendulum"]["init_state"]
-    #define DP_E j["double_pendulum"]["external_forces"]
-    
-    if(j["onoff"]["double_pendulum"])
+    #define M_PI_4		0.78539816339744830962
+    if(J["onoff"]["double_pendulum"])
     {
         DoublePendulum Dip;
-        Dip.SolverType = j["context"]["solver_type"];
+        Dip.SolverType = J["context"]["solver_type"];
         Dip.InitParameters
         (      
             DP_P["g"],
@@ -265,20 +251,43 @@ int main()
 
         vector<double> DipHistory[6];
         double *Dip_X;
-        // double InputDipNN[] = {0, 0, 0, 0, 0, 0};
-        
+        double InputDipNN[] = {0, 0, 0, 0, 0, 0};
+        /* control gains */
+        double K[] = {10, -259.7565, 309.8422, 8.3819, -0.7261, 27.0203};   
+        int TimeZ = 0;
+        bool OutOfRange = false;
         for (int i = 0; i < Ctx.GetProbesCountTotal(); i++)
         {
             
-            // InputDipNN[0] = Dip.st.phy.Position.Cart;
-            // InputDipNN[1] = Dip.st.phy.Position.InnerArm;
-            // InputDipNN[2] = Dip.st.phy.Position.ExternalArm;
-            // InputDipNN[3] = Dip.st.phy.Velocity.Cart; 
-            // InputDipNN[4] = Dip.st.phy.Velocity.InnerArm;
-            // InputDipNN[5] = Dip.st.phy.Velocity.ExternalArm;
+            InputDipNN[0] = Dip.st.phy.Position.Cart;
+            InputDipNN[1] = Dip.st.phy.Position.InnerArm;
+            InputDipNN[2] = Dip.st.phy.Position.ExternalArm;
+            InputDipNN[3] = Dip.st.phy.Velocity.Cart; 
+            InputDipNN[4] = Dip.st.phy.Velocity.InnerArm;
+            InputDipNN[5] = Dip.st.phy.Velocity.ExternalArm;
 
-            // Dip.ext.U = NR.CalculateOutput(Input)[0];
+            Dip.ext.U = NR.CalculateOutput(InputDipNN)[0];
+
+            if (std::abs(Dip.st.State[1]) >= M_PI_4/4 || std::abs(Dip.st.State[2]) >= M_PI_4/4) 
+            {
+                Dip.ext.U =  NR.CalculateOutput(InputDipNN)[0];  
+            } 
+            else 
+            {
+                Dip.ext.U = -K[0]*Dip.st.State[0] -K[1]*Dip.st.State[1] -K[2]*Dip.st.State[2] -K[3]*Dip.st.State[3] -K[4]*Dip.st.State[4] -K[5]*Dip.st.State[5];
+            }
+
             Dip_X = Dip.ComputeNextState(Ctx.GetStep(), &Dip);
+
+            if(0 == i % 1000)
+            {
+                TimeZ = 0;
+                Dip.ext.Z0 = 0;
+            }
+            if(TimeZ > 100) Dip.ext.Z0 = 0;
+            TimeZ++;
+            OutOfRange = false;
+                
 
             DipHistory[0].push_back(Dip_X[0]);
             DipHistory[1].push_back(Dip_X[1]);

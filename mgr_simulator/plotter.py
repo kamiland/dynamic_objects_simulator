@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import csv
 
-dt = 0.1
+dt = 0.001
 
 x0 = []
 x1 = []
@@ -137,9 +137,9 @@ try:
         plt.plot(T, x0, label="Pozycja wózka - \u03B80 [m]")
         plt.plot(T, x1, label="Pozycja ramienia 1 - \u03B81 [rad]")
         plt.plot(T, x2, label="Pozycja ramienia 2 - \u03B81 [rad]")
-        plt.plot(T, x3, label="Prędkość wózka - \u03B80' [m/s]", linestyle='--')
-        plt.plot(T, x4, label="Prędkość ramienia 1 - \u03B81' [rad/s]", linestyle='--')
-        plt.plot(T, x5, label="Prędkość ramienia 2 - \u03B82' [rad/s]", linestyle='--')
+        # plt.plot(T, x3, label="Prędkość wózka - \u03B80' [m/s]", linestyle='--')
+        # plt.plot(T, x4, label="Prędkość ramienia 1 - \u03B81' [rad/s]", linestyle='--')
+        # plt.plot(T, x5, label="Prędkość ramienia 2 - \u03B82' [rad/s]", linestyle='--')
         plt.plot(T, setp, label="\u03C0; -\u03C0", linestyle=':', color="grey")
         plt.plot(T, setp2, linestyle=':', color="grey")
         plt.grid(linestyle=':')

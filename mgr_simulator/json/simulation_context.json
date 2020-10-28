@@ -1,22 +1,22 @@
 {
   "context":
   {
-    "time": 10,
-    "probes_per_second": 1000,
+    "time": 5,
+    "probes_per_second": 100,
     "solver_type": 1
   },
 
    "evo":
   {
-    "population": 0,
-    "generation": 0
+    "population": 110,
+    "generation": 70
   },
 
   "onoff":
   {
-    "series_rlc": true,
-    "dc": true,
-    "pendulum" : true,
+    "series_rlc": false,
+    "dc": false,
+    "pendulum" : false,
     "double_pendulum" : true
   },
 
@@ -36,11 +36,11 @@
 
   "neural_network": 
   {
-    "nodes_count": [3, 10, 10, 10, 1],
-    "activation_functions": [1, 1, 1, 3],
-    "weights_range": 0.1,
-    "biases_range": 0.001,
-    "control_constant_range": 100		
+    "nodes_count": [6, 10, 10, 1],
+    "activation_functions": [1, 1, 3],
+    "weights_range": 5,
+    "biases_range": 3.1,
+    "control_constant_range": 15		
   },
 
   "series_rlc":
@@ -140,18 +140,18 @@
       "I2": 0.0013518257,
       "m2": 0.137952,
       "l2": 0.12041,
-      "eta0": 0.2,
-      "eta1": 0.01,
-      "eta2": 0.01,
-      "gantry": 10.0
+      "eta0": 0.01,
+      "eta1": 0.001,
+      "eta2": 0.001,
+      "gantry": 1.0
     },
     "init_state":
     {
       "position":
       {
         "cart": 0.0,
-        "inner_arm": 0.0,
-        "exter_arm": 0.1
+        "inner_arm": 3.14,
+        "exter_arm": 3.14
       }, 
       "velocity":
       {

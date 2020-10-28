@@ -1,221 +1,863 @@
-RK4 10s 100p
+Fitness of best object: 18.6392
+Fitness of best object: 18.6392
+Fitness of best object: 18.6392
+Fitness of best object: 18.6392
+Fitness of best object: 18.6392
+Fitness of best object: 18.6392
+Fitness of best object: 18.6392
+Fitness of best object: 18.6392
+Fitness of best object: 18.6392
+Fitness of best object: 18.6392
+Fitness of best object: 18.6392
+Fitness of best object: 18.6392
+Fitness of best object: 19.0419
+Fitness of best object: 19.0419
+Fitness of best object: 19.0419
+Fitness of best object: 19.0419
+Fitness of best object: 19.0419
+Fitness of best object: 19.0419
+Fitness of best object: 19.0419
+Fitness of best object: 19.0419
+Fitness of best object: 19.0419
+Fitness of best object: 19.0419
+Fitness of best object: 19.0419
+Fitness of best object: 19.0419
+Fitness of best object: 19.0419
+Fitness of best object: 19.0419
+Fitness of best object: 19.0419
+Fitness of best object: 19.0419
+Fitness of best object: 19.0419
+Fitness of best object: 19.0419
 Thank you for using N-Simulator. KamilAnd.
-Evolution Time [s]: 0
-Simulation Time [ms]: 118
+Evolution Time [s]: 26
+Simulation Time [ms]: 26
+Fitness of best object: 21.9641
+Fitness of best object: 21.9641
+Fitness of best object: 21.9641
+Fitness of best object: 21.9641
+Fitness of best object: 21.9641
+Fitness of best object: 21.9641
+Fitness of best object: 21.9641
+Fitness of best object: 30.3509
+Fitness of best object: 30.3509
+Fitness of best object: 30.3509
+Fitness of best object: 30.3509
+Fitness of best object: 30.3509
+Fitness of best object: 30.3509
+Fitness of best object: 30.3509
+Fitness of best object: 33.3002
+Fitness of best object: 33.3002
+Fitness of best object: 37.0485
+Fitness of best object: 37.0485
+Fitness of best object: 37.0485
+Fitness of best object: 37.0485
+Fitness of best object: 37.0485
+Fitness of best object: 38.9442
+Fitness of best object: 38.9442
+Fitness of best object: 38.9442
+Fitness of best object: 38.9442
+Fitness of best object: 38.9442
+Fitness of best object: 38.9442
+Fitness of best object: 38.9442
+Fitness of best object: 41.6528
+Fitness of best object: 41.6528
 Thank you for using N-Simulator. KamilAnd.
-Evolution Time [s]: 0
-Simulation Time [ms]: 118
+Evolution Time [s]: 59
+Simulation Time [ms]: 36
+Fitness of best object: 13.3728
+Fitness of best object: 16.539
+Fitness of best object: 16.539
+Fitness of best object: 18.0367
+Fitness of best object: 18.0367
+Fitness of best object: 18.0367
+Fitness of best object: 18.0367
+Fitness of best object: 20.3399
+Fitness of best object: 20.3399
+Fitness of best object: 20.3399
+Fitness of best object: 20.3399
+Fitness of best object: 20.3399
+Fitness of best object: 20.3399
+Fitness of best object: 21.9857
+Fitness of best object: 21.9857
+Fitness of best object: 21.9857
+Fitness of best object: 21.9857
+Fitness of best object: 21.9857
+Fitness of best object: 21.9857
+Fitness of best object: 21.9857
+Fitness of best object: 21.9857
+Fitness of best object: 21.9857
+Fitness of best object: 21.9857
+Fitness of best object: 21.9857
+Fitness of best object: 21.9857
+Fitness of best object: 21.9857
+Fitness of best object: 23.6355
+Fitness of best object: 23.6355
+Fitness of best object: 23.6355
+Fitness of best object: 23.6355
 Thank you for using N-Simulator. KamilAnd.
-Evolution Time [s]: 0
-Simulation Time [ms]: 116
+Evolution Time [s]: 38
+Simulation Time [ms]: 40
+Fitness of best object: 2.1271
+Fitness of best object: 2.1271
+Fitness of best object: 2.1271
+Fitness of best object: 2.1271
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
+Fitness of best object: 3.52176
 Thank you for using N-Simulator. KamilAnd.
-Evolution Time [s]: 0
-Simulation Time [ms]: 117
+Evolution Time [s]: 3
+Simulation Time [ms]: 38
+Fitness of best object: 4.73232
+Fitness of best object: 4.73232
+Fitness of best object: 4.73232
+Fitness of best object: 4.73232
+Fitness of best object: 4.73232
+Fitness of best object: 4.73232
+Fitness of best object: 4.73232
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 4.84174
+Fitness of best object: 6.43509
+Fitness of best object: 6.43509
+Fitness of best object: 6.43509
+Fitness of best object: 6.43509
+Fitness of best object: 6.43509
+Fitness of best object: 6.43509
+Fitness of best object: 6.43509
+Fitness of best object: 6.43509
+Fitness of best object: 6.43509
+Fitness of best object: 6.43509
+Fitness of best object: 6.43509
+Fitness of best object: 6.43509
+Fitness of best object: 6.43509
+Fitness of best object: 6.43509
+Fitness of best object: 6.43509
+Fitness of best object: 6.43509
+Fitness of best object: 6.43509
+Fitness of best object: 6.43509
+Fitness of best object: 6.43509
+Fitness of best object: 6.43509
+Fitness of best object: 6.43509
+Fitness of best object: 6.43509
+Fitness of best object: 6.43509
+Fitness of best object: 6.43509
+Fitness of best object: 6.43509
 Thank you for using N-Simulator. KamilAnd.
-Evolution Time [s]: 0
-Simulation Time [ms]: 118
+Evolution Time [s]: 15
+Simulation Time [ms]: 40
+Fitness of best object: 1.9667
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
+Fitness of best object: 9.62856
 Thank you for using N-Simulator. KamilAnd.
-Evolution Time [s]: 0
-Simulation Time [ms]: 117
+Evolution Time [s]: 13
+Simulation Time [ms]: 38
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
+Fitness of best object: 3.97537
 Thank you for using N-Simulator. KamilAnd.
-Evolution Time [s]: 0
-Simulation Time [ms]: 119
+Evolution Time [s]: 13
+Simulation Time [ms]: 41
+Fitness of best object: 8.81163
+Fitness of best object: 8.81163
+Fitness of best object: 17.4615
+Fitness of best object: 17.4615
+Fitness of best object: 17.4615
+Fitness of best object: 17.4615
+Fitness of best object: 17.4615
+Fitness of best object: 17.4615
+Fitness of best object: 17.4615
+Fitness of best object: 17.4615
+Fitness of best object: 17.4615
+Fitness of best object: 17.4615
+Fitness of best object: 17.4615
+Fitness of best object: 17.4615
+Fitness of best object: 17.4615
+Fitness of best object: 17.4615
+Fitness of best object: 17.4615
+Fitness of best object: 17.4615
+Fitness of best object: 17.4615
+Fitness of best object: 17.4615
+Fitness of best object: 17.4615
+Fitness of best object: 17.4615
+Fitness of best object: 17.4615
+Fitness of best object: 17.4615
+Fitness of best object: 17.4615
+Fitness of best object: 17.4615
+Fitness of best object: 17.4615
+Fitness of best object: 17.4615
+Fitness of best object: 17.4615
+Fitness of best object: 17.4615
+Fitness of best object: 17.4615
+Fitness of best object: 17.4615
+Fitness of best object: 17.4615
+Fitness of best object: 17.4615
+Fitness of best object: 17.4615
+Fitness of best object: 17.4615
+Fitness of best object: 17.4615
+Fitness of best object: 17.4615
+Fitness of best object: 17.4615
+Fitness of best object: 17.4615
+Fitness of best object: 17.4615
+Fitness of best object: 17.4615
+Fitness of best object: 17.4615
+Fitness of best object: 17.4615
+Fitness of best object: 17.4615
+Fitness of best object: 17.4615
+Fitness of best object: 17.4615
+Fitness of best object: 17.4615
+Fitness of best object: 17.4615
+Fitness of best object: 17.4615
+Fitness of best object: 17.4615
+Fitness of best object: 17.4615
+Fitness of best object: 17.4615
+Fitness of best object: 17.4615
+Fitness of best object: 17.4615
+Fitness of best object: 17.4615
+Fitness of best object: 17.4615
+Fitness of best object: 2.19929
+Fitness of best object: 3.08428
+Fitness of best object: 3.08428
+Fitness of best object: 3.11853
+Fitness of best object: 3.11853
+Fitness of best object: 5.46062
+Fitness of best object: 5.46062
+Fitness of best object: 5.46062
+Fitness of best object: 5.46062
+Fitness of best object: 5.46062
+Fitness of best object: 5.46062
+Fitness of best object: 5.46062
+Fitness of best object: 5.46062
+Fitness of best object: 5.46062
+Fitness of best object: 5.46062
+Fitness of best object: 5.46062
+Fitness of best object: 5.46062
+Fitness of best object: 5.46062
+Fitness of best object: 5.46062
+Fitness of best object: 5.46062
+Fitness of best object: 5.46062
+Fitness of best object: 5.46062
+Fitness of best object: 5.46062
+Fitness of best object: 5.46062
+Fitness of best object: 5.46062
+Fitness of best object: 5.46062
+Fitness of best object: 5.46062
+Fitness of best object: 5.46062
+Fitness of best object: 5.46062
+Fitness of best object: 5.46062
+Fitness of best object: 5.46062
+Fitness of best object: 5.46062
+Fitness of best object: 5.46062
+Fitness of best object: 5.46062
+Fitness of best object: 5.46062
+Fitness of best object: 5.46062
+Fitness of best object: 5.46062
+Fitness of best object: 5.46062
+Fitness of best object: 5.46062
+Fitness of best object: 5.46062
+Fitness of best object: 5.46062
+Fitness of best object: 5.46062
+Fitness of best object: 5.46062
+Fitness of best object: 5.46062
+Fitness of best object: 5.46062
+Fitness of best object: 5.46062
+Fitness of best object: 5.46062
+Fitness of best object: 5.46062
+Fitness of best object: 5.46062
+Fitness of best object: 5.46062
 Thank you for using N-Simulator. KamilAnd.
-Evolution Time [s]: 0
-Simulation Time [ms]: 122
+Evolution Time [s]: 12
+Simulation Time [ms]: 39
+Fitness of best object: 2.98181
+Fitness of best object: 2.98181
+Fitness of best object: 2.98181
+Fitness of best object: 2.98181
+Fitness of best object: 2.98181
+Fitness of best object: 2.98181
+Fitness of best object: 2.98181
+Fitness of best object: 2.98181
+Fitness of best object: 2.98181
+Fitness of best object: 2.98181
+Fitness of best object: 2.98181
+Fitness of best object: 2.98181
+Fitness of best object: 2.98181
+Fitness of best object: 2.98181
+Fitness of best object: 2.98181
+Fitness of best object: 2.98181
+Fitness of best object: 2.98181
+Fitness of best object: 2.98181
+Fitness of best object: 2.98181
+Fitness of best object: 2.98181
+Fitness of best object: 2.98181
+Fitness of best object: 2.98181
+Fitness of best object: 2.98181
+Fitness of best object: 2.98181
+Fitness of best object: 2.98181
+Fitness of best object: 2.98181
+Fitness of best object: 2.98181
+Fitness of best object: 2.98181
+Fitness of best object: 2.98181
+Fitness of best object: 2.98181
+Fitness of best object: 2.98181
+Fitness of best object: 2.98181
+Fitness of best object: 2.98181
+Fitness of best object: 2.98181
+Fitness of best object: 2.98181
+Fitness of best object: 2.98181
+Fitness of best object: 2.98181
+Fitness of best object: 2.98181
+Fitness of best object: 2.98181
+Fitness of best object: 2.98181
+Fitness of best object: 2.98181
+Fitness of best object: 2.98181
+Fitness of best object: 2.98181
+Fitness of best object: 2.98181
+Fitness of best object: 2.98181
+Fitness of best object: 2.98181
+Fitness of best object: 2.98181
+Fitness of best object: 2.98181
+Fitness of best object: 2.98181
+Fitness of best object: 2.98181
 Thank you for using N-Simulator. KamilAnd.
-Evolution Time [s]: 0
-Simulation Time [ms]: 117
+Evolution Time [s]: 6
+Simulation Time [ms]: 36
+Fitness of best object: 3.88991
+Fitness of best object: 3.88991
+Fitness of best object: 3.88991
+Fitness of best object: 3.88991
+Fitness of best object: 3.88991
+Fitness of best object: 3.88991
+Fitness of best object: 3.88991
+Fitness of best object: 3.88991
+Fitness of best object: 3.88991
+Fitness of best object: 3.88991
+Fitness of best object: 3.88991
+Fitness of best object: 3.88991
+Fitness of best object: 6.12024
+Fitness of best object: 6.12024
+Fitness of best object: 6.1504
+Fitness of best object: 6.1504
+Fitness of best object: 6.1504
+Fitness of best object: 6.1504
+Fitness of best object: 6.1504
+Fitness of best object: 6.1504
+Fitness of best object: 6.1504
+Fitness of best object: 6.1504
+Fitness of best object: 6.1504
+Fitness of best object: 6.1504
+Fitness of best object: 6.1504
+Fitness of best object: 6.1504
+Fitness of best object: 6.1504
+Fitness of best object: 6.1504
+Fitness of best object: 6.1504
+Fitness of best object: 6.1504
+Fitness of best object: 6.1504
+Fitness of best object: 6.1504
+Fitness of best object: 6.1504
+Fitness of best object: 6.1504
+Fitness of best object: 6.1504
+Fitness of best object: 6.1504
+Fitness of best object: 6.1504
+Fitness of best object: 6.1504
+Fitness of best object: 6.1504
+Fitness of best object: 6.1504
+Fitness of best object: 6.1504
+Fitness of best object: 6.1504
+Fitness of best object: 6.1504
+Fitness of best object: 6.1504
+Fitness of best object: 6.1504
+Fitness of best object: 6.1504
+Fitness of best object: 6.1504
+Fitness of best object: 6.1504
+Fitness of best object: 6.1504
+Fitness of best object: 6.1504
+Fitness of best object: 6.1504
+Fitness of best object: 6.1504
+Fitness of best object: 6.1504
+Fitness of best object: 6.1504
+Fitness of best object: 6.1504
+Fitness of best object: 6.1504
+Fitness of best object: 6.1504
+Fitness of best object: 6.1504
+Fitness of best object: 6.1504
+Fitness of best object: 6.1504
+Fitness of best object: 6.1504
+Fitness of best object: 6.1504
+Fitness of best object: 6.1504
+Fitness of best object: 6.1504
+Fitness of best object: 6.1504
+Fitness of best object: 6.1504
+Fitness of best object: 6.1504
+Fitness of best object: 6.1504
+Fitness of best object: 6.1504
+Fitness of best object: 6.1504
 Thank you for using N-Simulator. KamilAnd.
-Evolution Time [s]: 0
-Simulation Time [ms]: 119
+Evolution Time [s]: 9
+Simulation Time [ms]: 38
+Fitness of best object: 3.16153
+Fitness of best object: 4.77245
+Fitness of best object: 4.77245
+Fitness of best object: 4.77245
+Fitness of best object: 4.77245
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
+Fitness of best object: 4.97344
 Thank you for using N-Simulator. KamilAnd.
-Evolution Time [s]: 0
-Simulation Time [ms]: 117
-
-RK4 10s, 100p: [ms] 118  +- 4
-________________________________
-EULER 10s, 100p					|
-________________________________|
-
+Evolution Time [s]: 9
+Simulation Time [ms]: 41
+Fitness of best object: 2.30492
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
+Fitness of best object: 7.80756
 Thank you for using N-Simulator. KamilAnd.
-Evolution Time [s]: 0
-Simulation Time [ms]: 96
-Thank you for using N-Simulator. KamilAnd.
-Evolution Time [s]: 0
-Simulation Time [ms]: 95
-Thank you for using N-Simulator. KamilAnd.
-Evolution Time [s]: 0
-Simulation Time [ms]: 98
-Thank you for using N-Simulator. KamilAnd.
-Evolution Time [s]: 0
-Simulation Time [ms]: 100
-Thank you for using N-Simulator. KamilAnd.
-Evolution Time [s]: 0
-Simulation Time [ms]: 95
-Thank you for using N-Simulator. KamilAnd.
-Evolution Time [s]: 0
-Simulation Time [ms]: 96
-Thank you for using N-Simulator. KamilAnd.
-Evolution Time [s]: 0
-Simulation Time [ms]: 97
-Thank you for using N-Simulator. KamilAnd.
-Evolution Time [s]: 0
-
-EULER 10s, 100p: [ms] 96 +- 4 
-
-EULER 100s,1000p
-Thank you for using N-Simulator. KamilAnd.
-Evolution Time [s]: 0
-Simulation Time [ms]: 7132
-Thank you for using N-Simulator. KamilAnd.
-Evolution Time [s]: 0
-Simulation Time [ms]: 7205
-Thank you for using N-Simulator. KamilAnd.
-Evolution Time [s]: 0
-Simulation Time [ms]: 7128
-Thank you for using N-Simulator. KamilAnd.
-Evolution Time [s]: 0
-Simulation Time [ms]: 7204
-
-EULER 100s, 1000p: [ms] 7152 +- 50
-
-RK4 100s,1000p
-Thank you for using N-Simulator. KamilAnd.
-Evolution Time [s]: 0
-Simulation Time [ms]: 9500
-Thank you for using N-Simulator. KamilAnd.
-Evolution Time [s]: 0
-Simulation Time [ms]: 9738
-Thank you for using N-Simulator. KamilAnd.
-Evolution Time [s]: 0
-Simulation Time [ms]: 10070
-Thank you for using N-Simulator. KamilAnd.
-Evolution Time [s]: 0
-Simulation Time [ms]: 9532
-Thank you for using N-Simulator. KamilAnd.
-Evolution Time [s]: 0
-Simulation Time [ms]: 9585
-
-RK4 100s, 1000p: [ms] 9738 +- 200
-
-KOLEJNY DZIEN
-
-RK4 10s, 10p: [ms] 23 +- 1
-
-Thank you for using N-Simulator. KamilAnd.
-Evolution Time [s]: 0
-Simulation Time [ms]: 23
-Thank you for using N-Simulator. KamilAnd.
-Evolution Time [s]: 0
-Simulation Time [ms]: 25
-Thank you for using N-Simulator. KamilAnd.
-Evolution Time [s]: 0
-Simulation Time [ms]: 23
-Thank you for using N-Simulator. KamilAnd.
-Evolution Time [s]: 0
-Simulation Time [ms]: 23
-Thank you for using N-Simulator. KamilAnd.
-Evolution Time [s]: 0
-Simulation Time [ms]: 23
-Thank you for using N-Simulator. KamilAnd.
-Evolution Time [s]: 0
-Simulation Time [ms]: 23
-Thank you for using N-Simulator. KamilAnd.
-Evolution Time [s]: 0
-Simulation Time [ms]: 23
-Thank you for using N-Simulator. KamilAnd.
-Evolution Time [s]: 0
-Simulation Time [ms]: 22
-Thank you for using N-Simulator. KamilAnd.
-Evolution Time [s]: 0
-Simulation Time [ms]: 24
-
-
-EULER 10s, 10p: [ms] 16 +- 1
-
-Thank you for using N-Simulator. KamilAnd.
-Evolution Time [s]: 0
-Simulation Time [ms]: 17
-Thank you for using N-Simulator. KamilAnd.
-Evolution Time [s]: 0
-Simulation Time [ms]: 17
-Thank you for using N-Simulator. KamilAnd.
-Evolution Time [s]: 0
-Simulation Time [ms]: 16
-Thank you for using N-Simulator. KamilAnd.
-Evolution Time [s]: 0
-Simulation Time [ms]: 15
-Thank you for using N-Simulator. KamilAnd.
-Evolution Time [s]: 0
-Simulation Time [ms]: 17
-Thank you for using N-Simulator. KamilAnd.
-Evolution Time [s]: 0
-Simulation Time [ms]: 16
-Thank you for using N-Simulator. KamilAnd.
-Evolution Time [s]: 0
-Simulation Time [ms]: 17
-
-
-EULER 10s, 1000p: [ms] 729 +- 20
-
-Thank you for using N-Simulator. KamilAnd.
-Evolution Time [s]: 0
-Simulation Time [ms]: 738
-Thank you for using N-Simulator. KamilAnd.
-Evolution Time [s]: 0
-Simulation Time [ms]: 725
-Thank you for using N-Simulator. KamilAnd.
-Evolution Time [s]: 0
-Simulation Time [ms]: 736
-Thank you for using N-Simulator. KamilAnd.
-Evolution Time [s]: 0
-Simulation Time [ms]: 747
-Thank you for using N-Simulator. KamilAnd.
-Evolution Time [s]: 0
-Simulation Time [ms]: 742
-Thank you for using N-Simulator. KamilAnd.
-Evolution Time [s]: 0
-Simulation Time [ms]: 720
-Thank you for using N-Simulator. KamilAnd.
-Evolution Time [s]: 0
-Simulation Time [ms]: 729
-Thank you for using N-Simulator. KamilAnd.
-Evolution Time [s]: 0
-Simulation Time [ms]: 743
-
-
-RK4 10s, 1000p: [ms] 
-
-
-Thank you for using N-Simulator. KamilAnd.
-Evolution Time [s]: 0
-Simulation Time [ms]: 999
-
-Thank you for using N-Simulator. KamilAnd.
-Evolution Time [s]: 0
-Simulation Time [ms]: 1004
-Thank you for using N-Simulator. KamilAnd.
-Evolution Time [s]: 0
-Simulation Time [ms]: 989
-Thank you for using N-Simulator. KamilAnd.
-Evolution Time [s]: 0
-Simulation Time [ms]: 1002
-Thank you for using N-Simulator. KamilAnd.
-Evolution Time [s]: 0
-Simulation Time [ms]: 978
-Thank you for using N-Simulator. KamilAnd.
-Evolution Time [s]: 0
-Simulation Time [ms]: 953
-Thank you for using N-Simulator. KamilAnd.
-Evolution Time [s]: 0
-Simulation Time [ms]: 992
-Thank you for using N-Simulator. KamilAnd.
-Evolution Time [s]: 0
-Simulation Time [ms]: 981
-Thank you for using N-Simulator. KamilAnd.
-Evolution Time [s]: 0
-Simulation Time [ms]: 993
-Thank you for using N-Simulator. KamilAnd.
-Evolution Time [s]: 0
-Simulation Time [ms]: 1003
+Evolution Time [s]: 8
+Simulation Time [ms]: 36

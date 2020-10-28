@@ -1,5 +1,6 @@
 #include "EvolutionaryAlgorithm.hpp"
 #include "..\models\DcMotor.hpp"
+#include "..\models\DoublePendulum.hpp"
 #include "..\algorithms\Noise.hpp"
 
 
@@ -19,6 +20,8 @@ EvolutionaryAlgorithm::EvolutionaryAlgorithm(unsigned int _PopulationCount, Neur
 
     BestFitness = 0.0;
     srand((unsigned) time(NULL));
+
+    OutOfRange = false;
 }
 
 EvolutionaryAlgorithm::~EvolutionaryAlgorithm()
@@ -253,11 +256,122 @@ void EvolutionaryAlgorithm::RunSimulation()
 
 }
 
-NeuralRegulator EvolutionaryAlgorithm::EvolveNextGeneration()
+
+void EvolutionaryAlgorithm::RunDipSimulation(nlohmann::json J)
+{
+    // Run simulation
+        DoublePendulum Dip;
+        Dip.SolverType = J["context"]["solver_type"];
+        Dip.InitParameters
+        (      
+            DP_P["g"],
+            DP_P["m0"],
+            DP_P["m1"],
+            DP_P["L1"],
+            DP_P["l1"],
+            DP_P["I1"],
+            DP_P["L2"],
+            DP_P["I2"],
+            DP_P["m2"],
+            DP_P["l2"],
+            DP_P["eta0"],
+            DP_P["eta1"],
+            DP_P["eta2"],
+            DP_P["gantry"]
+        );
+
+        Dip.st.phy.Position.Cart        =   DP_S["position"]["cart"];
+        Dip.st.phy.Position.InnerArm    =   DP_S["position"]["inner_arm"];
+        Dip.st.phy.Position.ExternalArm =   DP_S["position"]["exter_arm"];
+        Dip.st.phy.Velocity.Cart        =   DP_S["velocity"]["cart"];
+        Dip.st.phy.Velocity.InnerArm    =   DP_S["velocity"]["inner_arm"];
+        Dip.st.phy.Velocity.ExternalArm =   DP_S["velocity"]["exter_arm"];
+
+        Dip.ext.U   =   DP_E["U"];
+        Dip.ext.Z0  =   DP_E["Z0"];
+        Dip.ext.Z1  =   DP_E["Z1"];
+        Dip.ext.Z2  =   DP_E["Z2"];
+
+        vector<double> DipHistory[6];
+        double *Dip_X;
+        double InputDipNN[] = {0, 0, 0, 0, 0, 0};
+
+    // TODO its the same as K - to unify
+    double Ke[] = {10, -259.7565, 309.8422, 8.3819, -0.7261, 27.0203};
+    for(auto it = ObjectGeneration.begin(); it != ObjectGeneration.end(); ++it)
+    {
+        for (int i = 0; i < Ctx.GetProbesCountTotal(); i++)
+        {
+            InputDipNN[0] = Dip.st.phy.Position.Cart;
+            InputDipNN[1] = Dip.st.phy.Position.InnerArm;
+            InputDipNN[2] = Dip.st.phy.Position.ExternalArm;
+            InputDipNN[3] = Dip.st.phy.Velocity.Cart; 
+            InputDipNN[4] = Dip.st.phy.Velocity.InnerArm;
+            InputDipNN[5] = Dip.st.phy.Velocity.ExternalArm;
+
+            if (std::abs(Dip.st.State[1]) >= M_PI_4/4 || std::abs(Dip.st.State[2]) >= M_PI_4/4) 
+            {
+                Dip.ext.U = OutOfRange ? 0 : it->CalculateOutput(InputDipNN)[0];
+            } 
+            else 
+            {
+                Dip.ext.U = -Ke[0]*Dip.st.State[0] -Ke[1]*Dip.st.State[1] -Ke[2]*Dip.st.State[2] -Ke[3]*Dip.st.State[3] -Ke[4]*Dip.st.State[4] -Ke[5]*Dip.st.State[5];
+            }
+            
+            Dip_X = Dip.ComputeNextState(Ctx.GetStep(), &Dip);
+
+            if (Dip.st.State[0] > 1) 
+            {
+                Dip.st.State[0] = 1;
+                Dip.st.State[3] = 0;
+                OutOfRange = true;
+                break;
+            } else if (Dip.st.State[0] < - 1) 
+            {
+                Dip.st.State[0] = - 1;
+                Dip.st.State[3] = 0;
+                OutOfRange = true;
+                break;
+            }
+
+            /* new fitness function */
+            if (!OutOfRange)
+            {
+                auto Abs = new double[DP_STATE_COUNT];
+                for (int i = 0; i < DP_STATE_COUNT; i++)
+                    Abs[i] = std::abs(Dip.st.State[i]);
+
+                double h = Ctx.GetStep();
+                for (int i = 0; i < 2; i++)
+                {
+                    if (Abs[1+i] >= 3*M_PI_4)
+                        it->Fitness += 0;                              //no reward in this zone
+                    else if (Abs[1+i] >= M_PI_2)
+                        it->Fitness += h * 1/2;                        //half point zone
+                    else if (Abs[1+i] >= M_PI_4)
+                        it->Fitness += h * (1 + 1/(Abs[4+i] + 1));     //one point zone + speed bonus
+                    else if (Abs[1+i] >= M_PI_4/2)
+                        it->Fitness += h * (2 + 2/(Abs[4+i] + 1) + 1/(Abs[0] + 1));     //two point zone + double speed bonus + zero position bonus
+                    else if (Abs[1+i] >= M_PI_4/4)
+                        it->Fitness += h * (4 + 4/(Abs[4+i] + 1) + 2/(Abs[0] + 1) + 1/(Abs[3] + 1));  //four point zone + quad speed bonus + double zero position bonus + cart velocity bonus
+                    else
+                        it->Fitness += h * (8 + 8/(4*Abs[4+i] + 1) + 4/(Abs[0] + 1) + 2/(4*Abs[3] + 1));  //eight point zone + octa speed bonus + quad zero position bonus + double cart velocity bonus
+                }
+            }
+            OutOfRange = false;
+
+        }
+
+        
+    }
+
+}
+
+NeuralRegulator EvolutionaryAlgorithm::EvolveNextGeneration(nlohmann::json J)
 {
     double Defaults[] = {4, 0.5, 0.1, 0, 0.7};
     
-    RunSimulation();
+    RunDipSimulation(J);
     // FindBest();
     // EvaluateAverageFitness();
     NormalizeFitness();
