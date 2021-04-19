@@ -1,4 +1,3 @@
-#include "models\Pid.hpp" 
 #include "models\ReferenceDcMotor.hpp"
 #include "models\DcMotor.hpp"
 #include "models\Pendulum.hpp"
@@ -8,5 +7,6 @@
 #include "algorithms\NeuralNetwork.hpp"
 #include "algorithms\NeuralRegulator.hpp"
 #include "algorithms\EvolutionaryAlgorithm.hpp"
+#include "algorithms\Pid.hpp" 
 #include "algorithms\Noise.hpp"
 #include "algorithms\Filter.hpp"
