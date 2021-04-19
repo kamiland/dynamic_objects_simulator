@@ -64,7 +64,7 @@ int main()
     */
     auto StartEvo = std::chrono::high_resolution_clock::now(); 
 
-    EvolutionaryAlgorithm EVA(j["evo"]["population"], NN);
+    EvoAlgDcMotor EVA(j["evo"]["population"], NN);
     for (int i = 0; i < j["evo"]["generation"]; i++)
     {
         NR = EVA.EvolveNextGeneration();
@@ -146,19 +146,19 @@ int main()
         double filtered = 0.0;
         for (int i = 0; i < Ctx.GetProbesCountTotal(); i++)
         {
-            // Input[0] = (Setpoint - DcMotor.st.AngularVelocity);
-            // Input[1] = DcMotor.st.AngularVelocity + Noiser.Get();
-            // Input[2] = DcMotor.st.RotorCurrent + NoiseBig.Get();
-            // DcMotor.ext.U = NR.CalculateOutput(Input)[0];
-            // filtered = LPF.LowPass(DcMotor.st.RotorCurrent + NoiseBig.Get());
+            Input[0] = (Setpoint - DcMotor.st.AngularVelocity);
+            Input[1] = DcMotor.st.AngularVelocity + Noiser.Get();
+            Input[2] = DcMotor.st.RotorCurrent + NoiseBig.Get();
+            DcMotor.ext.U = NR.CalculateOutput(Input)[0];
+            filtered = LPF.LowPass(DcMotor.st.RotorCurrent + NoiseBig.Get());
 
-            // if(i == 80){ DcMotor.ext.Tl = 15;}
-            // if(i == 190){ DcMotor.ext.Tl = 0;}
-            // if(i == 310){ DcMotor.ext.Tl = -7; }
-            // if(i == 650){ DcMotor.ext.Tl = 20;}
-            // if(i == 850){ DcMotor.ext.Tl = -13;}
-            // if(i == 1200){ DcMotor.ext.Tl = 29;}
-            // if(i == 1600){ DcMotor.ext.Tl = 0;}
+            if(i == 80){ DcMotor.ext.Tl = 15;}
+            if(i == 190){ DcMotor.ext.Tl = 0;}
+            if(i == 310){ DcMotor.ext.Tl = -7; }
+            if(i == 650){ DcMotor.ext.Tl = 20;}
+            if(i == 850){ DcMotor.ext.Tl = -13;}
+            if(i == 1200){ DcMotor.ext.Tl = 29;}
+            if(i == 1600){ DcMotor.ext.Tl = 0;}
 
             Dc_x = DcMotor.ComputeNextState(Ctx.GetStep(), &DcMotor);
 

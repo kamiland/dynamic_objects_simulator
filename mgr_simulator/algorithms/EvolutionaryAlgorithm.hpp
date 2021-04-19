@@ -12,6 +12,7 @@ using namespace std;
 
 extern GlobalContext Ctx;
 
+
 class EvolutionaryAlgorithm
 {
 private:
@@ -31,6 +32,8 @@ public:
 
     EvolutionaryAlgorithm(unsigned int _PopulationCount, NeuralNetwork _NeuralNet);
     ~EvolutionaryAlgorithm();
+    virtual void RunSimulation() = 0;
+    virtual NeuralRegulator EvolveNextGeneration() = 0;
     void PrintGenerationFitness();
     void PrintBest();
     NeuralRegulator FindBest();
@@ -40,8 +43,21 @@ public:
     void Mutation(unsigned int ii);
     void ReplicateChosenOne(NeuralRegulator ChosenObject);
     void NormalizeFitness();
+    
+};
+
+
+class EvoAlgDcMotor : public EvolutionaryAlgorithm
+{
+private:
+    
+public:
+    EvoAlgDcMotor(unsigned int _PopulationCount, NeuralNetwork _NeuralNet);
     void RunSimulation();
     NeuralRegulator EvolveNextGeneration();
 };
+
+
+
 
 #endif

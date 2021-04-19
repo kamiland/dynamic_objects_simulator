@@ -4,7 +4,9 @@
 
 
 EvolutionaryAlgorithm::EvolutionaryAlgorithm(unsigned int _PopulationCount, NeuralNetwork _NeuralNet)
-: ReferenceNN(_NeuralNet.NodesCount, _NeuralNet.ActivationFunctions), BestInCurrentGeneration(_NeuralNet), BestObject(_NeuralNet)
+: ReferenceNN(_NeuralNet.NodesCount, _NeuralNet.ActivationFunctions)
+, BestInCurrentGeneration(_NeuralNet)
+, BestObject(_NeuralNet)
 {
     this->PopulationCount = _PopulationCount;
     this->NodesCount = _NeuralNet.NodesCount;
@@ -208,7 +210,13 @@ void EvolutionaryAlgorithm::NormalizeFitness()
 
 }
 
-void EvolutionaryAlgorithm::RunSimulation()
+EvoAlgDcMotor::EvoAlgDcMotor(unsigned int _PopulationCount, NeuralNetwork _NeuralNet)
+: EvolutionaryAlgorithm(_PopulationCount, _NeuralNet)
+{
+
+}
+
+void EvoAlgDcMotor::RunSimulation()
 {
     // Run simulation
     DcMotor DcMotor;
@@ -253,7 +261,7 @@ void EvolutionaryAlgorithm::RunSimulation()
 
 }
 
-NeuralRegulator EvolutionaryAlgorithm::EvolveNextGeneration()
+NeuralRegulator EvoAlgDcMotor::EvolveNextGeneration()
 {
     double Defaults[] = {4, 0.5, 0.1, 0, 0.7};
     
@@ -310,5 +318,4 @@ NeuralRegulator EvolutionaryAlgorithm::EvolveNextGeneration()
     }
 
     return FindBest();
-
 }
