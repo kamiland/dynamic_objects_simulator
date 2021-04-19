@@ -1,62 +1,62 @@
 #include "Pid.hpp"
 #include <algorithm>
 
-Controller::Controller(double initialKp, double initialKi, double initialKd)
+Controller::Controller(double InitialKp, double InitialKi, double InitialKd)
 {
     P = 0;
     I = 0;
     D = 0;
-    integral = 0;
-    derivative = 0;
-    error = 0;
-    pre_error = 0;
-    controllerOutput = 0;
-    saturationMin = 0;
-    saturationMax = 0;
-    saturationEnable = false;
+    Integral = 0;
+    Derivative = 0;
+    Error = 0;
+    PreError = 0;
+    ControllerOutput = 0;
+    SaturationMin = 0;
+    SaturationMax = 0;
+    SaturationEnable = false;
 
-    Kp = initialKp;
-    Ki = initialKi;
-    Kd = initialKd;
+    Kp = InitialKp;
+    Ki = InitialKi;
+    Kd = InitialKd;
 }
 
 Controller::~Controller()
 {
 }
 
-void Controller::SetSaturation(double min, double max)
+void Controller::SetSaturation(double Min, double Max)
 {
-    saturationEnable = true;
-    saturationMin = min;
-    saturationMax = max;
+    SaturationEnable = true;
+    SaturationMin = Min;
+    SaturationMax = Max;
 }
 
 void Controller::ResetSaturaion()
 {
-    saturationEnable = false;
+    SaturationEnable = false;
 }
 
-double Controller::CalculateOutput(double setpoint, double pv, double dt = 0.001)
+double Controller::CalculateOutput(double Setpoint, double Pv, double Dt = 0.001)
 {
-    error = setpoint - pv;
+    Error = Setpoint - Pv;
 
-    P = Kp * error;
+    P = Kp * Error;
 
-    integral += error * dt;
-    I = Ki * integral;
+    Integral += Error * Dt;
+    I = Ki * Integral;
 
-    derivative = (error - pre_error) / dt;
-    D = Kd * derivative;
+    Derivative = (Error - PreError) / Dt;
+    D = Kd * Derivative;
 
-    pre_error = error;
+    PreError = Error;
 
-    controllerOutput = P + I + D;
+    ControllerOutput = P + I + D;
 
-    if(true == saturationEnable)
+    if(true == SaturationEnable)
     {
-        controllerOutput = min(controllerOutput, saturationMax);
-        controllerOutput = max(controllerOutput, saturationMin);
+        ControllerOutput = min(ControllerOutput, SaturationMax);
+        ControllerOutput = max(ControllerOutput, SaturationMin);
     }
 
-    return controllerOutput;
+    return ControllerOutput;
 }

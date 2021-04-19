@@ -10,14 +10,14 @@ private:
     double P;
     double I;
     double D;
-    double integral;
-    double derivative;
-    double error;
-    double pre_error;
-    double controllerOutput;
-    double saturationMin;
-    double saturationMax;
-    bool saturationEnable;
+    double Integral;
+    double Derivative;
+    double Error;
+    double PreError;
+    double ControllerOutput;
+    double SaturationMin;
+    double SaturationMax;
+    bool SaturationEnable;
 
 public:
     double Kp;
