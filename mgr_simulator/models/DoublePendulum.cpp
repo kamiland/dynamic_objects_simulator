@@ -105,7 +105,7 @@ double * DoublePendulum::ComputeNextState(double step, DoublePendulum *Object)
     {
     case SOLVER_EULER:
         return Solver.SolveEuler<OdeMethod, DoublePendulum>(step, st.State, OdeList, Object);
-
+        
     case SOLVER_RK4:
         return Solver.Solve<OdeMethod, DoublePendulum>(step, st.State, OdeList, Object);
     
@@ -118,6 +118,6 @@ void DoublePendulum::OperationAfterSolve()
 {
     for (int i = 1; i < 3; i++)
     {
-        st.State[i] = fmod((st.State[i] + M_PI), (M_PI * 2)) - M_PI;
+        this->st.State[i] = fmod((st.State[i] + 3 * M_PI), (M_PI * 2)) - M_PI;
     }
 }

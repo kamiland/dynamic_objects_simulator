@@ -9,6 +9,7 @@
 #include <iomanip>
 #include <chrono>
 #include <windows.h>
+#include <algorithm>
 #include "GlobalContext.hpp"
 #include "AllModels.hpp"
 #include "UsefulFunctions.hpp"
@@ -137,17 +138,23 @@ int main()
         Noise NoiseBig(3);
         Filter LPF(4, 0.5);
         double filtered = 0.0;
+        Controller Pid(J["pid"]["kp"], J["pid"]["ki"], J["pid"]["kd"]);
+        if (true == J["pid"]["saturation"]["set"])
+        {
+            Pid.SetSaturation(J["pid"]["saturation"]["min"], J["pid"]["saturation"]["max"]);
+        }
         for (int i = 0; i < Ctx.GetProbesCountTotal(); i++)
         {
             Input[0] = (Setpoint - DcMotor.st.AngularVelocity);
             Input[1] = DcMotor.st.AngularVelocity + Noiser.Get();
             Input[2] = DcMotor.st.RotorCurrent + NoiseBig.Get();
-            DcMotor.ext.U = 150; //NR.CalculateOutput(Input)[0];
+            // DcMotor.ext.U = 150; //NR.CalculateOutput(Input)[0];
+            DcMotor.ext.U = Pid.CalculateOutput(150, Input[1], Ctx.GetStep());
             filtered = LPF.LowPass(DcMotor.st.RotorCurrent + NoiseBig.Get());
 
             if(i == 80){ DcMotor.ext.Tl = 15;}
             if(i == 190){ DcMotor.ext.Tl = 0;}
-            if(i == 310){ DcMotor.ext.Tl = -7; }
+            if(i == 310){ DcMotor.ext.Tl = -7;}
             if(i == 650){ DcMotor.ext.Tl = 20;}
             if(i == 850){ DcMotor.ext.Tl = -13;}
             if(i == 1200){ DcMotor.ext.Tl = 29;}
@@ -201,7 +208,8 @@ int main()
             InputPenNN[2] = Pen.st.phy.Velocity.Cart; 
             InputPenNN[3] = Pen.st.phy.Velocity.Arm;
 
-            // Pen.ext.U = NR.CalculateOutput(Input)[0];
+            Pen.ext.U = NR.CalculateOutput(InputPenNN)[0];
+            Pen.ext.U = 0;
             Pen_X = Pen.ComputeNextState(Ctx.GetStep(), &Pen);
 
             PenHistory[0].push_back(Pen_X[0]);
@@ -215,6 +223,7 @@ int main()
 
     ///////////////// DOUBLE PENDULUM /////////////////
     #define M_PI_4		0.78539816339744830962
+    #define M_PI		3.14159265358979323846
     if(J["onoff"]["double_pendulum"])
     {
         DoublePendulum Dip;
@@ -256,9 +265,31 @@ int main()
         double K[] = {10, -259.7565, 309.8422, 8.3819, -0.7261, 27.0203};   
         int TimeZ = 0;
         bool OutOfRange = false;
+        Ctx.SetSimulationTimeSec(7);
+
+        // NR.NeuralNet.Weights[0][0] = {-0.8451260598271784,-3.7778087905641624,-4.495302145693662,-3.015288825391952,-3.2199550234467966,0.5346956242070292};
+        // NR.NeuralNet.Weights[0][1] = {4.659810379161893,3.580504429848152,4.761243529161373,0.4110924929026056,3.190260612808638,-4.055765800625899};
+        // NR.NeuralNet.Weights[0][2] = {-0.9333249715992914,0.9677434267111067,-0.2726724132367124,0.6947550898135906,-4.656829983770397,2.273658708290991};
+        // NR.NeuralNet.Weights[0][3] = {4.266347152851728,-1.5597692241276693,-3.4228549571151565,2.5700180012642284,0.9549056704283279,-3.9174780586662377};
+        // NR.NeuralNet.Weights[0][4] = {2.728764032037844,2.117207779633802,-1.9834984789297856,-4.45183695698428,-3.2117246170814835,5.241437091175403};
+        // NR.NeuralNet.Weights[0][5] = {2.793377439719743,-1.703917326724025,-1.1824335096635576,2.694718660265931,2.0509085801204923,0.02730579944424144,};
+        // NR.NeuralNet.Weights[0][6] = {-2.349377188627033,2.5734742257701466,3.717563286397624,-3.4222323867093647,1.934700928338422,-3.161380898714448};
+        // NR.NeuralNet.Weights[0][7] = {0.397393670367422,-0.31195866181801596,2.8378419765863883,-2.3562563852563763,5.143491723887903,2.409087961362555};
+        // NR.NeuralNet.Weights[0][8] = {0.4194777953774451,-4.5869741006952385,4.159173108006858,0.4577888582092361,-3.2210012793403817,-4.115858125854505};
+        // NR.NeuralNet.Weights[0][9] = {3.8178951023731025,2.6084170716657766,-2.407915979349867,-2.4395789703897814,-2.729655965582476,-0.4745191497217785};
+
+        // NR.NeuralNet.Weights[1][0] = {-0.49999636315147666,1.3638868479210262,-2.832538197648306,-1.553609560700556,-1.5868928143913905,-3.029117000966784,-1.0296736259861898,2.0517479059952737,3.370599602713029,-3.5609208558236443};
+
+        // NR.NeuralNet.Biases[0] = {-2.208939735908202,0.09814090217057904,0.6291382740846743,-2.5858560367659407,-0.777921415097085,2.6813619956421335,1.7370555099957485,-1.6556822203191501,-1.7047956816139704,-3.1663962076384595};
+
+        // NR.NeuralNet.Biases[1] = {-2.723326645760562};
+        
+        // NR.ControlConstant = 12.536921;
+
+        // Dip.st.State[1] = M_PI;
+        // Dip.st.State[2] = M_PI;
         for (int i = 0; i < Ctx.GetProbesCountTotal(); i++)
         {
-            
             InputDipNN[0] = Dip.st.phy.Position.Cart;
             InputDipNN[1] = Dip.st.phy.Position.InnerArm;
             InputDipNN[2] = Dip.st.phy.Position.ExternalArm;
@@ -268,13 +299,15 @@ int main()
 
             Dip.ext.U = NR.CalculateOutput(InputDipNN)[0];
 
-            if (std::abs(Dip.st.State[1]) >= M_PI_4/4 || std::abs(Dip.st.State[2]) >= M_PI_4/4) 
+            if (std::abs(Dip.st.State[1]) >= (M_PI_4/4) || std::abs(Dip.st.State[2]) >= (M_PI_4/4)) 
             {
                 Dip.ext.U =  NR.CalculateOutput(InputDipNN)[0];  
             } 
             else 
             {
                 Dip.ext.U = -K[0]*Dip.st.State[0] -K[1]*Dip.st.State[1] -K[2]*Dip.st.State[2] -K[3]*Dip.st.State[3] -K[4]*Dip.st.State[4] -K[5]*Dip.st.State[5];
+                // if (Dip.ext.U>15) Dip.ext.U=15;
+                // if (Dip.ext.U<-15) Dip.ext.U=-15;
             }
 
             Dip_X = Dip.ComputeNextState(Ctx.GetStep(), &Dip);

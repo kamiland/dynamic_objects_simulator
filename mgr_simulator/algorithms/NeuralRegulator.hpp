@@ -15,14 +15,14 @@ private:
 public:
     double Fitness = 0.0;
     double ControlConstant = 15.0;
-    double DefaultCcRrange = 15.0;
+    double DefaultCcRrange = 1;
     double DefaultCcTweakRange = 10;
 
     NeuralNetwork NeuralNet;
     NeuralRegulator(NeuralNetwork _NeuralNet, bool RandomCc = 0);
     ~NeuralRegulator();
     void InitNeuralNetwork();
-    NeuralRegulator Tweak(double weight_tweak_range = 0.1, double bias_tweak_range = 0.0);
+    NeuralRegulator Tweak(double weight_tweak_range = 0.1, double bias_tweak_range = 0.1);
     NeuralRegulator Crossover(NeuralRegulator ObjectToCrossWith);
     // NeuralRegulator Mutation();
     double EvaluateFitness();
@@ -35,10 +35,10 @@ template <class T, size_t N>
 vector <double> NeuralRegulator::CalculateOutput(T (&Input)[N])
 {   
     vector <double> NnOutput = this->NeuralNet.Feedforward(Input);
-    for (auto it = NnOutput.begin(); it != NnOutput.end(); ++it)
-    {
-        *it = *it * this->ControlConstant;
-    }
+    double ControlConstant = this->ControlConstant;
+
+    transform(begin(NnOutput), end(NnOutput), begin(NnOutput), [&ControlConstant](auto& elem){return elem * ControlConstant;});
+
     return NnOutput;
 }
 

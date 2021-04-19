@@ -41,8 +41,10 @@ public:
     void Mutation(unsigned int ii);
     void ReplicateChosenOne(NeuralRegulator ChosenObject);
     void NormalizeFitness();
-    void RunSimulation();
+    void RunDcSimulation();
     void RunDipSimulation(nlohmann::json J);
+    void RunIpSimulation(nlohmann::json J);
+
     NeuralRegulator EvolveNextGeneration(nlohmann::json J);
 };
 
